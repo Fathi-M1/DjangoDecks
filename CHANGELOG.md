@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v5 (26 Nov 2026, 5:49 PM Asia/Singapore)
+
+Switch to the FEU template background and add Research Gaps, MIMAROPA, and one-to-one SOP/SO.
+
+Uses the FEU template background. Content is updated to the current study: MIMAROPA, 31 fish categories, Research Gaps, and SOP/SO pairs mapped one-to-one. Data window runs through 2025 with a 70/15/15 split.
+
 ## v4 (26 Nov 2026, 5:01 PM Asia/Singapore)
 
 Drop mangrove change from the study and update the related slides.
