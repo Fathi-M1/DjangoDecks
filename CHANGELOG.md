@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v10 (26 Nov 2026, 9:41 PM Asia/Singapore)
+
+Restore the v7 swimming-fish design and keep the v9 content and structure.
+
+Keeps Area of Investigation, the hidden nav toggle, and the questions close from v9, but restores the v7 light underwater theme with swimming fish. The illustrated-ocean scene.py is removed. This commit also adds the DjangoDecks monorepo layout (root hub page, Vercel config, shared/ note, tests with relative paths).
+
 ## v9 (26 Nov 2026, 9:41 PM Asia/Singapore)
 
 Hide the nav bar behind a toggle, add Area of Investigation, and close on questions.
