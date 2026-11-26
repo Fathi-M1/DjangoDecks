@@ -228,3 +228,6 @@ window.__deck={go,next,prev,setStep,goLabel,get cur(){return cur},get step(){ret
  matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',go);
  window.__fish={F,running:()=>!!raf};go();
 })();
+
+/* v9: nav bar toggle (hidden by default; keys still work) */
+(()=>{const t=document.getElementById('navtog');if(!t)return;t.onclick=e=>{e.stopPropagation();const on=document.body.classList.toggle('navon');t.textContent=on?'﹀':'︿';t.setAttribute('aria-expanded',on)}})();

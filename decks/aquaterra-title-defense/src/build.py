@@ -27,6 +27,7 @@ chrome='''<div id="progress"></div>
 <div class="ov" id="help"><div class="modal" style="width:900px"><button class="x">✕</button><div class="kick">Keyboard</div><div class="dh">Controls</div><div class="keys">
 <b>→ / Space</b><span>next step or slide</span><b>←</b><span>previous</span><b>Home / End</b><span>first / last main slide</span><b>F</b><span>fullscreen</span><b>N</b><span>speaker notes</span>
 <b>Q</b><span>panel questions for this section</span><b>R</b><span>references</span><b>B / G</b><span>slide menu and backups</span><b>M</b><span>ambient motion on / off</span><b>Esc</b><span>close panels</span></div></div></div>
+<button id="navtog" title="Show / hide navigation bar" aria-label="Toggle navigation bar" aria-expanded="false">︿</button>
 <div id="toast"></div>'''
 import scene;AMB=scene.AMB
 js=open(os.path.join(D,'deck.js')).read()

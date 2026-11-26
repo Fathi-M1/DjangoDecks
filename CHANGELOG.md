@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v9 (26 Nov 2026, 9:41 PM Asia/Singapore)
+
+Hide the nav bar behind a toggle, add Area of Investigation, and close on questions.
+
+The bottom nav bar is hidden by default and can be opened with a small toggle. New Area of Investigation slide (what the study covers) sits before Background (why). The closing slide is a short thank-you and an invitation for questions. The Q&A bank and Prediction vs. Causation move to backup slides B1 and B2.
+
 ## v8 (26 Nov 2026, 9:31 PM Asia/Singapore)
 
 Try an illustrated ocean scene (later reverted).

@@ -376,3 +376,15 @@ body.nomo #amb #turtle{transform:translate(-400px,1010px)}
 .pair.on.dim{opacity:.9}
 @keyframes turtle{0%{transform:translate(-200px,972px)}60%{transform:translate(2100px,958px)}100%{transform:translate(2100px,958px)}}
 #amb #turtle{transform:translate(-200px,972px)}
+/* v9: area of investigation */
+.aoi{padding:26px 32px}
+.aoi-r{display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:baseline;padding:11px 0;border-top:1.5px solid var(--line)}
+.aoi-r .lab{color:var(--mute)}
+.ipo{display:flex;align-items:stretch;gap:0}
+.ipo-b{flex:1;padding:24px 28px;display:flex;flex-direction:column;gap:12px}
+.ipo-a{width:64px;flex:none;display:flex;align-items:center;justify-content:center;font:700 40px IN;color:var(--sea)}
+/* v9: collapsible nav bar */
+#bar{transition:opacity .3s,transform .3s}
+body:not(.navon) #bar{opacity:0;pointer-events:none;transform:translate(-50%,24px)}
+#navtog{position:absolute;right:20px;bottom:18px;z-index:60;width:44px;height:30px;border-radius:15px;background:rgba(255,255,255,.55);border:1.5px solid rgba(255,255,255,.7);color:var(--ink);font:700 16px/1 IN;display:flex;align-items:center;justify-content:center;opacity:.6;transition:opacity .2s,background .2s}
+#navtog:hover,body.navon #navtog{opacity:1;background:rgba(255,255,255,.92)}

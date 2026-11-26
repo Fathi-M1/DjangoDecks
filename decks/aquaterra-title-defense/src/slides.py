@@ -45,11 +45,37 @@ S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cove
 'Municipal' fish means catch from municipal waters, up to 15 km from shore under RA 8550 as amended by RA 10654, by fishers using no boat or boats of three gross tons or less. 'Landings' means the catch brought ashore, in tonnes per province per quarter. (Click a key term to define it; press Q for panel questions.)""")}
 </section>''')
 # ================= I · BACKGROUND =================
-S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="I · Background" data-sec="0" data-steps="4" data-q="bg" data-r="bg">
+S.append(f'''<section class="slide uw" id="s-aoi" data-label="01" data-title="I · Area of Investigation" data-sec="0" data-steps="2" data-q="scope" data-r="scope">
+{hd("01","I · Area of Investigation","Area of <em>Investigation</em>")}
+<div class="abs card aoi" style="left:110px;top:250px;width:820px;height:400px">
+ <div class="lab" style="color:var(--sea);margin-bottom:12px">The domain</div>
+ <div class="aoi-r"><span class="lab">Field</span><div class="b22">Data Science</div></div>
+ <div class="aoi-r"><span class="lab">Subfield</span><div class="b22">Time-series forecasting with machine learning and additive models</div></div>
+ <div class="aoi-r"><span class="lab">Application</span><div class="b22">Marine <b>municipal</b> fisheries in the Philippines</div></div>
+ <div class="aoi-r"><span class="lab">Nature</span><div class="b22">Applied, analytics-first; public secondary data only, no new field data</div></div>
+</div>
+<div class="abs card aoi rv" data-s="1" style="left:970px;top:250px;width:840px;height:400px">
+ <div class="lab" style="color:var(--sea);margin-bottom:12px">What the study will cover</div>
+ <div class="aoi-r"><span class="lab">Location</span><div class="b22">MIMAROPA: Occidental Mindoro, Oriental Mindoro, Marinduque, Romblon, Palawan</div></div>
+ <div class="aoi-r"><span class="lab">Subject</span><div class="b22">31 PSA fish categories · municipal landings and value</div></div>
+ <div class="aoi-r"><span class="lab">Period</span><div class="b22">Quarterly, 2002 Q1 – 2025 Q4</div></div>
+ <div class="aoi-r"><span class="lab">Unit</span><div class="b22">One province × fish category × quarter</div></div>
+ <div class="cite">PSA (2026)</div>
+</div>
+<div class="abs rv ipo" data-s="2" style="left:110px;top:690px;width:1700px;height:270px">
+ <div class="card ipo-b"><div class="lab" style="color:var(--sea)">Inputs</div><div class="b22">PSA landings &amp; value · rainfall · sea surface temperature · typhoon tracks</div><div class="cite">PSA (2026); Huffman et al. (2023); Huang et al. (2021); Gahtan et al. (2024)</div></div>
+ <div class="ipo-a">→</div>
+ <div class="card ipo-b"><div class="lab" style="color:var(--sea)">Process</div><div class="b22">Random Forest will select predictors; GAMM will forecast next-quarter landings; tested on held-out quarters</div></div>
+ <div class="ipo-a">→</div>
+ <div class="card ipo-b"><div class="lab" style="color:var(--coral)">Outputs</div><div class="b22">Seasonal shortfall flags and gross landing value at risk, ranked by province × category</div></div>
+</div>
+{notes("""Our study sits in data science, specifically time-series forecasting, applied to marine municipal fisheries. It is analytics-first: we will use public secondary data and will not collect new field data. [→] It will cover the five MIMAROPA provinces and the 31 fish categories in PSA's marine municipal fisheries tables, quarterly from 2002 Q1 to 2025 Q4 (PSA, 2026). 'Municipal' follows PSA's fisheries classification, and the province is our geographic level of analysis, so one record is one province, one fish category, one quarter. [→] Inputs: PSA landings and value, plus rainfall, sea surface temperature and typhoon tracks. Process: Random Forest will select the useful predictors, and a GAMM will forecast next-quarter landings, tested on quarters the model has not seen. Outputs: seasonal shortfall flags and their gross landing value at risk. Final coverage will depend on the completeness of the records.""")}
+</section>''')
+S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · Background" data-sec="0" data-steps="4" data-q="bg" data-r="bg">
 <div class="bgimg" style="background-image:url({{{{IMG:bangka}}}});bottom:auto;height:470px"></div>
 <div class="full" style="bottom:auto;height:470px;background:linear-gradient(180deg,rgba(2,40,58,.6),rgba(2,40,58,.2))"></div>
 <div class="abs" style="left:110px;top:62px;display:flex;gap:34px;align-items:flex-end;color:#fff">
- <div class="num w">01</div><div><div class="kick" style="color:#e6fff9">I · Background</div>
+ <div class="num w">02</div><div><div class="kick" style="color:#e6fff9">II · Background</div>
  <h2 style="margin-top:12px;color:#fff;font-size:62px">Background of the <em style="color:#ffcdbd">Study</em></h2></div></div>
 <div class="abs" style="left:0;top:380px">{waveH("#ffffff",110)}</div>
 <div class="abs" style="left:0;right:0;top:488px;bottom:0;background:#ffffff"></div>
@@ -87,8 +113,8 @@ GAPS=[("Level","No seasonal shortfall forecasts by <b>province × fish category<
 ("Weather","Typhoons, rain and sea temperature are linked to lower catch, but <b>few studies test</b> them in a provincial forecast.","Test with vs without; report it if they don't help. Prediction, not cause.","Noy et al. (2023); Holmes et al. (2021)")]
 gpos=[(110,330),(980,330),(110,610),(980,610)]
 gh="".join(f'<button class="abs gap rv" data-s="{i+1}" data-g="{i}" style="left:{x}px;top:{y}px"><div class="gn"><span>Gap {i+1}</span>{t}</div><p>{p}</p><p class="gw"><b>AquaTerra will:</b> {w}</p><div class="cite">{c}</div></button>' for i,((t,p,w,c),(x,y)) in enumerate(zip(GAPS,gpos)))
-S.append(f'''<section class="slide" id="s-gaps" data-label="02" data-title="II · Research Gaps" data-sec="0" data-steps="5" data-q="gaps" data-r="gaps">
-{hd("02","II · Research Gaps","Research <em>Gaps</em>")}
+S.append(f'''<section class="slide" id="s-gaps" data-label="02" data-title="III · Research Gaps" data-sec="0" data-steps="5" data-q="gaps" data-r="gaps">
+{hd("03","III · Research Gaps","Research <em>Gaps</em>")}
 <div class="abs b22" style="left:110px;top:258px;width:1700px"><b>Existing forecasts</b> work at region and sector level and stop at <i>how much fish</i> to expect. <span class="cite" style="display:inline">Bokingkito et al. (2026)</span></div>
 {gh}
 <div class="abs rv" data-s="5" style="left:110px;width:1700px;top:892px;padding:16px 28px;border-radius:16px;background:var(--ink);color:#fff;font:500 27px/1.35 IN"><span class="lab" style="color:var(--aqua)">AquaTerra&nbsp;&nbsp;</span>turns forecasts into <b>shortfalls and their value</b>, province by province.</div>
@@ -109,8 +135,8 @@ SO=[f"Build seasonal benchmarks for each province × fish category from PSA quar
 "Estimate the gross landing value at risk of each projected shortfall using historical first-sale prices, and rank the combinations.",
 f"Evaluate the forecasts on held-out quarters ({TE[0]}–{TE[1]}) with MAE, RMSE and MASE vs the seasonal-naive baseline, plus price-sensitivity and ranking-stability checks."]
 pairs="".join(f'<button class="abs pair rv" data-s="{i+1}" data-i="{i}" style="top:{452+i*130}px"><div class="pq"><span>SOP {i+1}</span>{q}</div><i>↔</i><div class="po"><span>SO {i+1}</span>To {o[0].lower()+o[1:]}</div></button>' for i,(q,o) in enumerate(zip(SOP,SO)))
-S.append(f'''<section class="slide uw" id="s-obj" data-label="03" data-title="III · Problem and Objectives" data-sec="1" data-steps="4" data-q="obj" data-r="algo">
-{hd("03","III · Research questions and objectives","Statement of the Problem and <em>Specific Objectives</em>")}
+S.append(f'''<section class="slide uw" id="s-obj" data-label="03" data-title="IV · Problem and Objectives" data-sec="1" data-steps="4" data-q="obj" data-r="algo">
+{hd("04","IV · Research questions and objectives","Statement of the Problem and <em>Specific Objectives</em>")}
 <div class="abs b22" style="left:110px;top:250px;width:1700px"><span class="lab" style="color:var(--sea)">General objective&nbsp;&nbsp;</span>AquaTerra will forecast next-quarter municipal fish landings, flag seasonal shortfalls and estimate their gross landing value at risk for five MIMAROPA provinces.</div>
 <div class="abs algo" style="left:110px;top:330px"><b>Random Forest</b> will rank and select the predictors. <span class="cite" style="display:inline">Nesslage et al. (2021)</span></div>
 <div class="abs algo" style="left:965px;top:330px"><b>GAMM</b> will forecast landings with smooth curves. <span class="cite" style="display:inline">Holmes et al. (2021)</span></div>
@@ -138,8 +164,8 @@ LM=[("Selected coverage","No commercial, aquaculture or inland fisheries; no fie
 ("Research prototype","No guaranteed real-time updates; adoption is not guaranteed.")]
 sch="".join(f'<div class="li"><i>✓</i><div><b>{a}</b><span>{b}{f" <em class=ct>{c}</em>" if c else ""}</span></div></div>' for a,b,c in SC)
 lmh="".join(f'<button class="li lm" data-i="{i}"><i>✕</i><div><b>{a}</b><span>{b}</span></div></button>' for i,(a,b) in enumerate(LM))
-S.append(f'''<section class="slide" id="s-scope" data-label="04" data-title="IV · Scope and Limitation" data-sec="2" data-steps="2" data-q="scope" data-r="scope">
-<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">04</div><div><div class="kick">IV · Scope and Limitation</div><h2 style="margin-top:12px;font-size:58px;">Scope and <em>Limitations</em></h2></div></div>
+S.append(f'''<section class="slide" id="s-scope" data-label="04" data-title="V · Scope and Limitation" data-sec="2" data-steps="2" data-q="scope" data-r="scope">
+<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">05</div><div><div class="kick">V · Scope and Limitation</div><h2 style="margin-top:12px;font-size:58px;">Scope and <em>Limitations</em></h2></div></div>
 <div class="abs" id="sl-tog" style="right:110px;top:222px;display:flex;gap:8px"><button class="chip" data-v="scope">Scope</button><button class="chip cor" data-v="lim">Limitation</button><button class="chip on" data-v="both">Both</button></div>
 <div class="abs glass colA" data-s="1" style="left:110px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--sea)">Scope</div>{sch}</div>
 <div class="abs glass colB rv" data-s="2" style="left:980px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--coral)">Limitation · click to focus</div>{lmh}</div>
@@ -157,23 +183,21 @@ CL=[("LGUs & fisheries offices","Primary potential users","see projected shortfa
 ("Traders, vendors & processors","","projected shortfalls for sourcing and inventory")]
 pos=[(110,270),(700,270),(1290,270),(400,560),(990,560)]
 clh="".join(f'<div class="abs glass cl rv" data-s="{i+1}" style="left:{x}px;top:{y}px">{f"<span class=tg>{t}</span>" if t else ""}<div class="ch">{h}</div><div class="cm">{m}</div></div>' for i,((h,t,m),(x,y)) in enumerate(zip(CL,pos)))
-S.append(f'''<section class="slide" id="s-clients" data-label="08" data-title="VI · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
-<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">07</div><div><div class="kick">VI · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
+S.append(f'''<section class="slide" id="s-clients" data-label="08" data-title="VII · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
+<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">08</div><div><div class="kick">VII · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
 {clh}
 <div class="abs" style="left:110px;right:110px;top:858px;padding:16px 26px;border-radius:14px;background:#fff7e0;border:2px solid var(--gold);font:600 23px/1.4 IN;color:#6b4a00">We will seek consultation with DTI or a relevant fisheries agency on data suitability and usefulness. Participation and adoption are not guaranteed.</div>
 {notes("""Our primary potential users are LGUs and fisheries offices, which could use provincial and fish-category forecasts to see projected shortfalls early and prioritize monitoring. [→] BFAR could use the findings as supplementary information for monitoring and planning. [→] DTI could use exposure estimates in consultations with fisheries-related enterprises. [→] Fisherfolk associations and cooperatives could use seasonal supply outlooks for marketing and delivery coordination. [→] Traders, vendors and processors could use projected shortfalls for sourcing and inventory planning. We will seek consultation with DTI or a relevant agency; participation and adoption are not guaranteed.""")}
 </section>''')
 # ================= THANK YOU =================
 S.append(f'''<section class="slide" id="s-end" data-label="09" data-title="Thank you" data-sec="5" data-steps="0">
-<div class="abs" style="left:110px;right:110px;top:100px;text-align:center">
- <div class="kick">Group DJANGO · AquaTerra</div>
- <div style="font:600 170px/1 PF;margin-top:24px;color:var(--ink)">Thank you</div>
- <div style="font:400 italic 40px PF;color:var(--sea);margin-top:20px">We welcome your questions and recommendations.</div>
- <div style="display:flex;gap:16px;justify-content:center;margin-top:40px;flex-wrap:wrap">
-  <button class="btn cor" data-go="b-qbank">? Panel Q&amp;A bank</button><button class="btn" data-go="b-cause">Prediction vs causation</button><button class="btn ghost" data-go="b-refs">References · APA 7</button></div>
+<div class="abs" style="left:110px;right:110px;top:120px;text-align:center">
+ <div class="kick" style="font-size:24px">Group DJANGO · AquaTerra</div>
+ <div style="font:600 190px/1 PF;margin-top:30px;color:var(--ink)">Thank you.</div>
+ <div style="font:500 66px/1.2 PF;color:var(--sea);margin-top:34px">We are now ready for your questions.</div>
 </div>
-<div class="abs imgframe" style="left:310px;top:640px;width:1300px;height:320px;background-image:url({{{{IMG:deep}}}})"></div>
-{notes("""Thank you. We welcome your questions and recommendations. Backup slides: the panel Q&A bank, prediction vs causation, the evaluation demo, the value-at-risk builder, and the references (press B for the slide menu).""")}
+<div class="abs imgframe" style="left:410px;top:660px;width:1100px;height:290px;background-image:url({{{{IMG:deep}}}})"></div>
+{notes("""Thank you. We are now ready for your questions. (Backups are in the B menu: B1 panel Q&A bank, B2 prediction vs causation, B3 evaluation demo, B4 value-at-risk builder, B5–B6 references.)""")}
 </section>''')
 # ================= B1 Q BANK =================
 S.append('''<section class="slide backup uw" id="b-qbank" data-label="B1" data-title="Backup · Panel Q&amp;A bank" data-sec="6" data-steps="0">
