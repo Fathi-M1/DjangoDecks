@@ -338,3 +338,5 @@ svg text{font-family:IN}
 body.nomo #amb *,body.nomo .slide *{animation:none!important;transition-duration:0s!important}
 body.nomo #amb .ray,body.nomo #amb .bub{display:none}
 @media (prefers-reduced-motion:reduce){#amb *,.slide *{animation:none!important;transition-duration:.01s!important}#amb .bub,#amb .ray{display:none}}
+
+#amb #fish{left:0;top:0;width:1920px;height:1080px}

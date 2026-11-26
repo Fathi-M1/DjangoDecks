@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v7 (26 Nov 2026, 8:52 PM Asia/Singapore)
+
+Add swimming fish in the background and put group identity and members on the cover.
+
+Canvas fish swim slowly behind the cards and move away from the cursor (M still freezes motion). Cover hook lines are larger. A cover card shows Title Defense, Group DJANGO, BS CS – Data Science, FEU Tech, and the four members.
+
 ## v6 (26 Nov 2026, 8:42 PM Asia/Singapore)
 
 Restore the underwater background, add ambient motion, and use plain slide titles.

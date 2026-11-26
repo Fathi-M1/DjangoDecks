@@ -187,3 +187,43 @@ window.__deck={go,next,prev,setStep,goLabel,get cur(){return cur},get step(){ret
  X.forEach((x,i)=>{const b=document.createElement('i');b.className='bub';const s=8+rnd()*16;b.style.cssText=`left:${x}px;width:${s}px;height:${s}px;animation-duration:${22+rnd()*20}s;animation-delay:${-rnd()*40}s`;a.appendChild(b)});
  const st=document.getElementById('stage');addEventListener('mousemove',e=>{if(document.body.classList.contains('nomo')||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const dx=e.clientX/innerWidth-.5,dy=e.clientY/innerHeight-.5;a.querySelectorAll('.par').forEach(p=>{const d=+p.dataset.d;p.style.transform=`translate(${-dx*d}px,${-dy*d}px)`})});
 })();
+
+/* v7: wandering fish (canvas, rAF, pauses when hidden / motion off) */
+(()=>{const cv=document.getElementById('fish');if(!cv)return;const g=cv.getContext('2d'),W=1920,H=1080,st=document.getElementById('stage');
+ let sd=11;const R=()=>(sd=(sd*16807)%2147483647)/2147483647;
+ // z: 0 far .. 1 near
+ const SP=[{z:.15,c:'#0a8fa0'},{z:.25,c:'#0a8fa0'},{z:.35,c:'#f08a3c',st:1},{z:.45,c:'#2a9fc2'},{z:.55,c:'#f2b53a'},{z:.7,c:'#f08a3c',st:1},{z:.85,c:'#0a8fa0'},{z:1,c:'#f08a3c',st:1}];
+ const F=SP.map(s=>({...s,x:R()*W,y:120+R()*820,a:(R()<.5?0:Math.PI)+(R()-.5)*.4,len:40+s.z*110,v:.25+s.z*.55+R()*.15,ph:R()*6.28,wob:R()*6.28,alpha:.16+s.z*.26}));
+ let mx=-1e4,my=-1e4;addEventListener('mousemove',e=>{const r=st.getBoundingClientRect(),k=r.width/W;mx=(e.clientX-r.left)/k;my=(e.clientY-r.top)/k});addEventListener('mouseleave',()=>{mx=my=-1e4});
+ function fish(f,t){const L=f.len,dir=Math.cos(f.a)<0?-1:1,tilt=Math.max(-.35,Math.min(.35,Math.sin(f.a)*dir));
+  g.save();g.translate(f.x,f.y);g.scale(dir,1);g.rotate(tilt*dir*dir);g.globalAlpha=f.alpha;
+  if(f.z>.8)g.filter='blur(2px)';else if(f.z<.3)g.filter='blur(.6px)';else g.filter='none';
+  const sw=Math.sin(t*0.006*(1+f.v)+f.ph)*0.28;
+  // tail
+  g.fillStyle=f.c;g.beginPath();g.moveTo(-L*.42,0);g.lineTo(-L*.78,-L*.26+sw*L*.2);g.quadraticCurveTo(-L*.68,sw*L*.1,-L*.78,L*.26+sw*L*.2);g.closePath();g.fill();
+  // body
+  g.beginPath();g.moveTo(L*.5,0);g.bezierCurveTo(L*.3,-L*.34,-L*.3,-L*.3,-L*.46,0);g.bezierCurveTo(-L*.3,L*.3,L*.3,L*.34,L*.5,0);g.fill();
+  // dorsal fin
+  g.beginPath();g.moveTo(L*.05,-L*.24);g.quadraticCurveTo(-L*.12,-L*.42,-L*.26,-L*.2);g.fill();
+  if(f.st){g.save();g.beginPath();g.moveTo(L*.5,0);g.bezierCurveTo(L*.3,-L*.34,-L*.3,-L*.3,-L*.46,0);g.bezierCurveTo(-L*.3,L*.3,L*.3,L*.34,L*.5,0);g.clip();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(L*.16,-L,L*.09,2*L);g.fillRect(-L*.16,-L,L*.1,2*L);g.restore()}
+  g.fillStyle='rgba(11,42,60,.7)';g.beginPath();g.arc(L*.33,-L*.05,Math.max(1.5,L*.035),0,6.28);g.fill();
+  g.restore()}
+ function step(f,dt,t){f.wob+=dt*.0004;f.a+=Math.sin(f.wob*3+f.ph)*.0016*dt*.06;
+  // keep mostly horizontal
+  const h=Math.cos(f.a)<0?Math.PI:0;let d=Math.atan2(Math.sin(f.a-h),Math.cos(f.a-h));if(Math.abs(d)>.45)f.a-=Math.sign(d)*.002*dt;
+  // soft vertical bounds
+  if(f.y<110)f.a+=(Math.cos(f.a)>0?.002:-.002)*dt;if(f.y>960)f.a-=(Math.cos(f.a)>0?.002:-.002)*dt;
+  // flee cursor
+  const dx=f.x-mx,dy=f.y-my,dd=Math.hypot(dx,dy),fr=200+f.z*80;let boost=0;
+  if(dd<fr){const want=Math.atan2(dy,dx),df=Math.atan2(Math.sin(want-f.a),Math.cos(want-f.a));f.a+=df*.004*dt;boost=(1-dd/fr)*1.6}
+  const v=(f.v+boost)*dt*.06;f.x+=Math.cos(f.a)*v;f.y+=Math.sin(f.a)*v;
+  const m=f.len+40;if(f.x>W+m){f.x=-m;f.y=140+R()*780}else if(f.x<-m){f.x=W+m;f.y=140+R()*780}}
+ const still=()=>document.body.classList.contains('nomo')||matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let last=0,raf=0;function draw(t){g.clearRect(0,0,W,H);F.forEach(f=>fish(f,t))}
+ function loop(t){raf=0;const dt=Math.min(50,last?t-last:16);last=t;if(still()){draw(t);return}F.forEach(f=>step(f,dt,t));draw(t);raf=requestAnimationFrame(loop)}
+ const go=()=>{if(!raf&&!document.hidden&&!still()){last=0;raf=requestAnimationFrame(loop)}};
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0}else go()});
+ new MutationObserver(go).observe(document.body,{attributes:true,attributeFilter:['class']});
+ matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',go);
+ window.__fish={F,running:()=>!!raf};go();
+})();

@@ -28,7 +28,7 @@ chrome='''<div id="progress"></div>
 <b>→ / Space</b><span>next step or slide</span><b>←</b><span>previous</span><b>Home / End</b><span>first / last main slide</span><b>F</b><span>fullscreen</span><b>N</b><span>speaker notes</span>
 <b>Q</b><span>panel questions for this section</span><b>R</b><span>references</span><b>B / G</b><span>slide menu and backups</span><b>M</b><span>ambient motion on / off</span><b>Esc</b><span>close panels</span></div></div></div>
 <div id="toast"></div>'''
-AMB='<div id="amb"><div class="par" data-d="14" style="inset:0"><div class="ray"></div><div class="ray"></div><div class="ray"></div></div><div class="caus par" data-d="8"></div><svg class="wave" viewBox="0 0 3840 150" preserveAspectRatio="none"><path d="'+''.join(f'{"M" if i==0 else "Q"}' for i in range(0))+'M0,70 '+' '.join(f'Q{i*480+240},{30 if i%2 else 110} {i*480+480},70' for i in range(8))+' V150 H0Z" fill="#bfeef2"/></svg></div>'
+AMB='<div id="amb"><div class="par" data-d="14" style="inset:0"><div class="ray"></div><div class="ray"></div><div class="ray"></div></div><div class="caus par" data-d="8"></div><svg class="wave" viewBox="0 0 3840 150" preserveAspectRatio="none"><path d="'+''.join(f'{"M" if i==0 else "Q"}' for i in range(0))+'M0,70 '+' '.join(f'Q{i*480+240},{30 if i%2 else 110} {i*480+480},70' for i in range(8))+' V150 H0Z" fill="#bfeef2"/></svg><canvas id="fish" width="1920" height="1080"></canvas></div>'
 js=open(os.path.join(D,'deck.js')).read()
 dat="const QA=%s,RT=%s,QB=%s,PSA=%s,APA=%s;"%tuple(json.dumps(x,ensure_ascii=False) for x in(data.QA,data.RT,data.QB,data.PSA,slides.APA))
 out=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

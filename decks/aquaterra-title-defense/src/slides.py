@@ -16,24 +16,28 @@ terms=[("municipal","Municipal","Catch from <b>municipal waters</b>, up to <b>15
 ("quarter","Quarter","<b>Q1</b> Jan–Mar · <b>Q2</b> Apr–Jun · <b>Q3</b> Jul–Sep · <b>Q4</b> Oct–Dec."),
 ("var","Gross landing value at risk","<b>Projected shortfall × historical first-sale price</b>. Gross value at stake, not income, profit or damage.")]
 chips="".join(f'<button class="chip term" data-t="{k}">{n}</button>' for k,n,_ in terms)
-pops="".join(f'<div class="pop" id="pop-{k}" style="left:1090px;top:330px;width:700px"><div class="lab" style="color:var(--sea);margin-bottom:10px">{n}</div>{t}</div>' for k,n,t in terms)
+pops="".join(f'<div class="pop" id="pop-{k}" style="left:1110px;top:300px;width:700px"><div class="lab" style="color:var(--sea);margin-bottom:10px">{n}</div>{t}</div>' for k,n,t in terms)
 S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cover · AquaTerra" data-sec="-1" data-steps="3" data-q="title">
-<div class="abs imgframe" style="left:1090px;top:60px;width:760px;height:520px;background-image:url({{{{IMG:hero}}}})"></div>
-<div class="abs kick" style="left:110px;top:84px;width:620px;line-height:1.55">Title Defense · Group DJANGO<br>BS CS – Data Science · FEU Tech</div>
-<div class="abs" style="left:110px;top:196px;width:940px">
- <p style="font:400 36px/1.3 PF;margin:0;color:var(--ink)">Fish feeds our families and supports coastal livelihoods.</p>
- <p class="rv" data-s="1" style="font:400 36px/1.3 PF;margin-top:14px;color:var(--ink)">Fishers, vendors and businesses depend on a steady supply.</p>
- <p class="rv" data-s="2" style="font:600 italic 50px/1.14 PF;margin-top:20px;color:var(--sea)">Can past data warn us when that supply will <span style="color:var(--coral)">fall short?</span></p>
+<div class="abs" style="left:110px;top:96px;width:1120px">
+ <p style="font:500 62px/1.16 PF;margin:0;color:var(--ink)">Fish feeds our families and supports coastal livelihoods.</p>
+ <p class="rv" data-s="1" style="font:500 62px/1.16 PF;margin-top:30px;color:var(--ink)">Fishers, vendors and businesses depend on a steady supply.</p>
+ <p class="rv" data-s="2" style="font:600 italic 80px/1.08 PF;margin-top:34px;color:var(--sea)">Can past data warn us when that supply will <span style="color:var(--coral)">fall short?</span></p>
 </div>
-<div class="abs rv" data-s="3" style="left:0;right:0;bottom:0;height:440px">
- <div class="abs" style="top:0;left:0">{waveH("#e6f6f3",110)}</div>
- <div class="abs" style="top:108px;left:0;right:0;bottom:0;background:#e6f6f3"></div>
- <div class="abs" style="left:110px;top:70px;display:flex;gap:40px;align-items:flex-start;width:1700px">
-  <div class="num" style="font-size:170px">00</div>
-  <div style="padding-top:10px"><div class="kick">Our proposed study</div>
-  <div style="font:700 92px/1 PF;color:var(--ink);margin-top:10px">AquaTerra<span style="color:var(--sea)">:</span></div>
-  <div style="font:500 31px/1.3 PF;color:var(--ink2);margin-top:12px;width:1340px">{SUB}</div>
-  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;align-items:center"><span class="lab" style="margin-right:6px">Key terms · click</span>{chips}</div></div>
+<div class="abs glass" id="cov-id" style="left:1300px;top:96px;width:520px;padding:30px 34px">
+ <div class="kick">Title Defense</div>
+ <div style="font:600 40px/1.15 PF;color:var(--ink);margin-top:14px">Group DJANGO</div>
+ <div style="font:500 23px/1.4 IN;color:var(--ink2);margin-top:10px">BS Computer Science – Data Science<br>FEU Institute of Technology (FEU Tech)</div>
+ <div class="lab" style="margin-top:24px;color:var(--sea)">Members</div>
+ <ul style="list-style:none;margin-top:10px;font:500 23px/1.6 IN;color:var(--ink)"><li>Chan, Reese Lauren C.</li><li>Ebrahim, Fathi Mahad</li><li>Pacate, Denienz A.</li><li>Whitty, Juan Angelo Roy B.</li></ul>
+</div>
+<div class="abs rv" data-s="3" style="left:0;right:0;bottom:0;height:330px">
+ <div class="abs" style="top:0;left:0">{waveH("#e6f6f3",80)}</div>
+ <div class="abs" style="top:78px;left:0;right:0;bottom:0;background:#e6f6f3"></div>
+ <div class="abs" style="left:110px;top:44px;display:flex;gap:34px;align-items:flex-start;width:1700px">
+  <div class="num" style="font-size:120px">00</div>
+  <div style="padding-top:4px"><div class="kick">Our proposed study</div>
+  <div style="font:700 54px/1 PF;color:var(--ink);margin-top:8px">AquaTerra<span style="color:var(--sea)">:</span></div><div style="font:500 25px/1.3 PF;color:var(--ink2);margin-top:8px;width:1540px">{SUB}</div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;align-items:center"><span class="lab" style="margin-right:6px">Key terms · click</span>{chips}</div></div>
  </div>
 </div>
 {pops}
