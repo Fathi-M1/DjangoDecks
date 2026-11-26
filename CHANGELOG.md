@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v3 (26 Nov 2026, 3:22 PM Asia/Singapore)
+
+Enlarge the spotlight panel, use the notched slide path, and bump fonts.
+
+Slides fill more of the screen (notched spotlight clip-path, panel_path.txt). Headings move into the top band, body and citation fonts are slightly larger, and the cover layout is tightened.
+
 ## v2 (26 Nov 2026, 3:10 PM Asia/Singapore)
 
 Fold the title into the cover and drop the standalone Title slide.

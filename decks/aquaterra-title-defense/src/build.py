@@ -17,7 +17,6 @@ assert '{{' not in html, re.findall(r'\{\{[^}]*\}\}',html)[:3]
 chrome='''<div id="progress"></div>
 <button class="back" id="back" style="display:none">← Back</button>
 <div id="notes"><div class="lab" id="nlab">Speaker notes</div><div id="ntxt"></div></div>
-<div id="rail"><div class="rt">Aqua<span>Terra</span></div><div class="rl">Sections</div>'''+"".join(f'<button class="rs" data-sec="{k}"><i></i>{n}</button>' for k,n in enumerate(["I · Background","II · Objectives","III · Scope &amp; Limitation","IV · Algorithm Justification","V · Potential Clients","Thank you","Backups"]))+'''</div>
 <div id="bar"><div id="seclab"></div><div id="steps"></div><div class="sp"></div>
 <button class="kb q" id="kq" title="Panel questions for this section"><b>Q</b>Panel asks</button>
 <button class="kb r" id="kr" title="References"><b>R</b>Refs</button>
@@ -34,7 +33,7 @@ js=open(os.path.join(D,'deck.js')).read()
 dat="const QA=%s,RT=%s,QB=%s,PSA=%s,APA=%s;"%tuple(json.dumps(x,ensure_ascii=False) for x in(data.QA,data.RT,data.QB,data.PSA,slides.APA))
 out=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces</title><style>{css}</style></head><body>
-<div id="stage">{html}{chrome}</div>
+<div id="stage"><svg id="panelbg" width="1920" height="1080"><defs><filter id="psh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0d2b45" flood-opacity=".16"/></filter></defs><path transform="translate(24,14) scale(0.975)" d="M440,0 H1886 A34,34 0 0 1 1920,34 V941 A34,34 0 0 1 1886,975 H1476 A24,24 0 0 0 1452,999 V1046 A34,34 0 0 1 1418,1080 H34 A34,34 0 0 1 0,1046 V217 A34,34 0 0 1 34,183 H382 A24,24 0 0 0 406,159 V34 A34,34 0 0 1 440,0 Z" fill="rgba(255,255,255,.965)" stroke="#a5e4dc" stroke-width="3" filter="url(#psh)"/></svg>{html}{chrome}</div>
 <script>{dat}
 {js}</script></body></html>'''
 p=os.path.join(D,'..','AquaTerra_Title_Defense.html');open(p,'w').write(out);print(p,round(len(out)/1e6,2),'MB')
