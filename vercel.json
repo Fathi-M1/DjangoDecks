@@ -1,13 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    {
-      "source": "/aquaterra-title-defense",
-      "destination": "/decks/aquaterra-title-defense/index.html"
-    },
-    {
-      "source": "/aquaterra-title-defense/",
-      "destination": "/decks/aquaterra-title-defense/index.html"
-    }
+    { "source": "/aquaterra-title-defense", "destination": "/decks/aquaterra-title-defense" },
+    { "source": "/aquaterra-title-defense/", "destination": "/decks/aquaterra-title-defense" }
   ]
 }
