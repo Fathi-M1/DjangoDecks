@@ -5,8 +5,9 @@ D=os.path.dirname(os.path.abspath(__file__));IMG=os.path.join(D,'..','img')
 def b64(p,m):return f"data:{m};base64,"+base64.b64encode(open(os.path.join(IMG,p),'rb').read()).decode()
 css=open(os.path.join(D,'deck.css')).read()
 for k in['pf','pfi','in']:css=css.replace('{{FONT:%s}}'%k,b64(k+'.woff2','font/woff2'))
+css=css.replace('{{IMG:feu_bg}}',b64('feu_bg.jpg','image/jpeg'))
 html="\n".join(slides.S)
-_n=[0]
+_n=[-1]
 def _lab(m):
     if m.group(1).startswith('B'):return m.group(0)
     _n[0]+=1;return 'data-label="%02d"'%_n[0]
@@ -16,10 +17,11 @@ assert '{{' not in html, re.findall(r'\{\{[^}]*\}\}',html)[:3]
 chrome='''<div id="progress"></div>
 <button class="back" id="back" style="display:none">← Back</button>
 <div id="notes"><div class="lab" id="nlab">Speaker notes</div><div id="ntxt"></div></div>
-<div id="bar"><div id="secs">'''+"".join('<i></i>' for _ in range(7))+'''</div><div id="seclab"></div><div id="steps"></div><div class="sp"></div>
+<div id="rail"><div class="rt">Aqua<span>Terra</span></div><div class="rl">Sections</div>'''+"".join(f'<button class="rs" data-sec="{k}"><i></i>{n}</button>' for k,n in enumerate(["I · Background","II · Objectives","III · Scope &amp; Limitation","IV · Algorithm Justification","V · Potential Clients","Thank you","Backups"]))+'''</div>
+<div id="bar"><div id="seclab"></div><div id="steps"></div><div class="sp"></div>
 <button class="kb q" id="kq" title="Panel questions for this section"><b>Q</b>Panel asks</button>
 <button class="kb r" id="kr" title="References"><b>R</b>Refs</button>
-<button class="kb" id="kn"><b>N</b>Notes</button><button class="kb" id="kb"><b>B</b>Slides</button><button class="kb" id="kf"><b>F</b>Full</button><button class="kb" id="kh"><b>?</b></button>
+<button class="kb" id="kn" title="Speaker notes"><b>N</b></button><button class="kb" id="kb" title="Slide menu"><b>B</b></button><button class="kb" id="kf" title="Fullscreen"><b>F</b></button><button class="kb" id="kh"><b>?</b></button>
 <button class="nav" id="pv" aria-label="Previous">‹</button><div id="counter"></div><button class="nav" id="nx" aria-label="Next">›</button></div>
 <div class="ov" id="qov"><div class="drawer"><button class="x">✕</button><div class="kick" style="color:var(--coral)">Panel might ask</div><div class="dh" id="qtitle"></div><div id="qbody"></div></div></div>
 <div class="ov" id="rov"><div class="drawer"><button class="x">✕</button><div class="kick">References</div><div class="dh">Sources for this section</div><div id="rbody"></div></div></div>
@@ -31,7 +33,7 @@ chrome='''<div id="progress"></div>
 js=open(os.path.join(D,'deck.js')).read()
 dat="const QA=%s,RT=%s,QB=%s,PSA=%s,APA=%s;"%tuple(json.dumps(x,ensure_ascii=False) for x in(data.QA,data.RT,data.QB,data.PSA,slides.APA))
 out=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AquaTerra · Title Defense · Group DJANGO</title><style>{css}</style></head><body>
+<title>AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces</title><style>{css}</style></head><body>
 <div id="stage">{html}{chrome}</div>
 <script>{dat}
 {js}</script></body></html>'''

@@ -1,5 +1,6 @@
-TITLE="Forecasting Municipal Fish Landing Shortfalls and Economic Exposure from Mangrove Change Using GAMMs and Random Forests"
-def waveH(fill="#fbfaf6",h=120,flip=False,op=1):
+TITLE="AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces"
+SUB="Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces"
+def waveH(fill="#ffffff",h=120,flip=False,op=1):
     d="M0,60 C320,10 640,110 960,60 C1280,10 1600,110 1920,60 L1920,120 L0,120Z"
     t=' style="transform:scaleY(-1)"' if flip else ''
     return f'<svg viewBox="0 0 1920 120" preserveAspectRatio="none" width="1920" height="{h}"{t}><path d="{d}" fill="{fill}" opacity="{op}"/><path d="M0,74 C320,24 640,124 960,74 C1280,24 1600,124 1920,74" stroke="{fill}" stroke-opacity=".5" stroke-width="3" fill="none"/></svg>'
@@ -7,64 +8,46 @@ def hd(num,kick,h,extra=""):
     return f'<div class="hd"><div class="num">{num}</div><div><div class="kick">{kick}</div><h2 style="margin-top:12px">{h}</h2></div>{extra}</div>'
 def notes(t): return f'<aside class="notes">{t.strip()}</aside>'
 S=[]
-# ---------------- 1 HOOK ----------------
-S.append(f'''<section class="slide" id="s-hook" data-label="01" data-title="Opening" data-sec="-1" data-steps="3">
-<div class="bgimg" style="background-image:url({{{{IMG:hero}}}})"></div><div class="rays"></div>
-<div class="full" style="background:linear-gradient(90deg,rgba(2,40,58,.78) 0%,rgba(2,40,58,.35) 55%,rgba(2,40,58,0) 80%)"></div>
-<div class="abs" style="left:120px;top:84px;width:1040px;color:#fff">
- <div class="kick" style="color:#bff4f8">Title Defense · Group DJANGO · BS Computer Science – Data Science · FEU Tech</div>
- <p style="font:400 40px/1.35 PF;margin-top:60px;color:#e8fbfd">Fish provides food for our families and supports the livelihoods of coastal communities.</p>
- <p class="rv" data-s="1" style="font:400 40px/1.35 PF;margin-top:26px;color:#e8fbfd">Behind every catch are fishers, vendors, and businesses that depend on a steady supply.</p>
- <p class="rv" data-s="2" style="font:600 italic 58px/1.18 PF;margin-top:40px;color:#fff">Can historical fisheries and environmental data help us anticipate when that supply may <span style="color:#ffcdbd">fall short?</span></p>
-</div>
-<div class="abs rv" data-s="3" style="left:0;right:0;bottom:0;height:430px">
- <div class="abs" style="top:0;left:0">{waveH("#fbfaf6",120)}</div>
- <div class="abs" style="top:118px;left:0;right:0;bottom:0;background:#fbfaf6"></div>
- <div class="abs" style="left:120px;top:96px;display:flex;gap:44px;align-items:flex-start;width:1680px">
-  <div class="num" style="font-size:190px">00</div>
-  <div style="padding-top:18px"><div class="kick">Our proposed study</div>
-  <div style="font:700 94px/1 PF;color:var(--ink);margin-top:10px">AquaTerra</div>
-  <div style="font:500 30px/1.35 PF;color:var(--ink2);margin-top:14px;width:1300px">{TITLE}</div></div>
- </div>
-</div>
-{notes("""Fish provides food for our families and supports the livelihoods of coastal communities. [→] Behind every catch are fishers, vendors, and businesses that depend on a steady supply. [→] This makes understanding changes in fish landings important. Can historical fisheries and environmental data help us anticipate periods when that supply may fall short? [→] Good day, respected panelists. We are Group Django, and today we present our proposed study, 'Forecasting Municipal Fish Landing Shortfalls and Economic Exposure from Mangrove Change Using GAMMs and Random Forests.'""")}
-</section>''')
-# ---------------- 2 TITLE ----------------
+# ---------------- 0 COVER / HOOK (also carries the title & key terms) ----------------
 terms=[("municipal","Municipal","<b>Type of fishing operation</b>, not a location: fishing without boats or with boats of <b>3 gross tons or less</b> (PSA classification). Records are grouped by <b>province</b>."),
 ("landings","Landings","Fish caught at sea and <b>brought ashore</b>. We measure the <b>metric tons</b> landed in each province during each quarter."),
 ("quarter","Quarter","<b>Q1</b> Jan–Mar · <b>Q2</b> Apr–Jun · <b>Q3</b> Jul–Sep · <b>Q4</b> Oct–Dec. PSA publishes the records quarterly."),
-("mangrove","Mangrove change","Historical <b>increases or decreases in mangrove area</b> in the selected provinces. Tested as a <b>predictor</b>; the relationship is tested, not assumed."),
-("exposure","Economic exposure","<b>Gross landing value at risk</b> = projected shortfall × historical reference price. Not income, profit or damage.")]
+("mangrove","Mangrove cover change","Historical increases or decreases in mangrove cover, derived from <b>Landsat satellite imagery</b>. Tested as a <b>predictor</b>; not assumed to cause anything."),
+("var","Gross landing value at risk","<b>Projected shortfall × matching historical first-sale price</b>. Gross revenue tied to the missing landings, not income, profit or damage.")]
 chips="".join(f'<button class="chip term" data-t="{k}">{n}</button>' for k,n,_ in terms)
-pops="".join(f'<div class="pop" id="pop-{k}" style="left:980px;top:770px"><div class="lab" style="color:var(--sea);margin-bottom:8px">{n}</div>{t}</div>' for k,n,t in terms)
-S.append(f'''<section class="slide" id="s-title" data-label="02" data-title="I · Title" data-sec="0" data-steps="0" data-q="title">
-<div class="bgimg" style="background-image:url({{{{IMG:bangka}}}});right:auto;width:900px"></div>
-<svg class="abs" style="left:790px;top:0" width="160" height="1080" viewBox="0 0 160 1080" preserveAspectRatio="none"><path d="M110,0 C40,180 160,360 90,540 C20,720 150,900 100,1080 L160,1080 L160,0Z" fill="#fbfaf6"/></svg>
-<div class="abs" style="left:950px;right:0;top:0;bottom:0;background:#fbfaf6"></div>
-<div class="abs" style="left:980px;top:96px;width:840px">
- <div style="display:flex;align-items:flex-end;gap:26px"><div class="num">01</div><div class="kick" style="margin-bottom:16px">I · Title</div></div>
- <div style="font:700 120px/1 PF;color:var(--ink);margin-top:34px">AquaTerra</div>
- <div style="font:500 36px/1.32 PF;color:var(--ink);margin-top:26px;border-left:5px solid var(--sea);padding-left:24px">{TITLE}</div>
- <div class="lab" style="margin-top:44px">Key terms · click to define</div>
- <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:14px">{chips}</div>
+pops="".join(f'<div class="pop" id="pop-{k}" style="left:1080px;top:330px;width:640px"><div class="lab" style="color:var(--sea);margin-bottom:8px">{n}</div>{t}</div>' for k,n,t in terms)
+S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cover · AquaTerra" data-sec="-1" data-steps="3" data-q="title">
+<div class="abs imgframe" style="left:1080px;top:70px;width:730px;height:540px;background-image:url({{{{IMG:hero}}}})"></div>
+<div class="abs" style="left:110px;top:80px;width:910px">
+ <div class="kick">Title Defense · Group DJANGO · BS CS – Data Science · FEU Tech</div>
+ <p style="font:400 34px/1.35 PF;margin-top:40px;color:var(--ink)">Fish provides food for our families and supports the livelihoods of coastal communities.</p>
+ <p class="rv" data-s="1" style="font:400 34px/1.35 PF;margin-top:20px;color:var(--ink)">Behind every catch are fishers, vendors, and businesses that depend on a steady supply.</p>
+ <p class="rv" data-s="2" style="font:600 italic 50px/1.18 PF;margin-top:30px;color:var(--sea)">Can historical fisheries and environmental data help us anticipate when that supply may <span style="color:var(--coral)">fall short?</span></p>
+</div>
+<div class="abs rv" data-s="3" style="left:0;right:0;bottom:0;height:430px">
+ <div class="abs" style="top:0;left:0">{waveH("#e6f6f3",120)}</div>
+ <div class="abs" style="top:118px;left:0;right:0;bottom:0;background:#e6f6f3"></div>
+ <div class="abs" style="left:110px;top:92px;display:flex;gap:44px;align-items:flex-start;width:1700px">
+  <div class="num" style="font-size:190px">00</div>
+  <div style="padding-top:14px"><div class="kick">Our proposed study</div>
+  <div style="font:700 92px/1 PF;color:var(--ink);margin-top:10px">AquaTerra<span style="color:var(--sea)">:</span></div>
+  <div style="font:500 30px/1.32 PF;color:var(--ink2);margin-top:12px;width:1320px">{SUB}</div>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center"><span class="lab" style="margin-right:6px">Key terms · click</span>{chips}</div></div>
+ </div>
 </div>
 {pops}
-<div class="abs" style="left:60px;bottom:110px;color:#fff;font:600 18px IN;letter-spacing:.14em;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.5)">Municipal fishing · boats of 3 GT or less</div>
-{notes("""Our title: Forecasting Municipal Fish Landing Shortfalls and Economic Exposure from Mangrove Change Using GAMMs and Random Forests. Our system is called AquaTerra.
-'Municipal' describes the type of fishing operation: no boat, or a small boat of three gross tons or less. It does not mean municipality; our records are grouped by province.
-'Landings' means bringing the catch from the water onto land; we measure metric tons per province per quarter.
-Mangrove change is a predictor we test. It is not assumed to cause anything.
-(Press Q for the panel questions on this section.)""")}
+{notes("""Fish provides food for our families and supports the livelihoods of coastal communities. [→] Behind every catch are fishers, vendors, and businesses that depend on a steady supply. [→] This makes understanding changes in fish landings important. Can historical fisheries and environmental data help us anticipate periods when that supply may fall short? [→] Good day, respected panelists. We are Group Django, and today we present our proposed study, 'AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces.'
+'Municipal' describes the type of fishing operation: no boat, or a small boat of three gross tons or less; our records are grouped by province. 'Landings' means the catch brought ashore, in metric tons per province per quarter. (Click a key term to define it; press Q for the panel questions on the title.)""")}
 </section>''')
 # ---------------- 3 BACKGROUND ----------------
-S.append(f'''<section class="slide" id="s-bg" data-label="03" data-title="II · Background" data-sec="1" data-steps="4" data-q="bg" data-r="bg">
+S.append(f'''<section class="slide" id="s-bg" data-label="03" data-title="I · Background" data-sec="0" data-steps="4" data-q="bg" data-r="bg">
 <div class="bgimg" style="background-image:url({{{{IMG:mangrove}}}});bottom:auto;height:470px"></div>
 <div class="full" style="bottom:auto;height:470px;background:linear-gradient(180deg,rgba(2,40,58,.55),rgba(2,40,58,.15))"></div>
 <div class="abs" style="left:110px;top:70px;display:flex;gap:34px;align-items:flex-end;color:#fff">
- <div class="num w">02</div><div><div class="kick" style="color:#bff4f8">II · Background</div>
+ <div class="num w">01</div><div><div class="kick" style="color:#e6fff9">I · Background</div>
  <h2 style="margin-top:12px;color:#fff;font-size:60px">Fish supports coastal livelihoods,<br>and national production <em style="color:#ffcdbd">is declining.</em></h2></div></div>
-<div class="abs" style="left:0;top:380px">{waveH("#fbfaf6",110)}</div>
-<div class="abs" style="left:0;right:0;top:488px;bottom:0;background:#fbfaf6"></div>
+<div class="abs" style="left:0;top:380px">{waveH("#ffffff",110)}</div>
+<div class="abs" style="left:0;right:0;top:488px;bottom:0;background:#ffffff"></div>
 <div class="abs rv" data-s="1" style="left:110px;top:470px;width:520px">
  <div class="lab" style="color:var(--sea)">1 · Why it matters</div>
  <p class="body" style="margin-top:12px">Small-scale fisheries are an important source of <b>rural livelihoods</b>.</p><div class="cite">FAO (2024)</div>
@@ -104,9 +87,9 @@ SO=[("Prepare","the dataset and seasonal benchmarks from quarterly landings, env
 ("Seek collaboration","with DTI or a relevant fisheries agency to review data suitability and practical usefulness")]
 rqh="".join(f'<button class="abs rq" data-i="{i}" style="left:110px;top:{372+i*132}px"><span>RQ{i+1}</span><div>{q}</div></button>' for i,q in enumerate(RQ))
 soh="".join(f'<div class="abs so" data-i="{i}" style="left:1060px;top:{372+i*104}px"><span>{i+1}</span><div><b>{h}</b><div>{m}</div></div></div>' for i,(h,m) in enumerate(SO))
-S.append(f'''<section class="slide uw" id="s-obj" data-label="04" data-title="III · Objectives" data-sec="2" data-steps="4" data-q="obj">
+S.append(f'''<section class="slide uw" id="s-obj" data-label="04" data-title="II · Objectives" data-sec="1" data-steps="4" data-q="obj">
 <div class="rays" style="opacity:.6"></div>
-{hd("03","III · Objectives","Four questions, <em>five specific objectives.</em>")}
+{hd("02","II · Objectives","Four questions, <em>five specific objectives.</em>")}
 <div class="abs" style="left:110px;top:262px;width:1700px;font:400 22px/1.45 IN;color:var(--ink2)"><span class="lab" style="color:var(--sea)">General objective&nbsp;&nbsp;</span>Develop and evaluate <b>AquaTerra</b>, using Random Forest for predictor selection and GAMM for next-quarter municipal fish landing forecasts, then estimate supply shortfalls and gross landing value at risk to support planning in selected Philippine coastal provinces.</div>
 <div class="abs lab" style="left:110px;top:345px">Research questions · click one</div><div class="abs lab" style="left:1060px;top:345px">Specific objectives</div>
 {rqh}<svg class="abs" id="rqlines" style="left:880px;top:372px" width="180" height="540"></svg>{soh}
@@ -115,8 +98,8 @@ We answer four questions [click each]. RQ1: what seasonal benchmarks identify sh
 Five specific objectives: prepare data and benchmarks; implement and evaluate the forecasting workflow; develop the economic exposure module; validate and present through a dashboard; and seek collaboration with DTI or a relevant fisheries agency.""")}
 </section>''')
 # ---------------- 5 SCOPE & LIMITATION ----------------
-SC=[("Marine municipal landings","selected coastal provinces and fish categories; final coverage depends on complete, compatible records"),
-("Public secondary data","PSA OpenSTAT · Global Mangrove Watch · NASA IMERG · NOAA OISST · NOAA IBTrACS"),
+SC=[("Study area · marine municipal landings","Palawan, Misamis Occidental, Negros Oriental, Tawi-Tawi, Zamboanga del Norte, Davao de Oro × five fish categories; final coverage depends on complete, compatible records"),
+("Public secondary data","PSA OpenSTAT · Landsat satellite imagery (mangrove cover) · NASA IMERG · NOAA OISST · NOAA IBTrACS"),
 ("RF → GAMM forecasts","next quarter; tests mangrove history and prior typhoon exposure beyond landings, seasonality, rainfall, SST"),
 ("Shortfalls & exposure","vs historical seasonal benchmarks × historical reference prices → exposure rankings"),
 ("Evaluation & dashboard","later quarters held out · web dashboard · consultation sought with DTI or a fisheries agency")]
@@ -127,21 +110,20 @@ LM=[("Selected coverage","Excludes commercial fisheries, aquaculture and inland 
 ("Research prototype","No guaranteed real-time updates or deployment. Consultation depends on agency availability; adoption is not guaranteed.")]
 sch="".join(f'<div class="li"><i>✓</i><div><b>{a}</b><span>{b}</span></div></div>' for a,b in SC)
 lmh="".join(f'<button class="li lm" data-i="{i}"><i>✕</i><div><b>{a}</b><span>{b}</span></div></button>' for i,(a,b) in enumerate(LM))
-S.append(f'''<section class="slide" id="s-scope" data-label="05" data-title="IV · Scope and Limitation" data-sec="3" data-steps="2" data-q="scope">
-<div class="bgimg" style="background-image:url({{{{IMG:deep}}}})"></div><div class="rays" style="opacity:.5"></div>
-<div class="abs" style="left:110px;top:64px;display:flex;gap:34px;align-items:flex-end;color:#fff"><div class="num w">04</div><div><div class="kick" style="color:#bff4f8">IV · Scope and Limitation</div><h2 style="margin-top:12px;color:#fff;font-size:56px">What we <em style="color:#9ff0f6">cover</em>, and what we <em style="color:#ffcdbd">don't claim.</em></h2></div></div>
+S.append(f'''<section class="slide" id="s-scope" data-label="05" data-title="III · Scope and Limitation" data-sec="2" data-steps="2" data-q="scope">
+<div class="abs" style="left:110px;top:64px;display:flex;gap:34px;align-items:flex-end"><div class="num">03</div><div><div class="kick">III · Scope and Limitation</div><h2 style="margin-top:12px;font-size:56px">What we <em>cover</em>, and what we <span class="c">don't claim.</span></h2></div></div>
 <div class="abs" id="sl-tog" style="right:110px;top:120px;display:flex;gap:8px"><button class="chip" data-v="scope">Scope</button><button class="chip cor" data-v="lim">Limitation</button><button class="chip on" data-v="both">Both</button></div>
 <div class="abs glass colA" data-s="1" style="left:110px;top:290px;width:830px;height:640px;padding:26px 30px"><div class="lab" style="color:var(--sea)">Scope</div>{sch}</div>
 <div class="abs glass colB rv" data-s="2" style="left:980px;top:290px;width:830px;height:640px;padding:26px 30px"><div class="lab" style="color:var(--coral)">Limitation · click an item to focus</div>{lmh}</div>
-{notes("""Scope: forecasting marine municipal fish landings and assessing economic exposure in selected Philippine coastal provinces, using publicly accessible secondary data: PSA OpenSTAT, Global Mangrove Watch, NASA IMERG, NOAA OISST and NOAA IBTrACS. Random Forest for predictor selection, then GAMM for next-quarter forecasts; compare with seasonal benchmarks, value shortfalls with historical reference prices, evaluate on later quarters, show results on a web dashboard, and seek consultation with DTI or a relevant fisheries agency.
+{notes("""Scope: forecasting marine municipal fish landings and assessing economic exposure in six Philippine coastal provinces (Palawan, Misamis Occidental, Negros Oriental, Tawi-Tawi, Zamboanga del Norte and Davao de Oro), using publicly accessible secondary data: PSA OpenSTAT, Landsat satellite imagery for mangrove cover, NASA IMERG, NOAA OISST and NOAA IBTrACS. Random Forest for predictor selection, then GAMM for next-quarter forecasts; compare with seasonal benchmarks, value shortfalls with historical reference prices, evaluate on later quarters, show results on a web dashboard, and seek consultation with DTI or a relevant fisheries agency.
 [→] Limitations: selected provinces and marine municipal categories only; no commercial, aquaculture or inland; no field monitoring. Next quarter only; gaps and delays may affect accuracy. We will not establish causal effects of mangrove change or typhoons. Gross landing value at risk uses historical prices, not income, profit or damage. The dashboard is a research prototype and adoption is not guaranteed.""")}
 </section>''')
 # ---------------- 6–7 DATA-FLOW PIPELINE (two slides) ----------------
 from flow import FLOW
 S.extend(FLOW)
-def demohd(k,h): return hd("05",f"V · Algorithm Justification · {k}",h)
+def demohd(k,h): return hd("04",f"IV · Algorithm Justification · {k}",h)
 # ---------------- 7 RF DEMO ----------------
-S.append(f'''<section class="slide uw" id="s-rf" data-label="07" data-title="V.1 · Random Forest demo" data-sec="4" data-steps="3" data-q="algo">
+S.append(f'''<section class="slide uw" id="s-rf" data-label="07" data-title="IV.1 · Random Forest demo" data-sec="3" data-steps="3" data-q="algo">
 <div class="rays" style="opacity:.5"></div>
 {demohd("Random Forest","Many trees vote; <em>importance</em> ranks the predictors.")}
 <div class="abs card" style="left:110px;top:270px;width:520px;height:600px;padding:26px 28px">
@@ -166,7 +148,7 @@ S.append(f'''<section class="slide uw" id="s-rf" data-label="07" data-title="V.1
 These numbers are illustrative. Importance means predictive usefulness, not cause.""")}
 </section>''')
 # ---------------- 8 GAMM DEMO ----------------
-S.append(f'''<section class="slide uw" id="s-gamm" data-label="08" data-title="V.2 · GAMM demo" data-sec="4" data-steps="4" data-q="algo">
+S.append(f'''<section class="slide uw" id="s-gamm" data-label="08" data-title="IV.2 · GAMM demo" data-sec="3" data-steps="4" data-q="algo">
 <div class="rays" style="opacity:.5"></div>
 {demohd("GAMM","Smooth curves <em>add up</em> to the forecast.")}
 <div class="abs card" style="left:110px;top:270px;width:560px;height:600px;padding:22px 26px">
@@ -187,7 +169,7 @@ S.append(f'''<section class="slide uw" id="s-gamm" data-label="08" data-title="V
 {notes("""GAMM stands for Generalized Additive Mixed Model. [→] It adds a smooth seasonal curve for the quarter, [→] then smooth, possibly nonlinear curves for the predictors that Random Forest passed on, such as sea surface temperature, rainfall or lagged landings. [→] The 'mixed' part adds random effects, a level shift for each province and fish category, so groups can differ without fitting a separate model for each. [→] The sum gives the next-quarter forecast. All curves here are illustrative.""")}
 </section>''')
 # ---------------- 9 BASELINE vs MODEL ----------------
-S.append(f'''<section class="slide uw" id="s-eval" data-label="09" data-title="V.3 · Baseline vs model" data-sec="4" data-steps="2" data-q="algo">
+S.append(f'''<section class="slide uw" id="s-eval" data-label="09" data-title="IV.3 · Baseline vs model" data-sec="3" data-steps="2" data-q="algo">
 <div class="rays" style="opacity:.5"></div>
 {demohd("Evaluation","The workflow must beat the <span class='c'>seasonal baseline</span> on unseen quarters.")}
 <div class="abs card" style="left:110px;top:270px;width:1240px;height:600px;padding:20px 26px">
@@ -195,7 +177,7 @@ S.append(f'''<section class="slide uw" id="s-eval" data-label="09" data-title="V
  <svg id="e-chart" width="1190" height="400" style="margin-top:6px"></svg>
  <div style="display:flex;align-items:center;gap:18px;margin-top:6px;font:600 18px IN;color:var(--ink2)">Test starts at <b id="e-lab" style="color:var(--coral);min-width:90px">2024 Q1</b>
  <input type="range" id="e-split" min="12" max="24" value="20" style="flex:1"><button class="btn ghost" id="e-roll">▶ Rolling origin</button></div>
- <div style="display:flex;gap:22px;margin-top:10px;font:600 16px IN;color:var(--ink2)"><span><i class="lg" style="background:#9fb8c2"></i>observed</span><span class="rv" data-s="1"><i class="lg" style="background:#7a8fa0"></i>seasonal baseline = same quarter last year</span><span class="rv" data-s="2"><i class="lg" style="background:var(--sea)"></i>RF → GAMM workflow</span></div>
+ <div style="display:flex;gap:22px;margin-top:10px;font:600 16px IN;color:var(--ink2)"><span><i class="lg" style="background:#a9bfc6"></i>observed</span><span class="rv" data-s="1"><i class="lg" style="background:#7a8fa0"></i>seasonal baseline = same quarter last year</span><span class="rv" data-s="2"><i class="lg" style="background:var(--sea)"></i>RF → GAMM workflow</span></div>
 </div>
 <div class="abs card" style="left:1380px;top:270px;width:430px;height:600px;padding:22px 26px">
  <div class="lab" style="color:var(--sea)">Error on test quarters</div>
@@ -206,7 +188,7 @@ S.append(f'''<section class="slide uw" id="s-eval" data-label="09" data-title="V
 {notes("""We compare the complete workflow against a seasonal baseline: the observed landings from the same quarter of the previous year. [→] The test quarters are later quarters excluded from training and tuning; drag the slider to move the split, or play the rolling-origin evaluation. [→] MAE tells us the typical miss in metric tons, RMSE highlights larger mistakes, and MASE lets us compare across differently sized series. If the workflow adds little over the baseline, we would not recommend it for operational use. Values are illustrative.""")}
 </section>''')
 # ---------------- 10 WITH vs WITHOUT ----------------
-S.append(f'''<section class="slide uw" id="s-contrib" data-label="10" data-title="V.4 · Predictive contribution" data-sec="4" data-steps="2" data-q="algo">
+S.append(f'''<section class="slide uw" id="s-contrib" data-label="10" data-title="IV.4 · Predictive contribution" data-sec="3" data-steps="2" data-q="algo">
 <div class="rays" style="opacity:.5"></div>
 {demohd("Contribution test","Do mangrove history and typhoons <em>improve the forecast?</em>")}
 <div class="abs card" style="left:110px;top:270px;width:520px;height:600px;padding:24px 28px">
@@ -228,7 +210,7 @@ S.append(f'''<section class="slide uw" id="s-contrib" data-label="10" data-title
 {notes("""To test predictive contribution we fit two models evaluated on the same unseen later quarters. [→] Model A uses past landings, seasonality, rainfall and SST. [→] Model B adds mangrove history and prior typhoon exposure. If Model B has lower MAE, RMSE and MASE, those predictors add predictive value. If not, we report that. Either way, better accuracy means predictive usefulness only. It does not prove mangroves or typhoons cause changes in landings. Values are illustrative.""")}
 </section>''')
 # ---------------- 11 VALUE AT RISK BUILDER ----------------
-S.append(f'''<section class="slide uw" id="s-var" data-label="11" data-title="V.5 · Value at risk builder" data-sec="4" data-steps="3" data-q="value">
+S.append(f'''<section class="slide uw" id="s-var" data-label="11" data-title="IV.5 · Value at risk builder" data-sec="3" data-steps="3" data-q="value">
 <div class="rays" style="opacity:.5"></div>
 {demohd("Valuation","Shortfall <span class='c'>×</span> historical price <em>=</em> gross landing value at risk.")}
 <div class="abs card" style="left:110px;top:270px;width:760px;height:600px;padding:22px 26px">
@@ -255,29 +237,6 @@ S.append(f'''<section class="slide uw" id="s-var" data-label="11" data-title="V.
 [→] We multiply the shortfall in tons, times 1,000 for kilograms, by that same historical first-sale price. That is the gross landing value at risk: the gross revenue tied to the missing landings. It is not profit and not household income loss. Where first-sale prices are missing, we use unit-value proxies.
 [→] Then we rank the province–category combinations. To defend the numbers, we switch price sources and move the price up or down, and check whether the ranking stays the same. Values here are illustrative.""")}
 </section>''')
-# ---------------- 12 DATASET ----------------
-SRC=[("PSA OpenSTAT · landing volume","Downloaded · preliminary inspection done","ok"),("PSA OpenSTAT · value / prices","Identified · to extract and check","todo"),
-("Global Mangrove Watch · mangrove extent","Identified · to extract","todo"),("NASA IMERG · rainfall","Identified · to extract","todo"),
-("NOAA OISST · sea surface temperature","Identified · to extract","todo"),("NOAA IBTrACS · cyclone tracks","Identified · to extract","todo")]
-srh="".join(f'<div class="sr2 rv" data-s="{1 if c=="ok" else 2}"><b>{a}</b><span class="{c}">{"✓ " if c=="ok" else "○ "}{b}</span></div>' for a,b,c in SRC)
-S.append(f'''<section class="slide" id="s-data" data-label="12" data-title="VI · Dataset Availability" data-sec="5" data-steps="2" data-q="data">
-<div class="bgimg" style="background-image:url({{{{IMG:reef}}}});right:auto;width:560px"></div>
-<svg class="abs" style="left:480px;top:0" width="140" height="1080" viewBox="0 0 140 1080" preserveAspectRatio="none"><path d="M90,0 C20,200 130,380 70,560 C10,740 120,900 80,1080 L140,1080 L140,0Z" fill="#fbfaf6"/></svg>
-<div class="abs" style="left:620px;right:0;top:0;bottom:0;background:#fbfaf6"></div>
-<div class="abs" style="left:640px;top:64px;display:flex;gap:30px;align-items:flex-end"><div class="num" style="font-size:150px">06</div><div><div class="kick">VI · Dataset Availability</div><h2 style="margin-top:12px;font-size:54px">Sources identified. <em>Combined dataset</em> not ready yet.</h2></div></div>
-<div class="abs" style="left:640px;top:270px;width:470px">{srh}
- <div class="small rv" data-s="2" style="margin-top:14px">Prices: compatible historical first-sale prices where available; otherwise unit-value proxies from matching value and volume records, after checking units and coverage.</div></div>
-<div class="abs card" style="left:1140px;top:270px;width:680px;height:620px;padding:20px 24px">
- <div class="lab" style="color:var(--sea)">PSA extract · candidate provinces · click a tab</div>
- <div id="d-tabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
- <div id="d-title" style="font:600 26px PF;color:var(--ink);margin-top:14px"></div>
- <div id="d-leg" style="display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font:600 16px IN;color:var(--ink2)"></div>
- <svg id="d-chart" width="630" height="330" style="margin-top:6px"></svg>
- <div class="cite">Source: PSA OpenSTAT, Table 0032E4GVMP0 · marine municipal volume of production, 2025 quarterly extract (mt)</div>
-</div>
-<div class="abs" style="left:40px;bottom:110px;width:420px;color:#fff;font:600 17px/1.4 IN;letter-spacing:.04em;background:rgba(2,28,40,.72);padding:12px 16px;border-radius:12px">Candidate categories: snapper · siganid · mullet · grouper · goatfish</div>
-{notes("""Our study will use publicly accessible secondary datasets from PSA, Global Mangrove Watch, NASA and NOAA. [→] We have already downloaded and inspected the PSA marine municipal landing-volume records. This identified province–fish combinations with complete quarterly volume records as preliminary candidates. Click a province tab to see its 2025 extract. [→] The environmental and monetary records still need to be extracted and checked against the selected locations and periods, so the final provinces, categories and study years depend on the combined records. For valuation we use compatible historical first-sale prices where available, otherwise unit-value proxies. The sources are identified; the combined dataset is not yet ready.""")}
-</section>''')
 # ---------------- 13 CLIENTS ----------------
 CL=[("LGUs & fisheries offices","Primary potential users","identify projected shortfalls, prioritize monitoring, and inform assessments of potential assistance needs"),
 ("BFAR","","supplementary information for fisheries monitoring and planning in the covered provinces"),
@@ -286,27 +245,26 @@ CL=[("LGUs & fisheries offices","Primary potential users","identify projected sh
 ("Traders, vendors & processors","","projected shortfalls to inform sourcing, purchasing and inventory planning")]
 pos=[(110,280),(700,280),(1290,280),(400,560),(990,560)]
 clh="".join(f'<div class="abs glass cl rv" data-s="{i+1}" style="left:{x}px;top:{y}px">{f"<span class=tg>{t}</span>" if t else ""}<div class="ch">{h}</div><div class="cm">{m}</div></div>' for i,((h,t,m),(x,y)) in enumerate(zip(CL,pos)))
-S.append(f'''<section class="slide" id="s-clients" data-label="13" data-title="VII · Potential Clients" data-sec="6" data-steps="5" data-q="clients">
-<div class="bgimg" style="background-image:url({{{{IMG:hero}}}});filter:saturate(.9)"></div><div class="full" style="background:linear-gradient(180deg,rgba(2,40,58,.55),rgba(2,40,58,.2))"></div>
-<div class="abs" style="left:110px;top:64px;display:flex;gap:34px;align-items:flex-end;color:#fff"><div class="num w">07</div><div><div class="kick" style="color:#bff4f8">VII · Potential Clients</div><h2 style="margin-top:12px;color:#fff;font-size:56px">Who could plan with <em style="color:#9ff0f6">these estimates.</em></h2></div></div>
+S.append(f'''<section class="slide" id="s-clients" data-label="13" data-title="V · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
+<div class="abs" style="left:110px;top:64px;display:flex;gap:34px;align-items:flex-end"><div class="num">05</div><div><div class="kick">V · Potential Clients</div><h2 style="margin-top:12px;font-size:56px">Who could plan with <em>these estimates.</em></h2></div></div>
 {clh}
 <div class="abs" style="left:110px;right:110px;top:860px;padding:14px 24px;border-radius:14px;background:#fff7e0;border:2px solid var(--gold);font:600 21px/1.4 IN;color:#6b4a00">As stated in our proposal, we will seek consultation with DTI or a relevant fisheries agency to assess data suitability and practical usefulness. Participation and future adoption are not guaranteed.</div>
 {notes("""Our primary potential users are LGUs and fisheries offices, which may use provincial and fish-category forecasts to identify projected shortfalls, prioritize monitoring and inform assessments of assistance needs. [→] BFAR may use the findings as supplementary information for monitoring and planning. [→] DTI may use exposure estimates to inform consultations with fisheries-related enterprises. [→] Fisherfolk associations and cooperatives may use seasonal supply outlooks for marketing and delivery coordination. [→] Traders, vendors and processors may use projected shortfalls for sourcing and inventory planning. We will seek consultation with DTI or a relevant agency; participation and adoption are not guaranteed.""")}
 </section>''')
 # ---------------- 14 THANK YOU ----------------
-S.append(f'''<section class="slide" id="s-end" data-label="14" data-title="Thank you" data-sec="7" data-steps="0">
-<div class="bgimg" style="background-image:url({{{{IMG:deep}}}})"></div><div class="rays" style="opacity:.35"></div>
-<div class="abs" style="left:0;right:0;top:220px;text-align:center;color:#fff">
- <div class="kick" style="color:#bff4f8">Group DJANGO · AquaTerra</div>
- <div style="font:600 190px/1 PF;margin-top:26px">Thank you</div>
- <div style="font:400 italic 40px PF;color:#d9f6fa;margin-top:22px">We welcome your questions and recommendations.</div>
- <div style="display:flex;gap:16px;justify-content:center;margin-top:50px">
-  <button class="btn cor" data-go="b-qbank">? Panel Q&amp;A bank</button><button class="btn" data-go="b-cause">Prediction vs causation</button><button class="btn ghost" data-go="b-refs" style="background:#fff">References · APA 7</button></div>
+S.append(f'''<section class="slide" id="s-end" data-label="14" data-title="Thank you" data-sec="5" data-steps="0">
+<div class="abs" style="left:0;right:0;top:120px;text-align:center">
+ <div class="kick">Group DJANGO · AquaTerra</div>
+ <div style="font:600 170px/1 PF;margin-top:24px;color:var(--ink)">Thank you</div>
+ <div style="font:400 italic 38px PF;color:var(--sea);margin-top:20px">We welcome your questions and recommendations.</div>
+ <div style="display:flex;gap:16px;justify-content:center;margin-top:44px">
+  <button class="btn cor" data-go="b-qbank">? Panel Q&amp;A bank</button><button class="btn" data-go="b-cause">Prediction vs causation</button><button class="btn ghost" data-go="b-refs">References · APA 7</button></div>
 </div>
+<div class="abs imgframe" style="left:310px;top:640px;width:1300px;height:330px;background-image:url({{{{IMG:deep}}}})"></div>
 {notes("""Thank you. We welcome your questions and recommendations. Backup slides: the panel Q&A bank, prediction vs causation, and the full reference list (press B for the slide menu).""")}
 </section>''')
 # ---------------- B1 Q BANK ----------------
-S.append('''<section class="slide backup uw" id="b-qbank" data-label="B1" data-title="Backup · Panel Q&amp;A bank" data-sec="8" data-steps="0">
+S.append('''<section class="slide backup uw" id="b-qbank" data-label="B1" data-title="Backup · Panel Q&amp;A bank" data-sec="6" data-steps="0">
 <div class="rays" style="opacity:.5"></div>
 <div class="hd"><div class="num" style="font-size:150px">B1</div><div><div class="kick">Backup</div><h2 style="margin-top:12px;font-size:54px">Panel Q&amp;A bank, <em>grouped by theme.</em></h2></div></div>
 <input id="qb-search" placeholder="Search questions…" style="position:absolute;right:110px;top:120px;width:420px;font:500 20px IN;padding:12px 18px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);outline:none">
@@ -315,8 +273,7 @@ S.append('''<section class="slide backup uw" id="b-qbank" data-label="B1" data-t
 <aside class="notes">Use the categories or search box to pull up a prepared answer.</aside>
 </section>''')
 # ---------------- B2 PREDICTION VS CAUSATION ----------------
-S.append(f'''<section class="slide backup" id="b-cause" data-label="B2" data-title="Backup · Prediction vs causation" data-sec="8" data-steps="3">
-<div class="bgimg" style="background-image:url({{{{IMG:mangrove}}}});opacity:.18"></div>
+S.append(f'''<section class="slide backup" id="b-cause" data-label="B2" data-title="Backup · Prediction vs causation" data-sec="6" data-steps="3">
 <div class="hd"><div class="num" style="font-size:150px">B2</div><div><div class="kick" style="color:var(--coral)">Panel might ask</div><h2 style="margin-top:12px;font-size:52px">"How will you separate <em>prediction</em> from <span class="c">causation?</span>"</h2></div></div>
 <div class="abs card" style="left:110px;top:280px;width:1700px;height:250px;padding:24px 30px">
  <div class="lab" style="color:var(--sea)">1 · The test we run</div>
@@ -346,7 +303,9 @@ S.append(f'''<section class="slide backup" id="b-cause" data-label="B2" data-tit
 APA=[
 "Benavides, I. F., Santacruz, M., Romero-Leiton, J. P., Barreto, C., &amp; Selvaraj, J. J. (2023). Assessing methods for multiple imputation of systematic missing data in marine fisheries time series with a new validation algorithm. <i>Aquaculture and Fisheries</i>. https://doi.org/10.1016/j.aaf.2021.12.013",
 "Bokingkito, P., Jaroensutasinee, K., &amp; Jaroensutasinee, M. (2026). Explainable AI-driven machine learning for forecasting marine fisheries production using environmental predictors. <i>Machine Learning and Knowledge Extraction, 8</i>(7), Article 197. https://doi.org/10.3390/make8070197",
+"Crawford, C. J., Roy, D. P., Arab, S., Barnes, C., Vermote, E., Hulley, G., Gerace, A., Choate, M., Engebretson, C., Micijevic, E., Schmidt, G., Anderson, C., Anderson, M., Bouchard, M., Cook, B., Dittmeier, R., Howard, D., Jenkerson, C., Kim, M., . . . Zahn, S. (2023). The 50-year Landsat collection 2 archive. <i>Science of Remote Sensing, 8</i>, Article 100103. https://doi.org/10.1016/j.srs.2023.100103",
 "Dumilag, R. V., San Pablo, M. H., Malto, M. A. D., Longavela, M. R., Orgela, E. G., Belgica, T. H. R., Mendoza, L. C., Hibay, J. M., Bailon, J. D., Corral, L. E. H., Calaminos, F. P., Omoto, A. T., Chua, V. L., &amp; Berdin, L. D. (2023). COVID-19 impacts on food security and income of the fisherfolk in Magallanes, Sorsogon, Philippines. <i>NRCP Research Journal, 22</i>(1), 179–201. https://www.ejournals.ph/article.php?id=19903",
+"Earth Resources Observation and Science (EROS) Center. (2020). <i>Landsat 8-9 Operational Land Imager / Thermal Infrared Sensor Level-2, Collection 2</i> [Data set]. U.S. Geological Survey. https://doi.org/10.5066/P9OGBGM6",
 "Food and Agriculture Organization of the United Nations. (2024). <i>The state of world fisheries and aquaculture 2024: Blue transformation in action</i>. FAO. https://doi.org/10.4060/cd0683en",
 "Hewamalage, H., Ackermann, K., &amp; Bergmeir, C. (2023). Forecast evaluation for data scientists: Common pitfalls and best practices. <i>Data Mining and Knowledge Discovery, 37</i>(2), 788–832. https://doi.org/10.1007/s10618-022-00894-5",
 "Holmes, E. E., BR, S., Nimit, K., Maity, S., Checkley, D. M., Jr., Wells, M. L., &amp; Trainer, V. L. (2021). Improving landings forecasts using environmental covariates: A case study on the Indian oil sardine (<i>Sardinella longiceps</i>). <i>Fisheries Oceanography, 30</i>(6), 623–642. https://doi.org/10.1111/fog.12541",
@@ -354,7 +313,7 @@ APA=[
 "Oceana. (2026). <i>Net loss: How governance gaps are sinking Philippine fisheries</i> [Report]. Zenodo. https://doi.org/10.5281/zenodo.18320988",
 "Philippine Statistics Authority. (n.d.). <i>Marine municipal fisheries: Volume of production by species, province and quarter</i> [Data set, Table 0032E4GVMP0]. PSA OpenSTAT. https://openstat.psa.gov.ph"]
 refh="".join(f'<p class="apa">{a}</p>' for a in APA)
-S.append(f'''<section class="slide backup" id="b-refs" data-label="B3" data-title="Backup · References" data-sec="8" data-steps="0">
+S.append(f'''<section class="slide backup" id="b-refs" data-label="B3" data-title="Backup · References" data-sec="6" data-steps="0">
 <div class="hd"><div class="num" style="font-size:150px">B3</div><div><div class="kick">Backup</div><h2 style="margin-top:12px;font-size:54px">References <em>(APA 7)</em></h2></div></div>
 <div class="abs" style="left:110px;top:270px;width:1700px;columns:2;column-gap:60px">{refh}</div>
 <aside class="notes">Full reference list. Bokingkito et al. (2026) uses region–sector panels; Holmes et al. (2021) is a method reference (Indian oil sardine), not a Philippine study.</aside>
