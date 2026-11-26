@@ -13,10 +13,11 @@ ICON={"psa":'<rect x="8" y="26" width="7" height="12" rx="1.5"/><rect x="19" y="
 "rain":'<path d="M12 22 C10 14 18 9 24 12 C27 6 37 8 37 16 C42 17 42 24 36 24 H14 C10 24 10 22 12 22Z"/><path d="M15 30 l-2 6 M23 30 l-2 6 M31 30 l-2 6" stroke="currentColor" stroke-width="2.5"/>',
 "sst":'<path d="M19 8 a4 4 0 0 1 8 0 v18 a8 8 0 1 1 -8 0Z"/><path d="M6 40 q5 -4 10 0 t10 0 t10 0" stroke="currentColor" stroke-width="2.5" fill="none"/>',
 "typh":'<path d="M23 23 m-4 0 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 M23 9 C33 9 38 15 37 21 M23 37 C13 37 8 31 9 25 M9 25 C9 17 15 13 21 13 M37 21 C37 29 31 33 25 33" stroke="currentColor" stroke-width="3" fill="none"/>'}
-SRC=[("#0e8f86","PSA OpenSTAT","Landings &amp; value · 31 categories","PSA (2026)","psa"),
-("#2f7fd6","NASA IMERG","Rainfall","Huffman et al. (2023)","rain"),
-("#d9822b","NOAA OISST","Sea surface temperature","Huang et al. (2021)","sst"),
-("#8a5bd6","NOAA IBTrACS","Typhoon tracks","Gahtan et al. (2024)","typh")]
+SRC=[("#0e8f86","PSA OpenSTAT","(23,250 total rows)","PSA (2026)","psa"),
+("#2f7fd6","NASA IMERG","Daily or Monthly Time Series","Holmes et al. (2021)","rain"),
+("#d9822b","NOAA OISST","Daily Time Series","Holmes et al. (2021)","sst"),
+("#8a5bd6","NOAA IBTrACS","Three-Hour","Noy et al. (2023)","typh"),
+("#20854a","GMW 4.1 + Landsat Imagery","Annual and 16-Days Time Series","Nababa et al. (2026)","psa")]
 srch="".join(f'<div class="src2" style="--c:{c}"><svg width="40" height="40" viewBox="0 0 46 46" style="color:{c};fill:{c};flex:none">{ICON[ic]}</svg><div><b>{n}</b><small>{w}</small></div><em>{ct}</em></div>' for c,n,w,ct,ic in SRC)
 COLS=[("Province × fish","#a9bfc6",210),("Quarter","#a9bfc6",120),("Landings (t)","#0e8f86",140),("Lag-4 (t)","#0e8f86",120),("Rain (mm)","#2f7fd6",120),("SST (°C)","#d9822b",110),("Typhoons","#8a5bd6",120)]
 E=["⋮"]*7
@@ -36,28 +37,29 @@ NAMES={"train":"Train","tune":"Tune","test":"Test"}
 segl="".join(f'<button class="segl s-{k}" data-seg="{k}"><b>{NAMES[k]}</b><span>{a} – {b} · {n} quarters</span></button>' for k,(a,b,n) in [(k,SPLIT[k]) for k in ("train","tune","test")])
 def ul(items): return '<ul class="mlist">'+"".join(f"<li>{x}</li>" for x in items)+'</ul>'
 def nxt(t): return f'<div class="abs nextl">→ <b>Next:</b> {t}</div>'
-pa=('<path class="fpath" data-to="2" data-c="#0e8f86" d="M630,410 H660"/>'
+pa=('<path class="fpath" data-to="2" data-c="#0e8f86" d="M730,410 H760"/>'
     '<path class="fpath" data-to="3" data-c="#0e8f86" d="M1200,410 H1230"/>'
-    '<path class="fpath" data-to="4" data-c="#6f8b99" d="M1520,590 C1520,602 420,598 420,610"/>'
-    '<path class="fpath" data-to="5" data-c="#d9822b" d="M730,770 H760"/>')
+    '<path class="fpath" data-to="4" data-c="#6f8b99" d="M1520,610 C1520,622 420,618 420,630"/>'
+    '<path class="fpath" data-to="5" data-c="#d9822b" d="M730,786 H760"/>')
 A=f'''<section class="slide uw flow f2" id="s-flowA" data-label="06" data-title="VI · Methodology 1/3 · Data preparation" data-sec="3" data-steps="4" data-q="data" data-r="data">
 {hd("06","VI · Methodology · 1 of 3","Methodology: <em>Data Preparation</em>")}
 <button class="abs btn fplay" style="right:110px;top:118px">▶ Play the flow</button>
-<div class="abs stg card2" data-st="1" style="left:110px;top:250px;width:520px;height:340px">{sh(1,"Sources","Four public datasets, 2002 Q1 – 2025 Q4")}<div style="margin-top:10px" class="srcs">{srch}</div></div>
-<div class="abs stg card2" data-st="2" style="left:660px;top:250px;width:540px;height:340px">{sh(2,"Collect and clean","Keep usable histories; log every exclusion")}
+<div class="abs stg card2" data-st="1" style="left:110px;top:210px;width:620px;height:400px">{sh(1,"Sources","Five source groups · 2002 Q1 – 2025 Q4")}<div style="margin-top:10px" class="srcs">{srch}</div></div>
+<div class="abs stg card2" data-st="2" style="left:760px;top:210px;width:440px;height:400px">{sh(2,"Collect and clean","Keep usable histories; log every exclusion")}
  {ul(["Standardize names, units, dates","Drop duplicates and annual totals","Log missing shares and gaps","Gaps stay visible, never zero"])}<div class="cite">PSA (2026)</div></div>
-<div class="abs stg card2" data-st="3" style="left:1230px;top:250px;width:580px;height:340px">{sh(3,"Time split · ~70 / 15 / 15","Split by time before filling any gaps")}
+<div class="abs stg card2" data-st="3" style="left:1230px;top:210px;width:580px;height:400px">{sh(3,"Time split · ~70 / 15 / 15","Split by time before filling any gaps")}
  <div class="segbar" style="margin-top:10px;height:44px">{seg}</div><div class="segls v">{segl}</div><div class="cite">Hewamalage et al. (2023)</div></div>
-<div class="abs stg card2" data-st="4" style="left:110px;top:610px;width:620px;height:332px">{sh(4,"Impute and validate","Test on known values before filling real gaps")}
+<div class="abs stg card2" data-st="4" style="left:110px;top:630px;width:620px;height:312px">{sh(4,"Impute and validate","Test on known values before filling real gaps")}
  {ul(["Compare SEADEC and Kalman structural imputation","KSSA: hide known blocks, rebuild, score error","Pick the lowest-error method; flag estimates","Long unsupported gaps stay unfilled"])}<div class="cite">Benavides et al. (2023)</div></div>
-<div class="abs stg card2" data-st="5" style="left:760px;top:610px;width:1050px;height:332px">{sh(5,"Align and join","One row = province × fish category × quarter")}
+<div class="abs stg card2" data-st="5" style="left:760px;top:630px;width:1050px;height:312px">{sh(5,"Align and join","One row = province × fish category × quarter")}
  <span class="ill" style="position:absolute;right:18px;top:16px">ILLUSTRATIVE VALUES</span>
  <div class="rules"><span>Rain → quarterly total</span><span>SST → quarterly mean</span><span>Typhoons → distinct storms</span><span>Prices → valuation only</span></div>
  <div id="fa-tab"><div class="fth">{th}</div>{tr}</div></div>
 <svg class="abs flowsvg" width="1920" height="1080" style="left:0;top:0">{pa}<g class="parts"></g></svg>
 {nxt("Forecasting and Value at Risk")}
 {notes(f"""Our methodology has three parts: data preparation, forecasting and value at risk, then evaluation. This slide is data preparation.
-[Stage 1] We will use four public datasets from 2002 Q1 to 2025 Q4: PSA OpenSTAT quarterly marine municipal landings and value for the five MIMAROPA provinces and 31 fish categories (PSA, 2026), NASA IMERG rainfall (Huffman et al., 2023), NOAA OISST sea surface temperature (Huang et al., 2021) and NOAA IBTrACS typhoon tracks (Gahtan et al., 2024).
+[Stage 1: Why these predictors?] We selected these environmental predictors based on studies published from 2021 onward. For mangrove extent and change, Nababa et al. (2026) documented a nonlinear relationship between mangrove extent and artisanal fish landings in Nigeria's Niger Delta, supporting its inclusion as a candidate predictor. For rainfall and sea surface temperature, Holmes et al. (2021) found that specific rainfall and temperature summaries improved forecasts of Indian oil sardine landings. For cyclone exposure, Noy et al. (2023) found fewer active fishing boats during and after tropical cyclones in the Philippines. These findings justify testing the predictors, while our study will assess whether they improve forecasts for MIMAROPA. The citations beside the environmental sources justify predictor selection; the dataset citations are retained in References.
+[Stage 1: Data sources] We will use five public source groups for the 2002 Q1 to 2025 Q4 study period: PSA OpenSTAT quarterly marine municipal landings and value for the five MIMAROPA provinces and 31 fish categories, with 23,250 total rows (PSA, 2026); NASA IMERG rainfall as daily or monthly time series (Huffman et al., 2023); NOAA OISST sea surface temperature as a daily time series (Huang et al., 2021); NOAA IBTrACS typhoon tracks at three-hour intervals (Gahtan et al., 2024); and Global Mangrove Watch (GMW) 4.1 with Landsat imagery, using annual GMW maps and 16-day Landsat time series (Bunting et al., 2026). The GMW dataset release is version 4.1.12: https://doi.org/10.5281/zenodo.21346457.
 [→ Stage 2] We will collect PSA landing volumes and compatible historical prices, then standardize names, units and quarterly dates, remove duplicates and annual totals, and log missing shares and consecutive gaps. Any category we exclude for insufficient coverage will be documented with the reason. Missing quarters will stay on the calendar; an unavailable value is not a zero landing.
 [→ Stage 3] Before filling any missing values, we will split the 96 quarters by time, about 70/15/15 after whole-quarter rounding: Train {tr_[0]} to {tr_[1]} ({tr_[2]} quarters), Tune or validation {tu_[0]} to {tu_[1]} ({tu_[2]}), Test {te_[0]} to {te_[1]} ({te_[2]}). At each forecast date, preparation will use only information available by then, so later test quarters cannot leak into earlier estimates (Hewamalage et al., 2023). The ratio is our design choice.
 [→ Stage 4] We will compare SEADEC and structural time-series imputation with Kalman-based estimation, which performed well on marine landing series in Benavides et al. (2023); we will revalidate them on our quarterly data. KSSA will temporarily hide known blocks inside the training history, rebuild them and compare with the true values; we will pick the lowest-error method per series, flag every estimate, and leave long unsupported gaps unfilled.

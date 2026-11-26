@@ -358,7 +358,13 @@ body:not(.navon) #bar{opacity:0;pointer-events:none;transform:translate(-50%,24p
 .mlist{list-style:none;margin-top:12px}.mlist li{position:relative;padding-left:22px;font:400 22px/1.3 IN;color:var(--ink2);margin-bottom:8px}.mlist li:before{content:"";position:absolute;left:4px;top:11px;width:8px;height:8px;border-radius:50%;background:var(--sea)}
 .nextl{left:110px;top:954px;font:500 22px IN;color:var(--ink2)}.nextl b{color:var(--sea)}
 .rules{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.rules span{font:600 18px IN;color:var(--ink);background:#eef7f5;border:1.5px solid var(--line);border-radius:20px;padding:5px 12px}
-#s-flowA #fa-tab{top:150px}
+#s-flowA #fa-tab{top:130px}
 .srcs .src2{height:54px;margin-bottom:6px}.srcs .src2 b{font-size:21px}.srcs .src2 small{font-size:18px;line-height:1.1}.srcs .src2 svg{width:32px;height:32px}
+#s-flowA .src2{display:grid;grid-template-columns:32px minmax(0,1fr) auto;column-gap:10px;row-gap:0;height:50px;padding:4px 12px}
+#s-flowA .src2 svg{grid-column:1;grid-row:1 / 3}
+#s-flowA .src2>div{display:contents}
+#s-flowA .src2 b{grid-column:2;grid-row:1;white-space:nowrap}
+#s-flowA .src2 small{grid-column:2 / 4;grid-row:2}
+#s-flowA .src2 em{grid-column:3;grid-row:1}
 .segls.v{grid-template-columns:1fr;gap:6px;margin-top:10px}.segls.v .segl{display:flex;gap:12px;align-items:baseline;padding:6px 12px}.segls.v .segl b{font:700 20px IN}.segls.v .segl span{margin:0;font-size:19px}
 .ev8 .sh b{font-size:20px}
