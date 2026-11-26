@@ -33,8 +33,8 @@ AMB='<div id="amb"><div class="par" data-d="14" style="inset:0"><div class="ray"
 js=open(os.path.join(D,'deck.js')).read()
 dat="const QA=%s,RT=%s,QB=%s,PSA=%s,APA=%s;"%tuple(json.dumps(x,ensure_ascii=False) for x in(data.QA,data.RT,data.QB,data.PSA,slides.APA))
 out=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces</title><style>{css}</style></head><body>
+<title>AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in MIMAROPA</title><style>{css}</style></head><body>
 <div id="stage">{AMB}{html}{chrome}</div>
 <script>{dat}
 {js}</script></body></html>'''
-p=os.path.join(D,'..','AquaTerra_Title_Defense.html');open(p,'w').write(out);print(p,round(len(out)/1e6,2),'MB')
+p=os.path.join(D,'..','index.html');open(p,'w').write(out);print(p,round(len(out)/1e6,2),'MB')

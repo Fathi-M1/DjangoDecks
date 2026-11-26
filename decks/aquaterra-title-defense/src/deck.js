@@ -96,7 +96,7 @@ $$('#sl-tog .chip').forEach(c=>c.onclick=()=>{if(c.dataset.v!=='scope'&&step<2)s
 $$('#s-scope .lm').forEach(b=>b.onclick=()=>{const was=b.classList.contains('on');$$('#s-scope .lm').forEach(x=>x.classList.remove('on'));const B=$('#s-scope .colB');if(was)B.classList.remove('focus');else{b.classList.add('on');B.classList.add('focus')}});
 ctrl['s-scope']={enter(){scopeView('both');$$('#s-scope .lm').forEach(x=>x.classList.remove('on'));$('#s-scope .colB').classList.remove('focus')}};
 // data-flow pipeline (two slides)
-const FL={'s-flowA':1,'s-flowB':5};let fRaf=null,fPlay=null,fLast=0;const fSpawn=new Map();
+const FL={'s-flowA':1,'s-flowB':6};let fRaf=null,fPlay=null,fLast=0;const fSpawn=new Map();
 function flowStep(id,s){const sl=$('#'+id),cs=FL[id]+s;
  $$('.stg',sl).forEach(g=>{const k=+g.dataset.st;g.classList.toggle('show',k<=cs);g.classList.toggle('cur',k===cs);g.classList.toggle('past',k<cs)});
  $$('.fpath,.fhead',sl).forEach(p=>p.classList.toggle('on',+p.dataset.to<=cs));
@@ -115,7 +115,7 @@ $$('.fplay').forEach(b=>b.onclick=()=>{if(fPlay){fStop();return}const sl=slides[
 $$('.flow .stg').forEach(g=>g.addEventListener('click',e=>{if(e.target.closest('[data-go]'))return;const sl=g.closest('.slide');if(slides[cur]!==sl)return;setStep(+g.dataset.st-FL[sl.id])}));
 for(const id in FL)ctrl[id]={enter:fStart,step(s){flowStep(id,s)},leave:fStopRaf};
 $$('#s-flowA [data-seg]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();if(step<2)setStep(2);const k=b.dataset.seg,t=$('#fa-tab'),was=t.dataset.hl===k;t.dataset.hl=was?'':k;$$('#s-flowA [data-seg]').forEach(x=>x.classList.toggle('on',!was&&x.dataset.seg===k))}));
-$$('#s-flowB [data-env]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const on=b.dataset.env==='1';$$('#s-flowB [data-env]').forEach(x=>x.classList.toggle('on',x===b));$('#gterms').classList.toggle('noenv',!on);$('#genv').innerHTML=on?'Both versions will be compared on Test quarters.':'<b>Model A</b>: no weather terms. If B is not better, we will say so.'}));
+$$('#s-flowB [data-env]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const on=b.dataset.env==='1';$$('#s-flowB [data-env]').forEach(x=>x.classList.toggle('on',x===b));$('#gterms').classList.toggle('noenv',!on);$('#genv').innerHTML=on?'Both versions will be compared.':'<b>Model A</b>: no weather terms. If B is not better, we will say so.'}));
 $$('#s-flowB [data-pr]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const p=+b.dataset.pr;$$('#s-flowB [data-pr]').forEach(x=>x.classList.toggle('on',x===b));$('#vp').textContent='₱'+p+'/kg';$('#vres').textContent='₱'+(180*1000*p/1e6).toFixed(1)+'M'}));
 // eval
 const eR=rng(23),EN=96,eTrue=[],eObs=[],eWf=[];

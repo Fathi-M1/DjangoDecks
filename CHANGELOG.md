@@ -2,6 +2,14 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v12 (27 Nov 2026, 2:00 AM Asia/Singapore)
+
+Add Methodology section (data preparation by Pacate, forecasting and value at risk, evaluation) and sync Reese's edits.
+
+- Reese's edits ported into `src/` (cover title "in MIMAROPA", GAMM spelled out, municipal-fisheries definition, MIMAROPA Q3 2025 figure, Research Gaps wording, SO 2 MAE-reduction wording, Limitations heading). Mangrove items excluded (mangroves were dropped).
+- New slides 06–08: Methodology: Data Preparation (sources, collect and clean, time split, impute and validate, align and join), Methodology: Forecasting and Value at Risk, Methodology: Evaluation. Potential Clients is now 09 and Thank you 10.
+- `build.py` now writes `index.html` directly. README rewritten.
+
 ## Reese edit (27 Nov 2026, 1:00 AM Asia/Singapore)
 
 Edits by Reese Lauren C. Chan, made on the built `index.html` (on top of v10). **`src/` was not updated** and still builds the v10 wording. If you need to rebuild from source, port these changes back into `src/` first.

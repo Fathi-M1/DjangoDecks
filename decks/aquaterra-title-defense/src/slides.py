@@ -1,5 +1,5 @@
-TITLE="AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces"
-SUB="Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces"
+TITLE="AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in MIMAROPA"
+SUB="Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in MIMAROPA"
 from flow import SPLIT
 TR,TU,TE=SPLIT['train'],SPLIT['tune'],SPLIT['test']
 def waveH(fill="#ffffff",h=120,flip=False,op=1):
@@ -41,7 +41,7 @@ S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cove
  </div>
 </div>
 {pops}
-{notes("""Fish feeds our families and supports the livelihoods of coastal communities. [→] Behind every catch are fishers, vendors and businesses that depend on a steady supply. [→] Can historical fisheries and environmental data help us anticipate when that supply will fall short? [→] Good day, respected panelists. We are Group Django, and today we present our proposed study, 'AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in Selected Philippine Coastal Provinces.'
+{notes("""Fish feeds our families and supports the livelihoods of coastal communities. [→] Behind every catch are fishers, vendors and businesses that depend on a steady supply. [→] Can historical fisheries and environmental data help us anticipate when that supply will fall short? [→] Good day, respected panelists. We are Group Django, and today we present our proposed study, 'AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in MIMAROPA.'
 'Municipal' fish means catch from municipal waters, up to 15 km from shore under RA 8550 as amended by RA 10654, by fishers using no boat or boats of three gross tons or less. 'Landings' means the catch brought ashore, in tonnes per province per quarter. (Click a key term to define it; press Q for panel questions.)""")}
 </section>''')
 # ================= I · BACKGROUND =================
@@ -65,7 +65,7 @@ S.append(f'''<section class="slide uw" id="s-aoi" data-label="01" data-title="I 
 <div class="abs rv ipo" data-s="2" style="left:110px;top:690px;width:1700px;height:270px">
  <div class="card ipo-b"><div class="lab" style="color:var(--sea)">Inputs</div><div class="b22">PSA landings &amp; value · rainfall · sea surface temperature · typhoon tracks</div><div class="cite">PSA (2026); Huffman et al. (2023); Huang et al. (2021); Gahtan et al. (2024)</div></div>
  <div class="ipo-a">→</div>
- <div class="card ipo-b"><div class="lab" style="color:var(--sea)">Process</div><div class="b22">Random Forest will select predictors; GAMM will forecast next-quarter landings; tested on held-out quarters</div></div>
+ <div class="card ipo-b"><div class="lab" style="color:var(--sea)">Process</div><div class="b22">Random Forest will select predictors; Generalized Additive Mixed Model (GAMM) will forecast next-quarter landings; tested on held-out quarters</div></div>
  <div class="ipo-a">→</div>
  <div class="card ipo-b"><div class="lab" style="color:var(--coral)">Outputs</div><div class="b22">Seasonal shortfall flags and gross landing value at risk, ranked by province × category</div></div>
 </div>
@@ -83,6 +83,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <div class="lab" style="color:var(--sea)">1 · Why it matters</div>
  <p class="b22">Fisheries are key to <b>food security and livelihoods</b>.</p><div class="cite">FAO (2024)</div>
  <p class="b22" style="margin-top:14px">2023 oil spill, <b>Naujan, Oriental Mindoro</b>: fishing banned, income lost.</p><div class="cite">Agaton et al. (2023)</div>
+ <p class="b22" style="margin-top:14px"><b>Municipal fisheries</b> here means catch from municipal waters (up to 15 km from shore), taken without a boat or with a boat of 3 gross tons or less.</p>
 </div>
 <div class="abs rv bgc" data-s="2" style="left:690px;top:470px;width:560px">
  <div class="lab" style="color:var(--coral)">2 · The decline</div>
@@ -91,18 +92,18 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <path id="oc-line" d="M40,34 L520,90" stroke="var(--coral)" stroke-width="5" fill="none" stroke-dasharray="12 9"/>
  <circle cx="40" cy="34" r="9" fill="var(--sea)"/><circle cx="520" cy="90" r="9" fill="var(--coral)"/>
  <text x="30" y="20" font-size="22" font-weight="700" fill="#0b2a3c">2010 · 2.6M t</text><text x="530" y="118" font-size="22" font-weight="700" fill="#0b2a3c" text-anchor="end">2023 · 1.9M t</text></svg>
- <p class="b22" style="margin-top:4px">National capture fisheries, linked to overfishing and illegal fishing.</p><div class="cite">Oceana (2026)</div>
+ <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> marine municipal production was <b>31,073.75 MT</b> in Q3 2025, down <b>9.2% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2025)</div>
 </div>
 <div class="abs rv bgc" data-s="3" style="left:1300px;top:470px;width:510px">
  <div class="lab" style="color:var(--sea)">3 · Forecasting so far</div>
  <p class="b22">A <b>regional</b> forecasting model for Philippine fisheries, with environmental data.</p><div class="cite">Bokingkito et al. (2026)</div>
  <p class="b22" style="margin-top:14px"><b>Our starting point.</b></p>
 </div>
-<div class="abs rv" data-s="4" style="left:110px;right:110px;top:872px;padding:18px 28px;border-radius:16px;background:var(--ink);color:#fff;font:500 27px/1.35 IN">
+<div class="abs rv" data-s="4" style="left:110px;right:110px;top:900px;padding:14px 28px;border-radius:16px;background:var(--ink);color:#fff;font:500 27px/1.35 IN">
  <span class="lab" style="color:var(--aqua)">The question&nbsp;&nbsp;</span>Can we see these drops coming, province by province?</div>
 {notes("""When fish gets expensive at the palengke, it's usually because less fish came in. Fish isn't just food on our table; it supports jobs and income in coastal towns, and FAO points to fisheries as key to food security and livelihoods (FAO, 2024).
 [→] We've seen what happens when supply is disrupted. After the February 2023 oil spill off Naujan, Oriental Mindoro, fishing was banned; the fisherfolk interviewed lost their main income, some up to about US$1,300 a week, and relief did not cover basic needs (Agaton et al., 2023).
-[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement.
+[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 31,073.75 MT in marine municipal fisheries production in Q3 2025, down 9.2% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2025).
 [→] So can we see these drops coming? Bokingkito et al. (2026) built a regional forecasting model for Philippine fisheries using environmental data. That's our starting point.
 [→] So what's still missing?""")}
 </section>''')
@@ -115,10 +116,10 @@ gpos=[(110,330),(980,330),(110,610),(980,610)]
 gh="".join(f'<button class="abs gap rv" data-s="{i+1}" data-g="{i}" style="left:{x}px;top:{y}px"><div class="gn"><span>Gap {i+1}</span>{t}</div><p>{p}</p><p class="gw"><b>AquaTerra will:</b> {w}</p><div class="cite">{c}</div></button>' for i,((t,p,w,c),(x,y)) in enumerate(zip(GAPS,gpos)))
 S.append(f'''<section class="slide" id="s-gaps" data-label="02" data-title="III · Research Gaps" data-sec="0" data-steps="5" data-q="gaps" data-r="gaps">
 {hd("03","III · Research Gaps","Research <em>Gaps</em>")}
-<div class="abs b22" style="left:110px;top:258px;width:1700px"><b>Existing forecasts</b> work at region and sector level and stop at <i>how much fish</i> to expect. <span class="cite" style="display:inline">Bokingkito et al. (2026)</span></div>
+<div class="abs b22" style="left:110px;top:258px;width:1700px"><b>Existing forecasts</b> work at the <i>regional level</i> across the Philippines; AquaTerra will work at the <b>province × fish-category level</b> within MIMAROPA. <span class="cite" style="display:inline">Bokingkito et al. (2026)</span></div>
 {gh}
 <div class="abs rv" data-s="5" style="left:110px;width:1700px;top:892px;padding:16px 28px;border-radius:16px;background:var(--ink);color:#fff;font:500 27px/1.35 IN"><span class="lab" style="color:var(--aqua)">AquaTerra&nbsp;&nbsp;</span>turns forecasts into <b>shortfalls and their value</b>, province by province.</div>
-{notes("""So here's what those studies already did. Existing forecasts like Bokingkito et al. (2026) work at the region and sector level, and they stop at how much fish to expect.
+{notes("""So here's what those studies already did. Bokingkito et al. (2026) developed fisheries forecasts at the regional level across the Philippines; AquaTerra will work at the province × fish-category level within MIMAROPA.
 [→] Gap 1: there are no seasonal shortfall forecasts by province and fish category, the level where local offices plan. We will forecast each province and fish category and flag seasonal shortfalls.
 [→] Gap 2: forecasts give kilos, not value. We will attach a historical first-sale price to each shortfall, using PSA value and volume records (PSA, 2026).
 [→] Gap 3: shortfall flags and value rankings haven't been checked. We will test how accurate the flags are, and whether the rankings hold when prices change, on later quarters the model has not seen (Hewamalage et al., 2023).
@@ -131,7 +132,7 @@ SOP=["What seasonal benchmarks will identify landing shortfalls for each MIMAROP
 "What gross landing value at risk will the projected shortfalls carry when priced at historical first-sale prices?",
 f"How accurate will the forecasts be on held-out quarters ({TE[0]}–{TE[1]}), measured by MAE, RMSE and MASE against a seasonal-naive baseline?"]
 SO=[f"Build seasonal benchmarks for each province × fish category from PSA quarterly landings, {TR[0]}–{TE[1]}.",
-"Develop the Random Forest → GAMM workflow and measure the added value of typhoon, rainfall and SST predictors (with vs without).",
+"Develop the Random Forest–GAMM workflow and measure the contribution of selected predictors using reductions in Mean Absolute Error (MAE), comparing forecasts with and without them on held-out quarters.",
 "Estimate the gross landing value at risk of each projected shortfall using historical first-sale prices, and rank the combinations.",
 f"Evaluate the forecasts on held-out quarters ({TE[0]}–{TE[1]}) with MAE, RMSE and MASE vs the seasonal-naive baseline, plus price-sensitivity and ranking-stability checks."]
 pairs="".join(f'<button class="abs pair rv" data-s="{i+1}" data-i="{i}" style="top:{452+i*130}px"><div class="pq"><span>SOP {i+1}</span>{q}</div><i>↔</i><div class="po"><span>SO {i+1}</span>To {o[0].lower()+o[1:]}</div></button>' for i,(q,o) in enumerate(zip(SOP,SO)))
@@ -168,7 +169,7 @@ S.append(f'''<section class="slide" id="s-scope" data-label="04" data-title="V �
 <div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">05</div><div><div class="kick">V · Scope and Limitation</div><h2 style="margin-top:12px;font-size:58px;">Scope and <em>Limitations</em></h2></div></div>
 <div class="abs" id="sl-tog" style="right:110px;top:222px;display:flex;gap:8px"><button class="chip" data-v="scope">Scope</button><button class="chip cor" data-v="lim">Limitation</button><button class="chip on" data-v="both">Both</button></div>
 <div class="abs glass colA" data-s="1" style="left:110px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--sea)">Scope</div>{sch}</div>
-<div class="abs glass colB rv" data-s="2" style="left:980px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--coral)">Limitation · click to focus</div>{lmh}</div>
+<div class="abs glass colB rv" data-s="2" style="left:980px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--coral)">Limitation</div>{lmh}</div>
 {notes(f"""Scope. Our study area will be MIMAROPA: Occidental Mindoro, Oriental Mindoro, Marinduque, Romblon and Palawan, across the 31 named fish categories in PSA's marine municipal fisheries tables (PSA, 2026); PSA's 'Others' group will be left out. Municipal fish means catch within municipal waters, which under RA 8550 as amended by RA 10654 extend up to 15 km from the coastline, by fishers using no boat or boats of three gross tons or less (RA 10654, 2015). We will use public data from {TR[0]} to {TE[1]}: PSA OpenSTAT, NASA IMERG, NOAA OISST and NOAA IBTrACS. Random Forest will select predictors and GAMM will forecast the next quarter; we will compare forecasts with seasonal benchmarks, value shortfalls with historical first-sale prices, evaluate on a 70/15/15 time split, show results on a web dashboard, and seek consultation with DTI or a relevant fisheries agency.
 [→] Limitations: selected provinces and marine municipal categories only; no commercial, aquaculture or inland fisheries and no field monitoring. Next quarter only; data gaps and delays may affect accuracy, and fishing effort and fuel costs will not be modeled. We will not establish causal effects of typhoons, rainfall or sea temperature. Gross landing value at risk will use historical prices, not income, profit or damage. The dashboard will be a research prototype, and adoption is not guaranteed.""")}
 </section>''')
@@ -184,7 +185,7 @@ CL=[("LGUs & fisheries offices","Primary potential users","see projected shortfa
 pos=[(110,270),(700,270),(1290,270),(400,560),(990,560)]
 clh="".join(f'<div class="abs glass cl rv" data-s="{i+1}" style="left:{x}px;top:{y}px">{f"<span class=tg>{t}</span>" if t else ""}<div class="ch">{h}</div><div class="cm">{m}</div></div>' for i,((h,t,m),(x,y)) in enumerate(zip(CL,pos)))
 S.append(f'''<section class="slide" id="s-clients" data-label="08" data-title="VII · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
-<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">08</div><div><div class="kick">VII · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
+<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">09</div><div><div class="kick">VII · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
 {clh}
 <div class="abs" style="left:110px;right:110px;top:858px;padding:16px 26px;border-radius:14px;background:#fff7e0;border:2px solid var(--gold);font:600 23px/1.4 IN;color:#6b4a00">We will seek consultation with DTI or a relevant fisheries agency on data suitability and usefulness. Participation and adoption are not guaranteed.</div>
 {notes("""Our primary potential users are LGUs and fisheries offices, which could use provincial and fish-category forecasts to see projected shortfalls early and prioritize monitoring. [→] BFAR could use the findings as supplementary information for monitoring and planning. [→] DTI could use exposure estimates in consultations with fisheries-related enterprises. [→] Fisherfolk associations and cooperatives could use seasonal supply outlooks for marketing and delivery coordination. [→] Traders, vendors and processors could use projected shortfalls for sourcing and inventory planning. We will seek consultation with DTI or a relevant agency; participation and adoption are not guaranteed.""")}
@@ -293,6 +294,7 @@ APA=[
 "Noy, I., Lacheheb, M., &amp; Pundit, M. (2023). <i>The impact of tropical cyclones on fishing activities in the Philippines</i> [Working paper]. Asian Development Bank. https://doi.org/10.22617/wps230291-2",
 "Oceana. (2026). <i>Net loss: How governance gaps are sinking Philippine fisheries</i> [Report]. Zenodo. https://doi.org/10.5281/zenodo.18320988",
 "Philippine Statistics Authority. (2026). <i>Marine municipal fisheries: Volume and value of production by geolocation, species, year and quarter</i> [Data sets, Tables 0032E4GVMP0 and 0042E4GCMP0]. PSA OpenSTAT. https://openstat.psa.gov.ph/"]
+"Philippine Statistics Authority, Regional Statistical Services Office MIMAROPA. (2025). <i>Marine municipal fisheries situation in MIMAROPA Region: July to September 2025</i> [Infographic]. https://rssomimaropa.psa.gov.ph/infographics?page=3",
 FOUND=[
 "Breiman, L. (2001). Random forests. <i>Machine Learning, 45</i>(1), 5–32. https://doi.org/10.1023/A:1010933404324",
 "Hyndman, R. J., &amp; Koehler, A. B. (2006). Another look at measures of forecast accuracy. <i>International Journal of Forecasting, 22</i>(4), 679–688. https://doi.org/10.1016/j.ijforecast.2006.03.001",

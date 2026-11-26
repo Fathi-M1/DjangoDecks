@@ -1,130 +1,52 @@
 # DjangoDecks
 
-Interactive HTML title-defense decks for **Group DJANGO** (FEU Tech, BS CS – Data Science).
-
-This repository is a small monorepo. Each deck is a self-contained folder under `decks/`. The site is static: the root page lists the decks, and Vercel serves them with no build step.
+Interactive HTML decks by Group DJANGO.
 
 ## Decks
 
-| Deck | Path | Live URL (after deploy) |
-| --- | --- | --- |
-| AquaTerra Title Defense | `decks/aquaterra-title-defense/` | `/aquaterra-title-defense` |
+| Deck | Folder |
+| --- | --- |
+| AquaTerra Title Defense | `decks/aquaterra-title-defense/` |
 
-The AquaTerra deck is a single HTML file (`decks/aquaterra-title-defense/index.html`). Source that rebuilds it lives in that folder's `src/` (run `python3 src/build.py` from the deck folder, then replace `index.html` with the generated `AquaTerra_Title_Defense.html`).
+## Folder layout
 
-Version history of the AquaTerra deck is in [CHANGELOG.md](CHANGELOG.md).
+```
+decks/<name>/
+  src/        slide content, styles and scripts (edit these)
+  src/build.py  builds the deck into one file
+  index.html  the built deck (single file, works offline)
+  img/        images embedded at build time
+  test/       layout and screenshot checks
+shared/       notes and pieces shared across decks
+index.html    hub page linking to every deck
+```
 
-## Open a deck without deploying
+## Open or rebuild a deck
 
-- Double-click `decks/aquaterra-title-defense/index.html`, or
-- From this folder, run `python3 -m http.server 8080` and open `http://localhost:8080/`.
+- Open: double-click `decks/<name>/index.html` in any browser. Arrow keys move through slides; `?` lists all keys.
+- Rebuild after editing `src/`:
 
-**Keep a USB copy of the deck HTML** for defense day, in case the room has no internet.
+```
+cd decks/<name>/src
+python3 build.py
+```
+
+- Check layout (needs Playwright): `python3 decks/<name>/test/test.py`
+
+Always edit `src/` and rebuild. Edits made only in `index.html` are lost on the next build.
 
 ## Add a new deck
 
-1. Create a folder `decks/your-deck-name/`.
-2. Put a built `index.html` in that folder (and a `src/` builder if you have one).
-3. Add a card and link on the root `index.html`.
-4. Add a rewrite in `vercel.json` if you want a short path such as `/your-deck-name`.
-5. Commit and push. Vercel will redeploy.
+1. Copy an existing deck folder to `decks/<new-name>/`.
+2. Replace the slides in `src/slides.py` (and `src/data.py` for Q&A and references).
+3. Run `python3 build.py` in `src/`.
+4. Add a row to the table above and a link in the root `index.html`.
 
-Reusable background or theme code can go in `shared/` when a second deck needs it. See `shared/README.md`.
+## Deck conventions
 
----
-
-## Publish this repo (do this yourself)
-
-You will push, so your GitHub account is the contributor. Do **not** skip the author rewrite before the first push: commits currently use placeholder emails so this public repo does not contain personal addresses.
-
-These commands are for **Git Bash** on Windows. Run them in order.
-
-### 1. Unzip or copy, then enter the folder
-
-If you received `DjangoDecks.zip`:
-
-```bash
-unzip DjangoDecks.zip
-cd DjangoDecks
-```
-
-If you already have the folder, just `cd` into it. Confirm you are on `main` and that `.git` is present:
-
-```bash
-git status
-git log --oneline
-```
-
-### 2. Set your Git name and email, then rewrite placeholder authors
-
-Use the **email on your GitHub account** (the one that makes the green contribution graph count). Ask Reese for the email on her GitHub account too.
-
-```bash
-git config user.name "Fathi Mahad Ebrahim"
-git config user.email "YOUR_GITHUB_EMAIL"
-
-export FATHI_EMAIL="YOUR_GITHUB_EMAIL"
-export REESE_EMAIL="REESE_GITHUB_EMAIL"
-
-FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch -f --env-filter '
-if [ "$GIT_AUTHOR_EMAIL" = "fathi@placeholder.local" ]; then
-    export GIT_AUTHOR_NAME="Fathi Mahad Ebrahim"
-    export GIT_AUTHOR_EMAIL="$FATHI_EMAIL"
-fi
-if [ "$GIT_COMMITTER_EMAIL" = "fathi@placeholder.local" ]; then
-    export GIT_COMMITTER_NAME="Fathi Mahad Ebrahim"
-    export GIT_COMMITTER_EMAIL="$FATHI_EMAIL"
-fi
-if [ "$GIT_AUTHOR_EMAIL" = "reese@placeholder.local" ]; then
-    export GIT_AUTHOR_NAME="Reese Lauren C. Chan"
-    export GIT_AUTHOR_EMAIL="$REESE_EMAIL"
-fi
-if [ "$GIT_COMMITTER_EMAIL" = "reese@placeholder.local" ]; then
-    export GIT_COMMITTER_NAME="Reese Lauren C. Chan"
-    export GIT_COMMITTER_EMAIL="$REESE_EMAIL"
-fi
-' -- --all
-```
-
-Check the result:
-
-```bash
-git log --format="%h %an <%ae> %s"
-```
-
-Every Fathi commit should show your real email, and Reese's commit should show hers. Then drop the rewrite backup and clean leftover files:
-
-```bash
-git update-ref -d refs/original/refs/heads/main
-rm -rf .git/refs/original .git/logs/refs/original
-git reflog expire --expire=now --all
-git gc --prune=now
-```
-
-Do this **before** the first push. If you push first, a later rewrite needs a force-push.
-
-### 3. Add the GitHub remote and push
-
-The empty public repo is: https://github.com/Fathi-M1/DjangoDecks
-
-```bash
-git remote add origin https://github.com/Fathi-M1/DjangoDecks.git
-git push -u origin main
-```
-
-### 4. Connect Vercel
-
-1. Open [vercel.com/new](https://vercel.com/new) and import `Fathi-M1/DjangoDecks`.
-2. Framework Preset: **Other**.
-3. Build Command: leave **empty** (no build step).
-4. Output Directory: **root** (`.` or leave as the repository root).
-5. Deploy. The hub is `/`, and the AquaTerra deck is `/aquaterra-title-defense`.
-
-Every later `git push` to `main` redeploys that link. Still keep a USB copy of `decks/aquaterra-title-defense/index.html` for the room.
-
----
-
-## Notes
-
-- This repo is **public**. Do not commit secrets, private attachments, or personal emails. Until you run the rewrite above, author emails are placeholders only (`fathi@placeholder.local`, `reese@placeholder.local`).
-- Reese's latest edits were made in the built HTML. See the last CHANGELOG entry: `src/` still matches v10 and should be synced if you need to rebuild from source.
+- Plain, descriptive slide titles; no slogans.
+- Readable from the back of the room: body text at least 22px, labels at least 18px at 1920×1080.
+- Proposal decks use future tense ("we will…").
+- Sources from 2020 onward; any older foundational or legal source is listed separately.
+- Invented example numbers are labelled ILLUSTRATIVE.
+- Motion stays subtle; `M` toggles it and reduced-motion settings are respected.
