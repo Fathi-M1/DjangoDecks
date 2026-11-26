@@ -19,7 +19,7 @@ chips="".join(f'<button class="chip term" data-t="{k}">{n}</button>' for k,n,_ i
 pops="".join(f'<div class="pop" id="pop-{k}" style="left:1090px;top:330px;width:700px"><div class="lab" style="color:var(--sea);margin-bottom:10px">{n}</div>{t}</div>' for k,n,t in terms)
 S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cover · AquaTerra" data-sec="-1" data-steps="3" data-q="title">
 <div class="abs imgframe" style="left:1090px;top:60px;width:760px;height:520px;background-image:url({{{{IMG:hero}}}})"></div>
-<div class="abs kick" style="left:440px;top:84px;width:620px;line-height:1.55">Title Defense · Group DJANGO<br>BS CS – Data Science · FEU Tech</div>
+<div class="abs kick" style="left:110px;top:84px;width:620px;line-height:1.55">Title Defense · Group DJANGO<br>BS CS – Data Science · FEU Tech</div>
 <div class="abs" style="left:110px;top:196px;width:940px">
  <p style="font:400 36px/1.3 PF;margin:0;color:var(--ink)">Fish feeds our families and supports coastal livelihoods.</p>
  <p class="rv" data-s="1" style="font:400 36px/1.3 PF;margin-top:14px;color:var(--ink)">Fishers, vendors and businesses depend on a steady supply.</p>
@@ -44,9 +44,9 @@ S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cove
 S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="I · Background" data-sec="0" data-steps="4" data-q="bg" data-r="bg">
 <div class="bgimg" style="background-image:url({{{{IMG:bangka}}}});bottom:auto;height:470px"></div>
 <div class="full" style="bottom:auto;height:470px;background:linear-gradient(180deg,rgba(2,40,58,.6),rgba(2,40,58,.2))"></div>
-<div class="abs" style="left:430px;top:62px;display:flex;gap:34px;align-items:flex-end;color:#fff">
+<div class="abs" style="left:110px;top:62px;display:flex;gap:34px;align-items:flex-end;color:#fff">
  <div class="num w">01</div><div><div class="kick" style="color:#e6fff9">I · Background</div>
- <h2 style="margin-top:12px;color:#fff;font-size:62px">Fish supports coastal towns,<br>and supply <em style="color:#ffcdbd">is falling.</em></h2></div></div>
+ <h2 style="margin-top:12px;color:#fff;font-size:62px">Background of the <em style="color:#ffcdbd">Study</em></h2></div></div>
 <div class="abs" style="left:0;top:380px">{waveH("#ffffff",110)}</div>
 <div class="abs" style="left:0;right:0;top:488px;bottom:0;background:#ffffff"></div>
 <div class="abs rv bgc" data-s="1" style="left:110px;top:470px;width:530px">
@@ -84,7 +84,7 @@ GAPS=[("Level","No seasonal shortfall forecasts by <b>province × fish category<
 gpos=[(110,330),(980,330),(110,610),(980,610)]
 gh="".join(f'<button class="abs gap rv" data-s="{i+1}" data-g="{i}" style="left:{x}px;top:{y}px"><div class="gn"><span>Gap {i+1}</span>{t}</div><p>{p}</p><p class="gw"><b>AquaTerra will:</b> {w}</p><div class="cite">{c}</div></button>' for i,((t,p,w,c),(x,y)) in enumerate(zip(GAPS,gpos)))
 S.append(f'''<section class="slide" id="s-gaps" data-label="02" data-title="II · Research Gaps" data-sec="0" data-steps="5" data-q="gaps" data-r="gaps">
-{hd("02","II · Research Gaps","What existing forecasts <em>leave open.</em>")}
+{hd("02","II · Research Gaps","Research <em>Gaps</em>")}
 <div class="abs b22" style="left:110px;top:258px;width:1700px"><b>Existing forecasts</b> work at region and sector level and stop at <i>how much fish</i> to expect. <span class="cite" style="display:inline">Bokingkito et al. (2026)</span></div>
 {gh}
 <div class="abs rv" data-s="5" style="left:110px;width:1700px;top:892px;padding:16px 28px;border-radius:16px;background:var(--ink);color:#fff;font:500 27px/1.35 IN"><span class="lab" style="color:var(--aqua)">AquaTerra&nbsp;&nbsp;</span>turns forecasts into <b>shortfalls and their value</b>, province by province.</div>
@@ -106,7 +106,7 @@ SO=[f"Build seasonal benchmarks for each province × fish category from PSA quar
 f"Evaluate the forecasts on held-out quarters ({TE[0]}–{TE[1]}) with MAE, RMSE and MASE vs the seasonal-naive baseline, plus price-sensitivity and ranking-stability checks."]
 pairs="".join(f'<button class="abs pair rv" data-s="{i+1}" data-i="{i}" style="top:{452+i*130}px"><div class="pq"><span>SOP {i+1}</span>{q}</div><i>↔</i><div class="po"><span>SO {i+1}</span>To {o[0].lower()+o[1:]}</div></button>' for i,(q,o) in enumerate(zip(SOP,SO)))
 S.append(f'''<section class="slide uw" id="s-obj" data-label="03" data-title="III · Problem and Objectives" data-sec="1" data-steps="4" data-q="obj" data-r="algo">
-{hd("03","III · Statement of the Problem ↔ Specific Objectives","Initial questions, <em>paired one-to-one.</em>")}
+{hd("03","III · Research questions and objectives","Statement of the Problem and <em>Specific Objectives</em>")}
 <div class="abs b22" style="left:110px;top:250px;width:1700px"><span class="lab" style="color:var(--sea)">General objective&nbsp;&nbsp;</span>AquaTerra will forecast next-quarter municipal fish landings, flag seasonal shortfalls and estimate their gross landing value at risk for five MIMAROPA provinces.</div>
 <div class="abs algo" style="left:110px;top:330px"><b>Random Forest</b> will rank and select the predictors. <span class="cite" style="display:inline">Nesslage et al. (2021)</span></div>
 <div class="abs algo" style="left:965px;top:330px"><b>GAMM</b> will forecast landings with smooth curves. <span class="cite" style="display:inline">Holmes et al. (2021)</span></div>
@@ -135,7 +135,7 @@ LM=[("Selected coverage","No commercial, aquaculture or inland fisheries; no fie
 sch="".join(f'<div class="li"><i>✓</i><div><b>{a}</b><span>{b}{f" <em class=ct>{c}</em>" if c else ""}</span></div></div>' for a,b,c in SC)
 lmh="".join(f'<button class="li lm" data-i="{i}"><i>✕</i><div><b>{a}</b><span>{b}</span></div></button>' for i,(a,b) in enumerate(LM))
 S.append(f'''<section class="slide" id="s-scope" data-label="04" data-title="IV · Scope and Limitation" data-sec="2" data-steps="2" data-q="scope" data-r="scope">
-<div class="abs" style="left:430px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">04</div><div><div class="kick">IV · Scope and Limitation</div><h2 style="margin-top:12px;font-size:58px;max-width:820px">What we <em>will cover</em>, and what we <span class="c">won't claim.</span></h2></div></div>
+<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">04</div><div><div class="kick">IV · Scope and Limitation</div><h2 style="margin-top:12px;font-size:58px;">Scope and <em>Limitations</em></h2></div></div>
 <div class="abs" id="sl-tog" style="right:110px;top:222px;display:flex;gap:8px"><button class="chip" data-v="scope">Scope</button><button class="chip cor" data-v="lim">Limitation</button><button class="chip on" data-v="both">Both</button></div>
 <div class="abs glass colA" data-s="1" style="left:110px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--sea)">Scope</div>{sch}</div>
 <div class="abs glass colB rv" data-s="2" style="left:980px;top:284px;width:830px;height:676px;padding:22px 30px"><div class="lab" style="color:var(--coral)">Limitation · click to focus</div>{lmh}</div>
@@ -154,14 +154,14 @@ CL=[("LGUs & fisheries offices","Primary potential users","see projected shortfa
 pos=[(110,270),(700,270),(1290,270),(400,560),(990,560)]
 clh="".join(f'<div class="abs glass cl rv" data-s="{i+1}" style="left:{x}px;top:{y}px">{f"<span class=tg>{t}</span>" if t else ""}<div class="ch">{h}</div><div class="cm">{m}</div></div>' for i,((h,t,m),(x,y)) in enumerate(zip(CL,pos)))
 S.append(f'''<section class="slide" id="s-clients" data-label="08" data-title="VI · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
-<div class="abs" style="left:430px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">07</div><div><div class="kick">VI · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Who could plan with <em>these estimates.</em></h2></div></div>
+<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">07</div><div><div class="kick">VI · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
 {clh}
 <div class="abs" style="left:110px;right:110px;top:858px;padding:16px 26px;border-radius:14px;background:#fff7e0;border:2px solid var(--gold);font:600 23px/1.4 IN;color:#6b4a00">We will seek consultation with DTI or a relevant fisheries agency on data suitability and usefulness. Participation and adoption are not guaranteed.</div>
 {notes("""Our primary potential users are LGUs and fisheries offices, which could use provincial and fish-category forecasts to see projected shortfalls early and prioritize monitoring. [→] BFAR could use the findings as supplementary information for monitoring and planning. [→] DTI could use exposure estimates in consultations with fisheries-related enterprises. [→] Fisherfolk associations and cooperatives could use seasonal supply outlooks for marketing and delivery coordination. [→] Traders, vendors and processors could use projected shortfalls for sourcing and inventory planning. We will seek consultation with DTI or a relevant agency; participation and adoption are not guaranteed.""")}
 </section>''')
 # ================= THANK YOU =================
 S.append(f'''<section class="slide" id="s-end" data-label="09" data-title="Thank you" data-sec="5" data-steps="0">
-<div class="abs" style="left:430px;right:110px;top:100px;text-align:center">
+<div class="abs" style="left:110px;right:110px;top:100px;text-align:center">
  <div class="kick">Group DJANGO · AquaTerra</div>
  <div style="font:600 170px/1 PF;margin-top:24px;color:var(--ink)">Thank you</div>
  <div style="font:400 italic 40px PF;color:var(--sea);margin-top:20px">We welcome your questions and recommendations.</div>
@@ -173,7 +173,7 @@ S.append(f'''<section class="slide" id="s-end" data-label="09" data-title="Thank
 </section>''')
 # ================= B1 Q BANK =================
 S.append('''<section class="slide backup uw" id="b-qbank" data-label="B1" data-title="Backup · Panel Q&amp;A bank" data-sec="6" data-steps="0">
-<div class="hd"><div class="num" style="font-size:150px">B1</div><div><div class="kick">Backup</div><h2 style="margin-top:12px;font-size:54px">Panel Q&amp;A bank, <em>by theme.</em></h2></div></div>
+<div class="hd"><div class="num" style="font-size:150px">B1</div><div><div class="kick">Backup</div><h2 style="margin-top:12px;font-size:54px">Panel Q&amp;A <em>Bank</em></h2></div></div>
 <input id="qb-search" placeholder="Search questions…" style="position:absolute;right:110px;top:120px;width:420px;font:500 22px IN;padding:12px 18px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);outline:none">
 <div class="abs" id="qb-cats" style="left:110px;top:260px;width:480px"></div>
 <div class="abs" id="qb-list" style="left:630px;top:260px;width:1180px;height:690px;overflow:auto;padding-right:10px"></div>
@@ -181,7 +181,7 @@ S.append('''<section class="slide backup uw" id="b-qbank" data-label="B1" data-t
 </section>''')
 # ================= B2 PREDICTION VS CAUSATION =================
 S.append(f'''<section class="slide backup" id="b-cause" data-label="B2" data-title="Backup · Prediction vs causation" data-sec="6" data-steps="3">
-<div class="hd"><div class="num" style="font-size:150px">B2</div><div><div class="kick" style="color:var(--coral)">Panel might ask</div><h2 style="margin-top:12px;font-size:52px">"How will you separate <em>prediction</em> from <span class="c">causation?</span>"</h2></div></div>
+<div class="hd"><div class="num" style="font-size:150px">B2</div><div><div class="kick" style="color:var(--coral)">Panel might ask</div><h2 style="margin-top:12px;font-size:52px">Prediction vs. <em>Causation</em></h2></div></div>
 <div class="abs card" style="left:110px;top:270px;width:1700px;height:260px;padding:24px 30px">
  <div class="lab" style="color:var(--sea)">1 · The test we will run</div>
  <div style="display:flex;align-items:center;gap:20px;margin-top:16px">
@@ -208,7 +208,7 @@ S.append(f'''<section class="slide backup" id="b-cause" data-label="B2" data-tit
 </section>''')
 # ================= B3 EVALUATION DEMO (moved from main flow) =================
 S.append(f'''<section class="slide backup uw" id="s-eval" data-label="B3" data-title="Backup · Evaluation demo (split slider)" data-sec="6" data-steps="2" data-q="algo" data-r="algo">
-{hd("B3","Backup · Evaluation demo","The workflow must beat the <span class='c'>seasonal-naive</span> baseline.")}
+{hd("B3","Backup · Evaluation demo","Evaluation Against the <em>Seasonal-Naive Baseline</em>")}
 <div class="abs card" style="left:110px;top:270px;width:1240px;height:690px;padding:20px 26px">
  <div style="display:flex;justify-content:space-between;align-items:center"><div class="lab">Landings (t) · one province × category</div><span class="ill">ILLUSTRATIVE</span></div>
  <svg id="e-chart" width="1190" height="430" style="margin-top:6px"></svg>
@@ -225,7 +225,7 @@ S.append(f'''<section class="slide backup uw" id="s-eval" data-label="B3" data-t
 </section>''')
 # ================= B4 VALUE AT RISK BUILDER (moved from main flow) =================
 S.append(f'''<section class="slide backup uw" id="s-var" data-label="B4" data-title="Backup · Value-at-risk builder" data-sec="6" data-steps="3" data-q="value">
-{hd("B4","Backup · Valuation","Shortfall <span class='c'>×</span> price <em>=</em> gross value at risk.")}
+{hd("B4","Backup · Valuation","Gross Landing <em>Value at Risk</em>")}
 <div class="abs card" style="left:110px;top:260px;width:800px;height:700px;padding:22px 26px">
  <div style="display:flex;justify-content:space-between;align-items:center"><div class="lab">Pick a province × category</div><span class="ill">ILLUSTRATIVE</span></div>
  <div id="v-pick" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div>

@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v6 (26 Nov 2026, 8:42 PM Asia/Singapore)
+
+Restore the underwater background, add ambient motion, and use plain slide titles.
+
+Drops the FEU template background and returns to the underwater theme. Adds subtle ambient motion (toggle with M). Slide titles are plain descriptive headings (for example, Statement of the Problem and Specific Objectives; Data and Evaluation Overview).
+
 ## v5 (26 Nov 2026, 5:49 PM Asia/Singapore)
 
 Switch to the FEU template background and add Research Gaps, MIMAROPA, and one-to-one SOP/SO.

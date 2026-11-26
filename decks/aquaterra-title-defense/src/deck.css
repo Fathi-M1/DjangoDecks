@@ -5,7 +5,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--abyss);overflow:hidden;font-family:IN,system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:var(--ink)}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:#f7fbfa url({{IMG:feu_bg}}) center/cover no-repeat}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:linear-gradient(180deg,#a9e9f0 0%,#d9f6f8 30%,#f1fbfa 62%,#fbfaf6 100%)}
 .slide{position:absolute;left:24px;top:14px;width:1920px;height:1080px;transform:scale(0.975);transform-origin:0 0;background:rgba(255,255,255,.965);clip-path:path('M440,0 H1886 A34,34 0 0 1 1920,34 V941 A34,34 0 0 1 1886,975 H1476 A24,24 0 0 0 1452,999 V1046 A34,34 0 0 1 1418,1080 H34 A34,34 0 0 1 0,1046 V217 A34,34 0 0 1 34,183 H382 A24,24 0 0 0 406,159 V34 A34,34 0 0 1 440,0 Z');opacity:0;visibility:hidden;transition:opacity .55s ease,visibility 0s linear .55s;overflow:hidden}
 .slide.active{opacity:1;visibility:visible;transition:opacity .55s ease}
 .abs{position:absolute}.full{position:absolute;inset:0}
@@ -305,3 +305,36 @@ svg text{font-family:IN}
 #s-scope .hd h2{max-width:740px}
 .li i,.lm i{font-size:18px}
 .qa .tagc{font-size:18px}.cl .tg{font-size:18px}
+
+/* ===== v6: original underwater theme, full-slide, ambient motion ===== */
+:root{--ink:#0b2a3c;--ink2:#2f4d5e;--mute:#4f6d7c;--sea:#078a9c;--aqua:#2fd3e0;--deep:#05344a;--abyss:#021c28;--coral:#e8603f;--coral2:#ffb199;--sand:#fbfaf6;--mist:#e7f6f8;--line:#cfe2e7;--gold:#f2b53a}
+.slide{left:0!important;top:0!important;transform:none!important;clip-path:none!important;background:transparent!important}
+.uw{background:transparent!important}
+.hd{left:110px!important}
+#s-obj .hd h2{font-size:54px}
+#s-flowB .hd h2{font-size:54px}
+#scope-h{max-width:none}
+.glass{background:rgba(255,255,255,.93);border:1.5px solid rgba(255,255,255,.9);box-shadow:0 16px 44px rgba(2,40,58,.16)}
+.card,.card2{box-shadow:0 12px 34px rgba(2,40,58,.12)}
+#bar{left:50%!important;transform:translateX(-50%);top:auto!important;bottom:16px;width:auto!important;height:46px;padding:0 8px 0 20px}
+/* ambient */
+#amb{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+#amb>*{position:absolute;pointer-events:none}
+#amb .ray{top:-200px;width:260px;height:1500px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 70%);transform-origin:top center;filter:blur(18px);opacity:.35;animation:ray 16s ease-in-out infinite alternate}
+#amb .ray:nth-child(1){left:980px;transform:rotate(18deg)}#amb .ray:nth-child(2){left:1300px;width:180px;transform:rotate(24deg);animation-duration:21s;animation-delay:-6s}#amb .ray:nth-child(3){left:1620px;width:320px;transform:rotate(14deg);animation-duration:26s;animation-delay:-11s}
+@keyframes ray{0%{opacity:.18;translate:-40px 0}100%{opacity:.42;translate:40px 0}}
+#amb .caus{inset:0 0 auto 0;height:560px;opacity:.22;background:radial-gradient(ellipse 120px 40px at 20% 30%,#fff 0,transparent 70%),radial-gradient(ellipse 160px 50px at 55% 18%,#fff 0,transparent 70%),radial-gradient(ellipse 140px 40px at 80% 40%,#fff 0,transparent 70%),radial-gradient(ellipse 90px 30px at 35% 60%,#fff 0,transparent 70%);background-size:900px 420px;mask-image:linear-gradient(180deg,#000,transparent);-webkit-mask-image:linear-gradient(180deg,#000,transparent);animation:caus 48s linear infinite}
+@keyframes caus{to{background-position:900px 120px}}
+#amb .wave{left:-1920px;bottom:0;width:3840px;height:150px;opacity:.5;animation:wave 40s linear infinite}
+@keyframes wave{to{transform:translateX(1920px)}}
+#amb .bub{bottom:-40px;border-radius:50%;border:1.5px solid rgba(7,138,156,.28);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.8),rgba(255,255,255,.1) 60%);animation:bub linear infinite}
+@keyframes bub{0%{transform:translate(0,0);opacity:0}10%{opacity:.6}50%{transform:translate(18px,-560px)}90%{opacity:.5}100%{transform:translate(-10px,-1160px);opacity:0}}
+#amb .par{transition:transform 1.2s ease-out}
+.slide{z-index:1}
+/* soft entrance for non-step elements */
+.slide.active>.abs:not(.rv):not(.stg):not(.pop),.slide.active>.hd{animation:enter .5s cubic-bezier(.2,.7,.2,1) both}
+.slide.active>.abs:nth-of-type(2){animation-delay:.05s}.slide.active>.abs:nth-of-type(3){animation-delay:.1s}.slide.active>.abs:nth-of-type(n+4){animation-delay:.14s}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+body.nomo #amb *,body.nomo .slide *{animation:none!important;transition-duration:0s!important}
+body.nomo #amb .ray,body.nomo #amb .bub{display:none}
+@media (prefers-reduced-motion:reduce){#amb *,.slide *{animation:none!important;transition-duration:.01s!important}#amb .bub,#amb .ray{display:none}}

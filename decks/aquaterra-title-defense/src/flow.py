@@ -38,7 +38,7 @@ pa=('<path class="fpath" data-to="2" data-c="#0e8f86" d="M700,455 H760"/>'
     '<path class="fpath" data-to="3" data-c="#6f8b99" d="M1000,672 C1000,700 640,690 640,712"/>'
     '<path class="fpath" data-to="4" data-c="#d9822b" d="M1110,840 H1160"/>')
 A=f'''<section class="slide uw flow f2" id="s-flowA" data-label="06" data-title="V · Algorithms 1/2 · Data, split, evaluation" data-sec="3" data-steps="3" data-q="algo" data-r="data">
-{hd("05","V · Algorithms · overview","From public data to a <em>fair test</em>.")}
+{hd("05","V · Algorithms · 1 of 2","Data and <em>Evaluation Overview</em>")}
 <button class="abs btn fplay" style="right:110px;top:118px">▶ Play the flow</button>
 <div class="abs stg card2" data-st="1" style="left:110px;top:250px;width:590px;height:420px">{sh(1,"Sources","Four public datasets, 2002 Q1 – 2025 Q4")}<div style="margin-top:14px">{srch}</div></div>
 <div class="abs stg card2" data-st="2" style="left:760px;top:250px;width:1050px;height:420px">{sh(2,"Align","One row = province × fish category × quarter")}
@@ -65,7 +65,7 @@ pb=('<path class="fpath" data-to="6" data-c="#0e8f86" d="M650,460 H700"/>'
     '<path class="fpath" data-to="7" data-c="#8a5bd6" d="M1260,460 H1310"/>'
     '<path class="fpath" data-to="8" data-c="#d9822b" d="M1560,670 V712"/>')
 B=f'''<section class="slide uw flow f2" id="s-flowB" data-label="07" data-title="V · Algorithms 2/2 · RF + GAMM → value at risk" data-sec="3" data-steps="3" data-q="value" data-r="algo">
-{hd("06","V · Algorithms · how they work together","Random Forest <em>selects</em>. GAMM <em>forecasts</em>.")}
+{hd("06","V · Algorithms · 2 of 2","Forecasting Workflow: <em>Random Forest and GAMM</em>")}
 <button class="abs btn fplay" style="right:110px;top:118px">▶ Play the flow</button>
 <div class="abs stg card2" data-st="5" style="left:110px;top:250px;width:540px;height:438px">{sh(5,"Random Forest","Will rank the predictors and keep the useful ones")}
  {ILL}<p class="b22" style="margin-top:12px">Many trees will learn from Train quarters; shuffling a useful predictor will raise the error.</p>

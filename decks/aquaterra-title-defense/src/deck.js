@@ -67,6 +67,7 @@ addEventListener('keydown',e=>{
  if(['ArrowRight','PageDown',' '].includes(k)){e.preventDefault();next()}
  else if(['ArrowLeft','PageUp'].includes(k)){e.preventDefault();prev()}
  else if(k==='Home'){go(0)}else if(k==='End'){go(mainN-1)}
+ else if(k==='m'||k==='M'){document.body.classList.toggle('nomo');toast&&toast(document.body.classList.contains('nomo')?'Motion off':'Motion on')}
  else if(k==='f'||k==='F')fs();else if(k==='n'||k==='N')$('#notes').classList.toggle('show');
  else if(k==='q'||k==='Q'){if(QA[slides[cur].dataset.q])toggleOv('qov');else toast('No section questions here · press B for the Q bank')}
  else if(k==='r'||k==='R')toggleOv('rov');else if('bBgG'.includes(k)&&k.length===1)toggleOv('menu');
@@ -178,4 +179,11 @@ $('#qb-search').oninput=qbDraw;ctrl['b-qbank']={enter:qbDraw};
 const h=location.hash.slice(1),hi=slides.findIndex(s=>s.id===h);
 slides[0].classList.add('active');go(hi>0?hi:0);
 window.__deck={go,next,prev,setStep,goLabel,get cur(){return cur},get step(){return step},slides};
+})();
+
+/* v6 ambient: bubbles + gentle parallax */
+(()=>{const a=document.getElementById('amb');if(!a)return;let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;
+ const X=[18,40,62,84,30,70,1836,1858,1880,1846,1870,1894];
+ X.forEach((x,i)=>{const b=document.createElement('i');b.className='bub';const s=8+rnd()*16;b.style.cssText=`left:${x}px;width:${s}px;height:${s}px;animation-duration:${22+rnd()*20}s;animation-delay:${-rnd()*40}s`;a.appendChild(b)});
+ const st=document.getElementById('stage');addEventListener('mousemove',e=>{if(document.body.classList.contains('nomo')||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const dx=e.clientX/innerWidth-.5,dy=e.clientY/innerHeight-.5;a.querySelectorAll('.par').forEach(p=>{const d=+p.dataset.d;p.style.transform=`translate(${-dx*d}px,${-dy*d}px)`})});
 })();
