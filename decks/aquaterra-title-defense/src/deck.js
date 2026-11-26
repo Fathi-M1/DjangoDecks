@@ -125,7 +125,7 @@ const qlab=t=>(2002+Math.floor(t/4))+' Q'+(t%4+1);let eRollT=null;
 function eDraw(){const sp=+$('#e-split').value;$('#e-lab').textContent=qlab(sp);const svg=$('#e-chart');svg.innerHTML='';const W=1190,L=56,B=390,T=40;
  const X=t=>L+t*(W-L-20)/(EN-1),Y=v=>B-(v-120)/(440-120)*(B-T);const tu=Math.max(4,sp-14);
  el('rect',{x:L,y:T,width:X(tu)-L,height:B-T,fill:'#eef9f6'},svg);el('rect',{x:X(tu),y:T,width:X(sp)-X(tu),height:B-T,fill:'#e1f2ee'},svg);el('rect',{x:X(sp)-8,y:T,width:W-X(sp)+8,height:B-T,fill:'#fff7e6'},svg);
- el('text',{x:L+10,y:T-12,'font-size':19,'font-weight':700,fill:'#0e8f86'},svg,'TRAIN');el('text',{x:X(tu)+8,y:T-12,'font-size':19,'font-weight':700,fill:'#3c5a6b'},svg,'TUNE');el('text',{x:X(sp),y:T-12,'font-size':19,'font-weight':700,fill:'#d9822b'},svg,'TEST');
+ el('text',{x:L+10,y:T-12,'font-size':19,'font-weight':700,fill:'#0b6f68'},svg,'TRAIN');el('text',{x:X(tu)+8,y:T-12,'font-size':19,'font-weight':700,fill:'#3c5a6b'},svg,'TUNE');el('text',{x:X(sp),y:T-12,'font-size':19,'font-weight':700,fill:'#a85a12'},svg,'TEST');
  for(let k=0;k<=4;k++){const v=120+80*k;el('line',{x1:L,x2:W-10,y1:Y(v),y2:Y(v),class:'ax'},svg);el('text',{x:L-8,y:Y(v)+5,'text-anchor':'end',class:'tick'},svg,v)}
  for(let t=0;t<EN;t+=16)el('text',{x:X(t),y:B+26,class:'tick','text-anchor':'middle'},svg,2002+t/4);el('text',{x:X(EN-1),y:B+26,class:'tick','text-anchor':'middle'},svg,'2025');
  let d='';eObs.forEach((v,t)=>d+=(t?'L':'M')+X(t)+','+Y(v));el('path',{d,stroke:'#a9bfc6','stroke-width':3,fill:'none'},svg);
@@ -156,8 +156,8 @@ function vDraw(){const c=VC[vSel],pct=+$('#v-price').value;$$('#v-pick .chip').f
  const svg=$('#v-chart');svg.innerHTML='';const W=710,B=164,T=24,mx=Math.max(c[1],c[2])*1.15,Y=v=>B-v/mx*(B-T);
  el('line',{x1:20,x2:W-20,y1:B,y2:B,class:'ax'},svg);
  el('rect',{x:150,y:Y(c[1]),width:150,height:B-Y(c[1]),fill:'#cfe6e1',rx:6},svg);el('text',{x:225,y:Y(c[1])-8,'text-anchor':'middle','font-size':18,'font-weight':700,fill:'#0b2a3c'},svg,fmt(c[1],0)+' mt');el('text',{x:225,y:B+22,'text-anchor':'middle',class:'tick'},svg,'Seasonal benchmark');
- el('rect',{x:410,y:Y(c[2]),width:150,height:B-Y(c[2]),fill:'#0e8f86',rx:6},svg);el('text',{x:485,y:Y(c[2])-8,'text-anchor':'middle','font-size':18,'font-weight':700,fill:'#0b2a3c'},svg,fmt(c[2],0)+' mt');el('text',{x:485,y:B+22,'text-anchor':'middle',class:'tick'},svg,'Next-quarter forecast');
- if(step>=1){if(sf>0){el('rect',{x:410,y:Y(c[1]),width:150,height:Y(c[2])-Y(c[1]),fill:'none',stroke:'#d9822b','stroke-width':3,'stroke-dasharray':'7 5',rx:4},svg);el('text',{x:575,y:(Y(c[1])+Y(c[2]))/2+6,'font-size':19,'font-weight':700,fill:'#d9822b'},svg,'shortfall')}else el('text',{x:575,y:Y(c[2])+20,'font-size':19,'font-weight':700,fill:'#0b8a5a'},svg,'no shortfall')}
+ el('rect',{x:410,y:Y(c[2]),width:150,height:B-Y(c[2]),fill:'#0b6f68',rx:6},svg);el('text',{x:485,y:Y(c[2])-8,'text-anchor':'middle','font-size':18,'font-weight':700,fill:'#0b2a3c'},svg,fmt(c[2],0)+' mt');el('text',{x:485,y:B+22,'text-anchor':'middle',class:'tick'},svg,'Next-quarter forecast');
+ if(step>=1){if(sf>0){el('rect',{x:410,y:Y(c[1]),width:150,height:Y(c[2])-Y(c[1]),fill:'none',stroke:'#d9822b','stroke-width':3,'stroke-dasharray':'7 5',rx:4},svg);el('text',{x:575,y:(Y(c[1])+Y(c[2]))/2+6,'font-size':19,'font-weight':700,fill:'#a85a12'},svg,'shortfall')}else el('text',{x:575,y:Y(c[2])+20,'font-size':19,'font-weight':700,fill:'#08704a'},svg,'no shortfall')}
  el('line',{x1:130,x2:580,y1:Y(c[1]),y2:Y(c[1]),stroke:'#6f8b99','stroke-dasharray':'4 4'},svg);
  // ranking
  const vals=VC.map(x=>vVal(x,vP)),order=vals.map((v,k)=>[v,k]).sort((a,b)=>b[0]-a[0]).map(x=>x[1]),mxv=Math.max(...vals)||1;
@@ -192,8 +192,9 @@ window.__deck={go,next,prev,setStep,goLabel,get cur(){return cur},get step(){ret
 (()=>{const cv=document.getElementById('fish');if(!cv)return;const g=cv.getContext('2d'),W=1920,H=1080,st=document.getElementById('stage');
  let sd=11;const R=()=>(sd=(sd*16807)%2147483647)/2147483647;
  // z: 0 far .. 1 near
- const SP=[{z:.15,c:'#0a8fa0'},{z:.25,c:'#0a8fa0'},{z:.35,c:'#f08a3c',st:1},{z:.45,c:'#2a9fc2'},{z:.55,c:'#f2b53a'},{z:.7,c:'#f08a3c',st:1},{z:.85,c:'#0a8fa0'},{z:1,c:'#f08a3c',st:1}];
- const F=SP.map(s=>({...s,x:R()*W,y:120+R()*820,a:(R()<.5?0:Math.PI)+(R()-.5)*.4,len:40+s.z*110,v:.25+s.z*.55+R()*.15,ph:R()*6.28,wob:R()*6.28,alpha:.16+s.z*.26}));
+ const SP=[{z:.15,c:'#7fe0ff'},{z:.25,c:'#b18cff'},{z:.35,c:'#ff8a3d',st:1},{z:.45,c:'#3f7bff'},{z:.55,c:'#ffd23f'},{z:.7,c:'#ff8a3d',st:1},{z:.85,c:'#ff6fb0'},{z:1,c:'#ff8a3d',st:1}];
+ const F=SP.map(s=>({...s,x:R()*W,y:120+R()*820,a:(R()<.5?0:Math.PI)+(R()-.5)*.4,len:40+s.z*110,v:.25+s.z*.55+R()*.15,ph:R()*6.28,wob:R()*6.28,alpha:.55+s.z*.35}));
+ const LD={z:.3,c:'#c8f4ff',x:-100,y:1030,a:0,len:26,v:.55,ph:0,wob:0,alpha:.85,lead:1};F.push(LD);for(let i=0;i<9;i++)F.push({z:.3,c:'#c8f4ff',x:-100-(i%3)*34,y:1030+(i%3-1)*16+((i/3|0)-1)*10,a:0,len:16+R()*6,v:.55,ph:R()*6,wob:R()*6,alpha:.8,sc:1,ox:-(1+(i%3))*30-(i/3|0)*12,oy:((i%3)-1)*16+((i/3|0)-1)*11});
  let mx=-1e4,my=-1e4;addEventListener('mousemove',e=>{const r=st.getBoundingClientRect(),k=r.width/W;mx=(e.clientX-r.left)/k;my=(e.clientY-r.top)/k});addEventListener('mouseleave',()=>{mx=my=-1e4});
  function fish(f,t){const L=f.len,dir=Math.cos(f.a)<0?-1:1,tilt=Math.max(-.35,Math.min(.35,Math.sin(f.a)*dir));
   g.save();g.translate(f.x,f.y);g.scale(dir,1);g.rotate(tilt*dir*dir);g.globalAlpha=f.alpha;
@@ -208,7 +209,7 @@ window.__deck={go,next,prev,setStep,goLabel,get cur(){return cur},get step(){ret
   if(f.st){g.save();g.beginPath();g.moveTo(L*.5,0);g.bezierCurveTo(L*.3,-L*.34,-L*.3,-L*.3,-L*.46,0);g.bezierCurveTo(-L*.3,L*.3,L*.3,L*.34,L*.5,0);g.clip();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(L*.16,-L,L*.09,2*L);g.fillRect(-L*.16,-L,L*.1,2*L);g.restore()}
   g.fillStyle='rgba(11,42,60,.7)';g.beginPath();g.arc(L*.33,-L*.05,Math.max(1.5,L*.035),0,6.28);g.fill();
   g.restore()}
- function step(f,dt,t){f.wob+=dt*.0004;f.a+=Math.sin(f.wob*3+f.ph)*.0016*dt*.06;
+ function step(f,dt,t){if(f.sc){const tx=LD.x+f.ox*Math.cos(LD.a),ty=LD.y+f.oy;f.a=Math.atan2(ty-f.y,tx-f.x);const d=Math.hypot(tx-f.x,ty-f.y);f.x+=Math.cos(f.a)*Math.min(d,(.6+d*.02)*dt*.06*2);f.y+=Math.sin(f.a)*Math.min(d,(.6+d*.02)*dt*.06*2);f.a=LD.a+Math.max(-.3,Math.min(.3,f.a-LD.a));return}if(f.lead){f.a=Math.sin(t*.0002)*.08;f.x+=f.v*dt*.06;f.y=1028+Math.sin(t*.0004)*14;if(f.x>W+200)f.x=-200;return}f.wob+=dt*.0004;f.a+=Math.sin(f.wob*3+f.ph)*.0016*dt*.06;
   // keep mostly horizontal
   const h=Math.cos(f.a)<0?Math.PI:0;let d=Math.atan2(Math.sin(f.a-h),Math.cos(f.a-h));if(Math.abs(d)>.45)f.a-=Math.sign(d)*.002*dt;
   // soft vertical bounds

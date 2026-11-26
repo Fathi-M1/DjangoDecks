@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v8 (26 Nov 2026, 9:31 PM Asia/Singapore)
+
+Try an illustrated ocean scene (later reverted).
+
+Adds an illustrated ocean backdrop (coral, kelp, jellyfish, turtle) via scene.py, with a frosted glass panel over the content for contrast. This look was later dropped in favour of the v7 swimming-fish design.
+
 ## v7 (26 Nov 2026, 8:52 PM Asia/Singapore)
 
 Add swimming fish in the background and put group identity and members on the cover.

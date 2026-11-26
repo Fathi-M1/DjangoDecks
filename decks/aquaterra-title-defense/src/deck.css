@@ -267,7 +267,7 @@ svg text{font-family:IN}
 .pair .po span{background:var(--sea)}
 .pair i{width:60px;flex:none;display:flex;align-items:center;justify-content:center;font:700 30px IN;color:var(--mute);font-style:normal}
 .pair.sel .pq{border-color:var(--coral);box-shadow:0 10px 26px rgba(217,130,43,.18)}.pair.sel .po{border-color:var(--sea);box-shadow:0 10px 26px rgba(14,143,134,.18)}.pair.sel i{color:var(--coral)}
-.pair.on.dim{opacity:.55}
+.pair.on.dim{opacity:.8}
 /* algorithm slides */
 .f2 .stg.past{opacity:.85;filter:none}
 .card2{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:18px 22px;box-shadow:0 10px 30px rgba(5,52,74,.08)}
@@ -340,3 +340,39 @@ body.nomo #amb .ray,body.nomo #amb .bub{display:none}
 @media (prefers-reduced-motion:reduce){#amb *,.slide *{animation:none!important;transition-duration:.01s!important}#amb .bub,#amb .ray{display:none}}
 
 #amb #fish{left:0;top:0;width:1920px;height:1080px}
+
+/* ===== v8: illustrated deep-ocean scene + frosted reading sheet ===== */
+:root{--sea:#05707e;--coral:#c4461f;--mute:#3f5a68;--ink2:#2a4555}
+#stage{background:linear-gradient(180deg,#1a8fd0 0%,#0d5fa6 22%,#08407f 55%,#062c63 80%,#04204d 100%)!important}
+#amb .glow{inset:0;background:radial-gradient(ellipse 55% 32% at 50% -6%,rgba(190,240,255,.75),rgba(120,210,255,.18) 55%,transparent 75%)}
+#amb .surf{left:0;right:0;top:0;height:22px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 60px,rgba(255,255,255,.08) 60px 140px);filter:blur(3px);animation:surf 18s linear infinite}
+@keyframes surf{to{background-position:280px 0}}
+#amb .ray{top:-160px;height:1300px;background:linear-gradient(180deg,rgba(220,250,255,.6),rgba(220,250,255,0) 75%);filter:blur(14px);opacity:.4;mix-blend-mode:screen}
+#amb .ray:nth-child(n){left:auto}
+#amb .caus{opacity:.18}
+#amb .floor,#amb .reef{left:0;top:0}
+#amb .kelp{transform-box:fill-box;transform-origin:50% 100%;animation:sway 7s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+#amb .anem{transform-box:fill-box;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite alternate}
+#amb .jel{animation:jel 11s ease-in-out infinite alternate}
+@keyframes jel{from{transform:translateY(-30px)}to{transform:translateY(40px)}}
+#amb #turtle{left:0;top:0;transform:translate(-320px,1006px);animation:turtle 80s linear infinite}
+#amb #turtle .tw{transform:translate(0,0);animation:tbob 6s ease-in-out infinite alternate}
+#amb #turtle svg,#amb #turtle{overflow:visible}
+@keyframes turtle{0%{transform:translate(-320px,1010px)}60%{transform:translate(2260px,985px)}100%{transform:translate(2260px,985px)}}
+@keyframes tbob{to{transform:translateY(-12px) rotate(-2deg)}}
+#amb .fl{transform-box:fill-box;transform-origin:90% 50%;animation:flap 2.6s ease-in-out infinite alternate}
+#amb .fl2{animation-delay:-1.3s}
+@keyframes flap{from{transform:rotate(-14deg)}to{transform:rotate(12deg)}}
+#amb .bub{border-color:rgba(220,250,255,.5);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(255,255,255,.12) 60%)}
+#amb .wave{display:none}
+/* reading sheet: frosted light glass behind every slide's content */
+.slide::before{content:"";position:absolute;left:70px;top:26px;right:70px;bottom:92px;z-index:-1;border-radius:30px;background:rgba(244,250,253,.9);-webkit-backdrop-filter:blur(6px) saturate(1.1);backdrop-filter:blur(6px) saturate(1.1);border:1.5px solid rgba(255,255,255,.75);box-shadow:0 24px 70px rgba(2,20,50,.45),inset 0 1px 0 rgba(255,255,255,.9)}
+#s-hook [data-s="3"]>.abs:nth-child(-n+2){display:none}
+body.nomo #amb #turtle{transform:translate(-400px,1010px)}
+:root{--sea:#04606c;--coral:#b43c19;--mute:#36505d;--ink2:#243e4d}
+.slide::before{background:rgba(244,250,253,.94)}
+.f2 .stg.past{opacity:.95}
+.pair.on.dim{opacity:.9}
+@keyframes turtle{0%{transform:translate(-200px,972px)}60%{transform:translate(2100px,958px)}100%{transform:translate(2100px,958px)}}
+#amb #turtle{transform:translate(-200px,972px)}
