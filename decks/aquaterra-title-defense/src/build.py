@@ -12,7 +12,7 @@ def _lab(m):
     if m.group(1).startswith('B'):return m.group(0)
     _n[0]+=1;return 'data-label="%02d"'%_n[0]
 html=re.sub(r'data-label="([^"]+)"',_lab,html)
-for k in['hero','mangrove','bangka','reef','deep']:html=html.replace('{{IMG:%s}}'%k,b64(k+'.jpg','image/jpeg'))
+for k in['hero','bangka','reef','deep']:html=html.replace('{{IMG:%s}}'%k,b64(k+'.jpg','image/jpeg'))
 assert '{{' not in html, re.findall(r'\{\{[^}]*\}\}',html)[:3]
 chrome='''<div id="progress"></div>
 <button class="back" id="back" style="display:none">← Back</button>

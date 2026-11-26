@@ -12,7 +12,6 @@ S=[]
 terms=[("municipal","Municipal","<b>Type of fishing operation</b>, not a location: fishing without boats or with boats of <b>3 gross tons or less</b> (PSA classification). Records are grouped by <b>province</b>."),
 ("landings","Landings","Fish caught at sea and <b>brought ashore</b>. We measure the <b>metric tons</b> landed in each province during each quarter."),
 ("quarter","Quarter","<b>Q1</b> Jan–Mar · <b>Q2</b> Apr–Jun · <b>Q3</b> Jul–Sep · <b>Q4</b> Oct–Dec. PSA publishes the records quarterly."),
-("mangrove","Mangrove cover change","Historical increases or decreases in mangrove cover, derived from <b>Landsat satellite imagery</b>. Tested as a <b>predictor</b>; not assumed to cause anything."),
 ("var","Gross landing value at risk","<b>Projected shortfall × matching historical first-sale price</b>. Gross revenue tied to the missing landings, not income, profit or damage.")]
 chips="".join(f'<button class="chip term" data-t="{k}">{n}</button>' for k,n,_ in terms)
 pops="".join(f'<div class="pop" id="pop-{k}" style="left:1080px;top:330px;width:640px"><div class="lab" style="color:var(--sea);margin-bottom:8px">{n}</div>{t}</div>' for k,n,t in terms)
@@ -41,7 +40,7 @@ S.append(f'''<section class="slide" id="s-hook" data-label="00" data-title="Cove
 </section>''')
 # ---------------- 3 BACKGROUND ----------------
 S.append(f'''<section class="slide" id="s-bg" data-label="03" data-title="I · Background" data-sec="0" data-steps="4" data-q="bg" data-r="bg">
-<div class="bgimg" style="background-image:url({{{{IMG:mangrove}}}});bottom:auto;height:470px"></div>
+<div class="bgimg" style="background-image:url({{{{IMG:bangka}}}});bottom:auto;height:470px"></div>
 <div class="full" style="bottom:auto;height:470px;background:linear-gradient(180deg,rgba(2,40,58,.55),rgba(2,40,58,.15))"></div>
 <div class="abs" style="left:430px;top:62px;display:flex;gap:34px;align-items:flex-end;color:#fff">
  <div class="num w">01</div><div><div class="kick" style="color:#e6fff9">I · Background</div>
@@ -77,11 +76,11 @@ S.append(f'''<section class="slide" id="s-bg" data-label="03" data-title="I · B
 </section>''')
 # ---------------- 4 OBJECTIVES ----------------
 RQ=["What historical seasonal benchmarks identify landing shortfalls by province and fish category?",
-"Which predictors are useful for GAMM forecasting, and do mangrove history and prior typhoon exposure improve accuracy?",
+"Which predictors are useful for GAMM forecasting, and do prior typhoon exposure, rainfall and SST improve accuracy?",
 "What gross landing value is associated with projected shortfalls, using historical first-sale reference prices?",
 "How reliably are economically significant shortfalls identified on unseen quarters, and how sensitive are estimates and rankings to alternative prices?"]
 SO=[("Prepare","the dataset and seasonal benchmarks from quarterly landings, environmental information and historical reference prices"),
-("Forecast & evaluate","against a seasonal baseline with MAE, RMSE and MASE, including the added predictive value of mangrove history and prior typhoon exposure"),
+("Forecast & evaluate","against a seasonal baseline with MAE, RMSE and MASE, including the added predictive value of prior typhoon exposure, rainfall and SST"),
 ("Value exposure","calculate shortfalls, estimate gross landing value at risk, and rank province–category combinations"),
 ("Validate & present","shortfall detection and rankings on unseen quarters, alternative price assumptions, planning dashboard"),
 ("Seek collaboration","with DTI or a relevant fisheries agency to review data suitability and practical usefulness")]
@@ -94,18 +93,18 @@ S.append(f'''<section class="slide uw" id="s-obj" data-label="04" data-title="II
 <div class="abs lab" style="left:110px;top:345px">Research questions · click one</div><div class="abs lab" style="left:1060px;top:345px">Specific objectives</div>
 {rqh}<svg class="abs" id="rqlines" style="left:880px;top:372px" width="180" height="540"></svg>{soh}
 {notes("""The general objective is to develop and evaluate AquaTerra: Random Forest for predictor selection and GAMM for next-quarter forecasts, then estimate supply shortfalls and gross landing value at risk.
-We answer four questions [click each]. RQ1: what seasonal benchmarks identify shortfalls. RQ2: which predictors help GAMM, and do mangrove history and prior typhoon exposure improve accuracy. RQ3: what gross landing value goes with projected shortfalls. RQ4: how reliably are significant shortfalls identified on unseen quarters, and how price-sensitive are the rankings.
+We answer four questions [click each]. RQ1: what seasonal benchmarks identify shortfalls. RQ2: which predictors help GAMM, and do prior typhoon exposure, rainfall and sea temperature improve accuracy. RQ3: what gross landing value goes with projected shortfalls. RQ4: how reliably are significant shortfalls identified on unseen quarters, and how price-sensitive are the rankings.
 Five specific objectives: prepare data and benchmarks; implement and evaluate the forecasting workflow; develop the economic exposure module; validate and present through a dashboard; and seek collaboration with DTI or a relevant fisheries agency.""")}
 </section>''')
 # ---------------- 5 SCOPE & LIMITATION ----------------
 SC=[("Study area · marine municipal landings","Palawan, Misamis Occidental, Negros Oriental, Tawi-Tawi, Zamboanga del Norte, Davao de Oro × five fish categories; final coverage depends on complete, compatible records"),
-("Public secondary data","PSA OpenSTAT · Landsat satellite imagery (mangrove cover) · NASA IMERG · NOAA OISST · NOAA IBTrACS"),
-("RF → GAMM forecasts","next quarter; tests mangrove history and prior typhoon exposure beyond landings, seasonality, rainfall, SST"),
+("Public secondary data","PSA OpenSTAT · NASA IMERG · NOAA OISST · NOAA IBTrACS"),
+("RF → GAMM forecasts","next quarter; tests prior typhoon exposure, rainfall and SST beyond past landings and seasonality"),
 ("Shortfalls & exposure","vs historical seasonal benchmarks × historical reference prices → exposure rankings"),
 ("Evaluation & dashboard","later quarters held out · web dashboard · consultation sought with DTI or a fisheries agency")]
-LM=[("Selected coverage","Excludes commercial fisheries, aquaculture and inland municipal fisheries. No field catch monitoring, mangrove surveys or sensors."),
+LM=[("Selected coverage","Excludes commercial fisheries, aquaculture and inland municipal fisheries. No field catch monitoring, habitat surveys or sensors."),
 ("Next quarter only","Data gaps, publication delays and inconsistent records may affect coverage and accuracy. Fishing effort, fuel costs and policy changes are not modeled where records are unavailable."),
-("No causal claims","We test whether mangrove history and typhoon exposure help predict landings. That does not establish that they cause shortfalls."),
+("No causal claims","We test whether typhoon exposure, rainfall and SST help predict landings. That does not establish that they cause shortfalls."),
 ("Gross value only","Historical reference prices. No future price prediction, household income loss, business profit or disaster damage. Unit-value proxies may reflect catch composition and quality."),
 ("Research prototype","No guaranteed real-time updates or deployment. Consultation depends on agency availability; adoption is not guaranteed.")]
 sch="".join(f'<div class="li"><i>✓</i><div><b>{a}</b><span>{b}</span></div></div>' for a,b in SC)
@@ -115,8 +114,8 @@ S.append(f'''<section class="slide" id="s-scope" data-label="05" data-title="III
 <div class="abs" id="sl-tog" style="right:110px;top:120px;display:flex;gap:8px"><button class="chip" data-v="scope">Scope</button><button class="chip cor" data-v="lim">Limitation</button><button class="chip on" data-v="both">Both</button></div>
 <div class="abs glass colA" data-s="1" style="left:110px;top:290px;width:830px;height:640px;padding:26px 30px"><div class="lab" style="color:var(--sea)">Scope</div>{sch}</div>
 <div class="abs glass colB rv" data-s="2" style="left:980px;top:290px;width:830px;height:640px;padding:26px 30px"><div class="lab" style="color:var(--coral)">Limitation · click an item to focus</div>{lmh}</div>
-{notes("""Scope: forecasting marine municipal fish landings and assessing economic exposure in six Philippine coastal provinces (Palawan, Misamis Occidental, Negros Oriental, Tawi-Tawi, Zamboanga del Norte and Davao de Oro), using publicly accessible secondary data: PSA OpenSTAT, Landsat satellite imagery for mangrove cover, NASA IMERG, NOAA OISST and NOAA IBTrACS. Random Forest for predictor selection, then GAMM for next-quarter forecasts; compare with seasonal benchmarks, value shortfalls with historical reference prices, evaluate on later quarters, show results on a web dashboard, and seek consultation with DTI or a relevant fisheries agency.
-[→] Limitations: selected provinces and marine municipal categories only; no commercial, aquaculture or inland; no field monitoring. Next quarter only; gaps and delays may affect accuracy. We will not establish causal effects of mangrove change or typhoons. Gross landing value at risk uses historical prices, not income, profit or damage. The dashboard is a research prototype and adoption is not guaranteed.""")}
+{notes("""Scope: forecasting marine municipal fish landings and assessing economic exposure in six Philippine coastal provinces (Palawan, Misamis Occidental, Negros Oriental, Tawi-Tawi, Zamboanga del Norte and Davao de Oro), using publicly accessible secondary data: PSA OpenSTAT, NASA IMERG, NOAA OISST and NOAA IBTrACS. Random Forest for predictor selection, then GAMM for next-quarter forecasts; compare with seasonal benchmarks, value shortfalls with historical reference prices, evaluate on later quarters, show results on a web dashboard, and seek consultation with DTI or a relevant fisheries agency.
+[→] Limitations: selected provinces and marine municipal categories only; no commercial, aquaculture or inland; no field monitoring. Next quarter only; gaps and delays may affect accuracy. We will not establish causal effects of typhoons, rainfall or sea temperature. Gross landing value at risk uses historical prices, not income, profit or damage. The dashboard is a research prototype and adoption is not guaranteed.""")}
 </section>''')
 # ---------------- 6–7 DATA-FLOW PIPELINE (two slides) ----------------
 from flow import FLOW
@@ -190,16 +189,16 @@ S.append(f'''<section class="slide uw" id="s-eval" data-label="09" data-title="I
 # ---------------- 10 WITH vs WITHOUT ----------------
 S.append(f'''<section class="slide uw" id="s-contrib" data-label="10" data-title="IV.4 · Predictive contribution" data-sec="3" data-steps="2" data-q="algo">
 <div class="rays" style="opacity:.5"></div>
-{demohd("Contribution test","Do mangrove history and typhoons <em>improve the forecast?</em>")}
+{demohd("Contribution test","Do typhoons, rainfall and SST <em>improve the forecast?</em>")}
 <div class="abs card" style="left:110px;top:270px;width:520px;height:630px;padding:24px 28px">
  <div class="lab" style="color:var(--sea)">Two models, same test quarters</div>
- <div class="mbox" id="c-A"><b>Model A</b><span>past landings · seasonality · rainfall · SST</span></div>
- <div class="mbox" id="c-B"><b>Model B</b><span>Model A <b style="color:var(--coral)">+ mangrove history + prior typhoon exposure</b></span></div>
+ <div class="mbox" id="c-A"><b>Model A</b><span>past landings · seasonality</span></div>
+ <div class="mbox" id="c-B"><b>Model B</b><span>Model A <b style="color:var(--coral)">+ prior typhoon exposure + rainfall + SST</b></span></div>
  <div class="lab" style="margin-top:20px">Show</div>
  <div style="display:flex;gap:10px;margin-top:8px"><button class="chip" data-m="A">Without</button><button class="chip" data-m="B">With</button><button class="chip on" data-m="AB">Both</button></div>
  <div class="lab" style="margin-top:18px">Possible result</div>
  <div style="display:flex;gap:10px;margin-top:8px"><button class="chip on" data-r="help">They help</button><button class="chip" data-r="none">No improvement</button></div>
- <div class="pnote" style="margin-top:18px;display:flex">Predictive, not causal: better accuracy ≠ mangroves cause landings</div>
+ <div class="pnote" style="margin-top:18px;display:flex">Predictive, not causal: better accuracy ≠ weather causes landings</div>
 </div>
 <div class="abs card" style="left:660px;top:270px;width:1150px;height:630px;padding:20px 24px">
  <div style="display:flex;justify-content:space-between;align-items:center"><div class="lab">Test quarters · forecasts vs observed</div><span class="ill">ILLUSTRATIVE</span></div>
@@ -207,7 +206,7 @@ S.append(f'''<section class="slide uw" id="s-contrib" data-label="10" data-title
  <div id="c-bars" style="display:flex;gap:26px;margin-top:10px"></div>
  <div id="c-verdict" style="font:600 22px/1.35 PF;color:var(--ink);margin-top:12px"></div>
 </div>
-{notes("""To test predictive contribution we fit two models evaluated on the same unseen later quarters. [→] Model A uses past landings, seasonality, rainfall and SST. [→] Model B adds mangrove history and prior typhoon exposure. If Model B has lower MAE, RMSE and MASE, those predictors add predictive value. If not, we report that. Either way, better accuracy means predictive usefulness only. It does not prove mangroves or typhoons cause changes in landings. Values are illustrative.""")}
+{notes("""To test predictive contribution we fit two models evaluated on the same unseen later quarters. [→] Model A uses past landings and seasonality only. [→] Model B adds prior typhoon exposure, rainfall and sea surface temperature. If Model B has lower MAE, RMSE and MASE, those predictors add predictive value. If not, we report that. This answers our gap: few studies check whether typhoons, rainfall and sea temperature improve a provincial forecast. Either way, better accuracy means predictive usefulness only. It does not prove typhoons or weather cause changes in landings. Values are illustrative.""")}
 </section>''')
 # ---------------- 11 VALUE AT RISK BUILDER ----------------
 S.append(f'''<section class="slide uw" id="s-var" data-label="11" data-title="IV.5 · Value at risk builder" data-sec="3" data-steps="3" data-q="value">
@@ -279,33 +278,31 @@ S.append(f'''<section class="slide backup" id="b-cause" data-label="B2" data-tit
  <div class="lab" style="color:var(--sea)">1 · The test we run</div>
  <div style="display:flex;align-items:center;gap:22px;margin-top:16px">
   <div class="mb2"><b>Model A</b><span>past landings + seasonality</span></div><div class="vs">vs</div>
-  <div class="mb2 co"><b>Model B</b><span>Model A + mangrove history + prior typhoon exposure</span></div>
+  <div class="mb2 co"><b>Model B</b><span>Model A + prior typhoon exposure + rainfall + SST</span></div>
   <div class="vs">→</div><div class="mb2"><b>Unseen later quarters</b><span>compare MAE, RMSE, MASE</span></div>
   <div class="vs">→</div><div class="mb2 ok"><b>Better accuracy?</b><span>= predictive usefulness only</span></div></div>
 </div>
 <div class="abs card rv" data-s="1" style="left:110px;top:560px;width:830px;height:330px;padding:24px 30px">
  <div class="lab" style="color:var(--coral)">2 · Why accuracy is not proof of cause</div>
- <p class="body" style="margin-top:12px">Other factors can move <b>together with mangrove loss</b> and also change recorded landings:</p>
+ <p class="body" style="margin-top:12px">Other factors can move <b>together with typhoons and weather</b> and also change recorded landings:</p>
  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px"><span class="chip">Fishing effort</span><span class="chip">Fuel prices</span><span class="chip">Regulations</span><span class="chip">Reporting changes</span></div>
  <p class="body" style="margin-top:14px">Proving cause would need <b>controlled or field studies</b>, which are outside our scope.</p>
 </div>
 <div class="abs card rv" data-s="2" style="left:980px;top:560px;width:830px;height:330px;padding:24px 30px">
  <div class="lab" style="color:var(--sea)">3 · How we will word results</div>
- <div class="say ok rv" data-s="2">✓ "Mangrove history <b>improves forecast accuracy</b> for these provinces and quarters."</div>
- <div class="say no rv" data-s="3">✕ "Mangrove loss <b>causes</b> lower landings."</div>
- <p class="small" style="margin-top:14px">Same rule for typhoon exposure, and for any predictor Random Forest ranks as important.</p>
+ <div class="say ok rv" data-s="2">✓ "Typhoon exposure <b>improves forecast accuracy</b> for these provinces and quarters."</div>
+ <div class="say no rv" data-s="3">✕ "Typhoons <b>cause</b> lower landings."</div>
+ <p class="small" style="margin-top:14px">Same rule for rainfall and SST, and for any predictor Random Forest ranks as important.</p>
 </div>
-{notes("""We test whether environmental information improves forecast accuracy. We compare a model with only past landings and seasonality against one with mangrove history and typhoon exposure added, both evaluated on unseen later quarters.
-[→] Better accuracy means predictive usefulness only. Fishing effort, fuel prices, regulations and reporting changes can move together with mangrove loss and also affect landings. Proving cause would need controlled or field studies, which are outside our scope.
+{notes("""We test whether environmental information improves forecast accuracy. We compare a model with only past landings and seasonality against one with typhoon exposure, rainfall and sea temperature added, both evaluated on unseen later quarters. The gap: Typhoons, rainfall and sea temperature are often linked to lower catch, but few studies check whether they improve a provincial forecast. We test that, and report it if they don't help. That is prediction, not cause.
+[→] Better accuracy means predictive usefulness only. Fishing effort, fuel prices, regulations and reporting changes can move together with typhoons and weather and also affect landings. Proving cause would need controlled or field studies, which are outside our scope.
 [→] So our results will say 'improves forecast accuracy', [→] never 'causes'.""")}
 </section>''')
 # ---------------- B3 REFERENCES ----------------
 APA=[
 "Benavides, I. F., Santacruz, M., Romero-Leiton, J. P., Barreto, C., &amp; Selvaraj, J. J. (2023). Assessing methods for multiple imputation of systematic missing data in marine fisheries time series with a new validation algorithm. <i>Aquaculture and Fisheries</i>. https://doi.org/10.1016/j.aaf.2021.12.013",
 "Bokingkito, P., Jaroensutasinee, K., &amp; Jaroensutasinee, M. (2026). Explainable AI-driven machine learning for forecasting marine fisheries production using environmental predictors. <i>Machine Learning and Knowledge Extraction, 8</i>(7), Article 197. https://doi.org/10.3390/make8070197",
-"Crawford, C. J., Roy, D. P., Arab, S., Barnes, C., Vermote, E., Hulley, G., Gerace, A., Choate, M., Engebretson, C., Micijevic, E., Schmidt, G., Anderson, C., Anderson, M., Bouchard, M., Cook, B., Dittmeier, R., Howard, D., Jenkerson, C., Kim, M., . . . Zahn, S. (2023). The 50-year Landsat collection 2 archive. <i>Science of Remote Sensing, 8</i>, Article 100103. https://doi.org/10.1016/j.srs.2023.100103",
 "Dumilag, R. V., San Pablo, M. H., Malto, M. A. D., Longavela, M. R., Orgela, E. G., Belgica, T. H. R., Mendoza, L. C., Hibay, J. M., Bailon, J. D., Corral, L. E. H., Calaminos, F. P., Omoto, A. T., Chua, V. L., &amp; Berdin, L. D. (2023). COVID-19 impacts on food security and income of the fisherfolk in Magallanes, Sorsogon, Philippines. <i>NRCP Research Journal, 22</i>(1), 179–201. https://www.ejournals.ph/article.php?id=19903",
-"Earth Resources Observation and Science (EROS) Center. (2020). <i>Landsat 8-9 Operational Land Imager / Thermal Infrared Sensor Level-2, Collection 2</i> [Data set]. U.S. Geological Survey. https://doi.org/10.5066/P9OGBGM6",
 "Food and Agriculture Organization of the United Nations. (2024). <i>The state of world fisheries and aquaculture 2024: Blue transformation in action</i>. FAO. https://doi.org/10.4060/cd0683en",
 "Hewamalage, H., Ackermann, K., &amp; Bergmeir, C. (2023). Forecast evaluation for data scientists: Common pitfalls and best practices. <i>Data Mining and Knowledge Discovery, 37</i>(2), 788–832. https://doi.org/10.1007/s10618-022-00894-5",
 "Holmes, E. E., BR, S., Nimit, K., Maity, S., Checkley, D. M., Jr., Wells, M. L., &amp; Trainer, V. L. (2021). Improving landings forecasts using environmental covariates: A case study on the Indian oil sardine (<i>Sardinella longiceps</i>). <i>Fisheries Oceanography, 30</i>(6), 623–642. https://doi.org/10.1111/fog.12541",

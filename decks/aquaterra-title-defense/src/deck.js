@@ -114,7 +114,7 @@ $$('.fplay').forEach(b=>b.onclick=()=>{if(fPlay){fStop();return}const sl=slides[
 $$('.flow .stg').forEach(g=>g.addEventListener('click',e=>{if(e.target.closest('[data-go]'))return;const sl=g.closest('.slide');if(slides[cur]!==sl)return;setStep(+g.dataset.st-FL[sl.id])}));
 for(const id in FL)ctrl[id]={enter:fStart,step(s){flowStep(id,s)},leave:fStopRaf};
 // RF demo
-const PRED=[["Landings, lag 4 (same quarter last year)",.92,0],["Quarter of the year (season)",.78,0],["Landings, lag 1",.61,0],["Mangrove history",.44,1],["Sea surface temperature",.38,1],["Prior typhoon exposure",.27,1],["Rainfall",.16,1]];
+const PRED=[["Landings, lag 4 (same quarter last year)",.92,0],["Quarter of the year (season)",.78,0],["Landings, lag 1",.61,0],["Sea surface temperature",.38,1],["Prior typhoon exposure",.27,1],["Rainfall",.16,1]];
 let rfImp=PRED.map(p=>p[1]),rfSeed=7,rfRanked=false;
 const rfBars=$('#rf-bars');rfBars.innerHTML=PRED.map((p,k)=>`<div class="bar${p[2]?' env':''}" data-k="${k}"><div class="bn">${p[0]}</div><div class="bt"><div class="bf"></div></div><div class="bv"></div></div>`).join('');
 const ALPHA=[3,1,6,2,5,0,4];// pre-rank display order (scrambled)
@@ -210,7 +210,7 @@ function cDraw(){$$('#s-contrib [data-m]').forEach(c=>c.classList.toggle('on',c.
  const names=['MAE (mt)','RMSE (mt)','MASE'];$('#c-bars').innerHTML=names.map((n,k)=>{const mx=Math.max(ma[k],mbb[k])*1.15;return `<div style="flex:1"><div class="lab">${n}</div>
  <div class="mt" style="margin:6px 0 0"><div class="mr">A<div class="t"><div class="f" style="width:${step>=1?ma[k]/mx*100:0}%;background:#3c5a6b"></div></div><b>${step>=1?fmt(ma[k],k==2?2:1):'–'}</b></div>
  <div class="mr">B<div class="t"><div class="f" style="width:${step>=2?mbb[k]/mx*100:0}%;background:var(--coral)"></div></div><b>${step>=2?fmt(mbb[k],k==2?2:1):'–'}</b></div></div></div>`}).join('');
- $('#c-verdict').innerHTML=step<2?'Press → to add Model B.':cRes==='help'?'Model B is more accurate on unseen quarters → mangrove history and typhoon exposure <span style="color:var(--sea)">add predictive value</span>. That does not show they <i>cause</i> landings to change.':'No improvement → we report that these predictors <span style="color:var(--coral)">did not add predictive value</span> for these provinces and quarters.'}
+ $('#c-verdict').innerHTML=step<2?'Press → to add Model B.':cRes==='help'?'Model B is more accurate on unseen quarters → typhoon exposure, rainfall and SST <span style="color:var(--sea)">add predictive value</span>. That does not show they <i>cause</i> landings to change.':'No improvement → we report that these predictors <span style="color:var(--coral)">did not add predictive value</span> for these provinces and quarters.'}
 $$('#s-contrib [data-m]').forEach(c=>c.onclick=()=>{cM=c.dataset.m;if(step<2)setStep(2);else cDraw()});
 $$('#s-contrib [data-r]').forEach(c=>c.onclick=()=>{cRes=c.dataset.r;if(step<2)setStep(2);else cDraw()});
 ctrl['s-contrib']={step(){cDraw()}};

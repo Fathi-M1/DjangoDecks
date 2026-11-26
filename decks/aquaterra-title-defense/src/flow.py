@@ -11,32 +11,30 @@ def T(x,y,s,size=13,fill="#3c5a6b",w=500,anchor="start",cls="",d=None,extra=""):
 ILL='<span class="ill" style="position:absolute;right:16px;top:14px;font-size:11px;padding:4px 7px">ILLUSTRATIVE</span>'
 # ================= SLIDE A =================
 SRC=[("#0e8f86","PSA OpenSTAT","Landings and value by province × species × quarter","Palawan · snapper · 2025 Q4 → 1,220.96 mt","psa"),
-("#1f9d6b","Landsat satellite imagery","Mangrove cover derived from 30 m imagery, by year","e.g. Province A, 2020 → 12,950 ha","gmw"),
 ("#2f7fd6","NASA IMERG","Rainfall from satellites","e.g. → 610 mm in the quarter","rain"),
 ("#d9822b","NOAA OISST","Sea surface temperature","e.g. → 27.9 °C quarterly mean","sst"),
 ("#8a5bd6","NOAA IBTrACS","Typhoon tracks","e.g. → 2 typhoons passed near, prior quarter","typh")]
 ICON={"psa":'<rect x="8" y="26" width="7" height="12" rx="1.5"/><rect x="19" y="18" width="7" height="20" rx="1.5"/><rect x="30" y="10" width="7" height="28" rx="1.5"/>',
-"gmw":'<path d="M23 8 C12 10 9 20 14 26 C18 30 28 30 32 26 C37 20 34 10 23 8Z"/><path d="M23 26 V38 M23 32 L16 40 M23 32 L30 40" stroke="currentColor" stroke-width="2.5" fill="none"/>',
 "rain":'<path d="M12 22 C10 14 18 9 24 12 C27 6 37 8 37 16 C42 17 42 24 36 24 H14 C10 24 10 22 12 22Z"/><path d="M15 30 l-2 6 M23 30 l-2 6 M31 30 l-2 6" stroke="currentColor" stroke-width="2.5"/>',
 "sst":'<path d="M19 8 a4 4 0 0 1 8 0 v18 a8 8 0 1 1 -8 0Z"/><path d="M6 40 q5 -4 10 0 t10 0 t10 0" stroke="currentColor" stroke-width="2.5" fill="none"/>',
 "typh":'<path d="M23 23 m-4 0 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0 M23 9 C33 9 38 15 37 21 M23 37 C13 37 8 31 9 25 M9 25 C9 17 15 13 21 13 M37 21 C37 29 31 33 25 33" stroke="currentColor" stroke-width="3" fill="none"/>'}
 srch=""
 for i,(c,n,w,sm,ic) in enumerate(SRC):
     srch+=f'<div class="src" style="--c:{c}"><svg width="46" height="46" viewBox="0 0 46 46" style="color:{c};fill:{c};flex:none">{ICON[ic]}</svg><div><b>{n}</b><small>{w}</small><code>{sm}</code></div></div>'
-COLS=[("Province × fish","#a9bfc6",150),("Year","#a9bfc6",56),("Season","#a9bfc6",58),("Landings (mt)","#0e8f86",84),("Lag-4 landings","#0e8f86",80),
-("Rain (mm)","#2f7fd6",66),("SST (°C)","#d9822b",58),("Mangrove (ha)","#1f9d6b",90),("Typhoons prior Q","#8a5bd6",90),("Price (₱/kg)","#0e8f86",78)]
-E=["⋮"]*10
-ROWS=[("train",["A · Cat 1","2002","Q1","412.0","—","610","27.9","12,950","0","168"]),
-("train",["B · Cat 2","2002","Q1","96.4","—","540","28.1","3,120","1","241"]),
+COLS=[("Province × fish","#a9bfc6",170),("Year","#a9bfc6",66),("Season","#a9bfc6",68),("Landings (mt)","#0e8f86",94),("Lag-4 landings","#0e8f86",90),
+("Rain (mm)","#2f7fd6",76),("SST (°C)","#d9822b",68),("Typhoons prior Q","#8a5bd6",90),("Price (₱/kg)","#0e8f86",78)]
+E=["⋮"]*9
+ROWS=[("train",["A · Cat 1","2002","Q1","412.0","—","610","27.9","0","168"]),
+("train",["B · Cat 2","2002","Q1","96.4","—","540","28.1","1","241"]),
 ("train",E),
-("train",["A · Cat 1","2019","Q4","535.2","498.7","980","28.6","12,410","2","176"]),
-("train",["B · Cat 2","2019","Q4","118.9","121.3","1,020","28.8","3,050","2","255"]),
-("tune",["A · Cat 1","2020","Q1","401.3","452.6","400","28.0","12,390","0","178"]),
+("train",["A · Cat 1","2019","Q4","535.2","498.7","980","28.6","2","176"]),
+("train",["B · Cat 2","2019","Q4","118.9","121.3","1,020","28.8","2","255"]),
+("tune",["A · Cat 1","2020","Q1","401.3","452.6","400","28.0","0","178"]),
 ("tune",E),
-("tune",["B · Cat 2","2022","Q4","108.2","115.0","1,110","28.9","2,990","3","262"]),
-("test",["A · Cat 1","2023","Q1","388.5","395.1","560","28.2","12,330","0","180"]),
+("tune",["B · Cat 2","2022","Q4","108.2","115.0","1,110","28.9","3","262"]),
+("test",["A · Cat 1","2023","Q1","388.5","395.1","560","28.2","0","180"]),
 ("test",E),
-("test",["B · Cat 2","2026","Q3","121.7","119.4","890","29.1","2,960","1","270"])]
+("test",["B · Cat 2","2026","Q3","121.7","119.4","890","29.1","1","270"])]
 th="".join(f'<div style="width:{w}px;--c:{c}">{n}</div>' for n,c,w in COLS)
 tr=""
 for r,(g,vals) in enumerate(ROWS):
@@ -49,16 +47,16 @@ BANDS=[("train","Train","earliest quarters, e.g. 2002–2019. The model learns h
 bh="".join(f'<div class="band b-{k}" style="top:{t}px;height:{h}px"><b>{n}</b><span>{x}</span></div>' for k,n,x,t,h in BANDS)
 # connector paths: card right edge -> table left edge
 pa=""
-for i in range(5):
+for i in range(4):
     y0=250+78+50+i*110; y1=250+78+56+30+i*82
     pa+=f'<path class="fpath" data-to="2" data-c="{SRC[i][0]}" d="M540,{y0} C590,{y0} 590,{y1} 640,{y1}"/>'
 for k,t,h in [(0,134,200),(1,350,120),(2,486,120)]:
     y=250+t+h/2;pa+=f'<path class="fpath" data-to="3" data-c="{["#0e8f86","#6f8b99","#d9822b"][k]}" d="M1474,{y} H1508"/>'
 A=f'''<section class="slide uw flow" id="s-flowA" data-label="06" data-title="IV · Data flow 1/2 · Inputs → Split" data-sec="3" data-steps="2" data-q="algo">
 <div class="rays" style="opacity:.55"></div>
-{hd("04","IV · Algorithm Justification · data flow 1 of 2","Five sources become one <em>quarterly table</em>.")}
+{hd("04","IV · Algorithm Justification · data flow 1 of 2","Four sources become one <em>quarterly table</em>.")}
 <button class="abs btn fplay" style="right:110px;top:118px">▶ Play the flow</button>
-<div class="abs stg" id="fa-st1" data-st="1" style="left:110px;top:250px;width:430px;height:650px">{sh(1,"Inputs","Five public sources. Each adds one piece.")}<div style="margin-top:16px">{srch}</div></div>
+<div class="abs stg" id="fa-st1" data-st="1" style="left:110px;top:250px;width:430px;height:650px">{sh(1,"Inputs","Four public sources. Each adds one piece.")}<div style="margin-top:16px">{srch}</div></div>
 <div class="abs stg" id="fa-st2" data-st="2" style="left:640px;top:250px;width:830px;height:690px">{sh(2,"Align","Matched into one table: one row = province × fish category × quarter.")}
  <span class="ill" style="position:absolute;right:0;top:0;font-size:11px;padding:4px 7px">ILLUSTRATIVE VALUES</span>
  <div id="fa-tab"><div class="fth">{th}</div>{tr}</div>
@@ -67,8 +65,8 @@ A=f'''<section class="slide uw flow" id="s-flowA" data-label="06" data-title="IV
  <div style="position:absolute;left:0;top:626px"><button class="try" data-go="s-eval">Try the split slider · IV.3 →</button></div></div>
 <svg class="abs flowsvg" width="1920" height="1080" style="left:0;top:0">{pa}<g class="parts"></g></svg>
 {notes("""Here is the whole pipeline, from raw data to pesos, in two slides.
-[Stage 1] We start with five public sources. PSA OpenSTAT gives quarterly landings, and the value records we use for prices, for each province and fish category. For example, Palawan snapper in the fourth quarter of 2025 was about 1,221 metric tons. Landsat satellite imagery gives mangrove cover: we derive the mangrove area for each province and year from the images. NASA IMERG gives rainfall. NOAA OISST gives sea surface temperature. NOAA IBTrACS gives typhoon tracks.
-[→ Stage 2] We line everything up into one table. Each row is one province, one fish category, one quarter. The columns are that quarter's landings, landings in the same quarter last year, the season, rainfall, sea temperature, mangrove area, recent typhoons, and the price. Price is only carried along for the money step at the end; it is never used to predict landings.
+[Stage 1] We start with four public sources. PSA OpenSTAT gives quarterly landings, and the value records we use for prices, for each province and fish category. For example, Palawan snapper in the fourth quarter of 2025 was about 1,221 metric tons. NASA IMERG gives rainfall. NOAA OISST gives sea surface temperature. NOAA IBTrACS gives typhoon tracks.
+[→ Stage 2] We line everything up into one table. Each row is one province, one fish category, one quarter. The columns are that quarter's landings, landings in the same quarter last year, the season, rainfall, sea temperature, recent typhoons, and the price. Price is only carried along for the money step at the end; it is never used to predict landings.
 [→ Stage 3] Then we split the rows by time, not at random. The earliest quarters train the model, the next quarters tune it, and the latest quarters are locked away as the test. The model never sees them until the final check. The years shown are an example.""")}
 </section>'''
 # ================= SLIDE B =================
@@ -78,14 +76,14 @@ def panel(n,lab,line,svg,links):
     return f'<div class="abs stg pnl" data-st="{n}" style="left:{x}px;top:{y}px">{ILL}{sh(n,lab,line)}<svg class="pv" width="464" height="206" viewBox="0 0 464 206">{svg}</svg><div class="lk">{lk}</div></div>'
 # --- 4 RF
 rf=""
-for i in range(5): rf+=f'<rect class="seq" style="--d:{0.1+i*0.06:.2f}s" x="0" y="{34+i*16}" width="56" height="11" rx="3" fill="#c4ebe5"/>'
+for i in range(4): rf+=f'<rect class="seq" style="--d:{0.1+i*0.06:.2f}s" x="0" y="{34+i*16}" width="56" height="11" rx="3" fill="#c4ebe5"/>'
 rf+=T(28,130,"train rows",11,"#6f8b99",600,"middle")
 rf+='<path d="M62,70 H84" stroke="#a9bfc6" stroke-width="2.5"/><path d="M84,65 l7,5 l-7,5Z" fill="#a9bfc6"/>'
 for k,(cx,s) in enumerate([(108,1),(132,1.25),(156,1)]):
     rf+=f'<g class="seq" style="--d:{0.4+k*0.12:.2f}s"><path d="M{cx},{70-28*s} L{cx+14*s},{70} L{cx-14*s},{70}Z" fill="#1f9d6b"/><path d="M{cx},{58-22*s} L{cx+11*s},{82-22*s} L{cx-11*s},{82-22*s}Z" fill="#2fb383"/><rect x="{cx-2}" y="70" width="4" height="12" fill="#6b5a3a"/></g>'
 rf+=T(132,100,"forest",11,"#6f8b99",600,"middle")
 rf+='<path d="M172,70 H190" stroke="#a9bfc6" stroke-width="2.5"/><path d="M190,65 l7,5 l-7,5Z" fill="#a9bfc6"/>'
-IMP=[("lagged landings",.92),("season",.78),("mangrove",.55),("SST",.44),("typhoons",.27),("rainfall",.18)]
+IMP=[("lagged landings",.92),("season",.78),("SST",.48),("rainfall",.36),("typhoons",.24)]
 for i,(n,v) in enumerate(IMP):
     y=14+i*24;top=i<4
     g=f'<g{"" if top else " class=\"fadeo\" style=\"--d:1.7s\""}>'
@@ -106,8 +104,8 @@ g=""
 g+=T(0,12,"seasonal curve · s(season)",11.5,"#0e8f86",700,cls="seq",d=0.2)
 g+=f'<path class="draw" style="--d:.3s" d="{pth(sea,0,190,0,0.42,40)}" stroke="#0e8f86" stroke-width="2.5" fill="none"/>'
 g+=T(95,72,"+",18,"#6f8b99",700,"middle",cls="seq",d=0.9)
-g+=T(0,88,"smooth curves · lagged, mangrove, SST",11.5,"#8a5bd6",700,cls="seq",d=1.0)
-for k,(c,ph) in enumerate([("#8a5bd6",0),("#1f9d6b",1.2),("#d9822b",2.4)]):
+g+=T(0,88,"smooth curves · lagged, rainfall, SST",11.5,"#8a5bd6",700,cls="seq",d=1.0)
+for k,(c,ph) in enumerate([("#8a5bd6",0),("#2f7fd6",1.2),("#d9822b",2.4)]):
     v=[9*math.sin(t/1.7+ph)-0.4*t for t in range(N)]
     g+=f'<path class="draw" style="--d:{1.05+k*0.1:.2f}s" d="{pth(v,0,190,0,0.9,112)}" stroke="{c}" stroke-width="2" fill="none"/>'
 g+=T(95,142,"+",18,"#6f8b99",700,"middle",cls="seq",d=1.6)

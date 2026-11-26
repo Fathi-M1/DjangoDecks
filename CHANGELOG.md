@@ -2,6 +2,12 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## v4 (26 Nov 2026, 5:01 PM Asia/Singapore)
+
+Drop mangrove change from the study and update the related slides.
+
+Mangrove cover is no longer a study predictor. Wording now tests typhoon exposure, rainfall and sea surface temperature as forecast inputs, and mangrove imagery is removed from the slides.
+
 ## v3 (26 Nov 2026, 3:22 PM Asia/Singapore)
 
 Enlarge the spotlight panel, use the notched slide path, and bump fonts.
