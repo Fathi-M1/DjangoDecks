@@ -2,6 +2,22 @@
 
 AquaTerra title-defense deck, recorded in order. Dates are Asia/Singapore (UTC+8).
 
+## Reese edit (27 Nov 2026, 1:00 AM Asia/Singapore)
+
+Edits by Reese Lauren C. Chan, made on the built `index.html` (on top of v10). **`src/` was not updated** and still builds the v10 wording. If you need to rebuild from source, port these changes back into `src/` first.
+
+What changed in the built deck:
+
+- Cover title now ends with “in MIMAROPA” instead of “in Selected Philippine Coastal Provinces”.
+- Area of Investigation: Inputs add mangrove change (USGS Landsat Collection 2, 2023); Process spells out “Generalized Additive Mixed Model (GAMM)”.
+- New sentence defining municipal fisheries: municipal waters up to 15 km from shore, no boat or a boat of 3 gross tons or less.
+- Background adds a MIMAROPA-specific figure, kept separate from the national 45M kg/year loss: marine municipal production was 31,073.75 MT in Q3 2025, down 9.2% year on year (PSA RSSO MIMAROPA, 2025).
+- Research Gaps: existing forecasts are described as regional across the Philippines; AquaTerra will work at the province × fish-category level within MIMAROPA.
+- SO 2 now measures predictor contribution using reductions in MAE, with vs without those predictors on held-out quarters.
+- Scope public-data list adds Global Mangrove Watch; the Limitations heading no longer says “click to focus”.
+- Section labels: slide 06 kicker becomes “VI · Datasets”; slide 07 becomes “VII · Algorithms” (GAMM spelled out in the workflow card); Potential Clients becomes “VIII”.
+- References add U.S. Geological Survey (2023), Landsat Collection 2.
+
 ## v10 (26 Nov 2026, 9:41 PM Asia/Singapore)
 
 Restore the v7 swimming-fish design and keep the v9 content and structure.
