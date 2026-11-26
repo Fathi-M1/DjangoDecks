@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Local / OS
+.DS_Store
+Thumbs.db
+*.log
+.cache/
+
+# Node / Vercel
+node_modules/
+.vercel
+
+# Secrets (none should be committed)
+.env
+.env.*
+
+# Local build artifact (tracked file is index.html)
+AquaTerra_Title_Defense.html
+
+# Heavy local screenshots; not part of the deck
+shots/
