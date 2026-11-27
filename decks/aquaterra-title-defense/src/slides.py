@@ -92,7 +92,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <path id="oc-line" d="M40,34 L520,90" stroke="var(--coral)" stroke-width="5" fill="none" stroke-dasharray="12 9"/>
  <circle cx="40" cy="34" r="9" fill="var(--sea)"/><circle cx="520" cy="90" r="9" fill="var(--coral)"/>
  <text x="30" y="20" font-size="22" font-weight="700" fill="#0b2a3c">2010 · 2.6M t</text><text x="530" y="118" font-size="22" font-weight="700" fill="#0b2a3c" text-anchor="end">2023 · 1.9M t</text></svg>
- <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> marine municipal production was <b>31,073.75 MT</b> in Q3 2025, down <b>9.2% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2025)</div>
+ <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> marine municipal production was <b>31,073.75 MT</b> in Q3 2025, down <b>40.2% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2025)</div>
 </div>
 <div class="abs rv bgc" data-s="3" style="left:1300px;top:470px;width:510px">
  <div class="lab" style="color:var(--sea)">3 · Forecasting so far</div>
@@ -103,7 +103,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <span class="lab" style="color:var(--aqua)">The question&nbsp;&nbsp;</span>Can we see these drops coming, province by province?</div>
 {notes("""When fish gets expensive at the palengke, it's usually because less fish came in. Fish isn't just food on our table; it supports jobs and income in coastal towns, and FAO points to fisheries as key to food security and livelihoods (FAO, 2024).
 [→] We've seen what happens when supply is disrupted. After the February 2023 oil spill off Naujan, Oriental Mindoro, fishing was banned; the fisherfolk interviewed lost their main income, some up to about US$1,300 a week, and relief did not cover basic needs (Agaton et al., 2023).
-[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 31,073.75 MT in marine municipal fisheries production in Q3 2025, down 9.2% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2025).
+[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 31,073.75 MT in marine municipal fisheries production in Q3 2025, down 40.2% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2025).
 [→] So can we see these drops coming? Bokingkito et al. (2026) built a regional forecasting model for Philippine fisheries using environmental data. That's our starting point.
 [→] So what's still missing?""")}
 </section>''')
@@ -283,6 +283,7 @@ APA=[
 "Agaton, C. B., Guno, C. S., Labog, R. A., &amp; Collera, A. A. (2023). Immediate socioeconomic impacts of Mindoro oil spill on fisherfolk of Naujan, Philippines. <i>Resources, 12</i>(9), Article 102. https://doi.org/10.3390/resources12090102",
 "Benavides, I. F., Santacruz, M., Romero-Leiton, J. P., Barreto, C., &amp; Selvaraj, J. J. (2023). Assessing methods for multiple imputation of systematic missing data in marine fisheries time series with a new validation algorithm. <i>Aquaculture and Fisheries</i>. https://doi.org/10.1016/j.aaf.2021.12.013",
 "Bokingkito, P., Jaroensutasinee, K., &amp; Jaroensutasinee, M. (2026). Explainable AI-driven machine learning for forecasting marine fisheries production using environmental predictors. <i>Machine Learning and Knowledge Extraction, 8</i>(7), Article 197. https://doi.org/10.3390/make8070197",
+"Bunting, P., Hilarides, L., Rosenqvist, A., Oakes, G., Castro Brandão Vaz dos Santos, P., Worthington, T., Rosenqvist, J., Zanaga, D., Van De Kerchove, R., Tadono, T., &amp; Kobayashi, K. (2026). <i>Global Mangrove Watch: Timeseries of mangrove extent</i> (Version 4.1.12) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.21346457",
 "Food and Agriculture Organization of the United Nations. (2024). <i>The state of world fisheries and aquaculture 2024: Blue transformation in action</i>. FAO. https://doi.org/10.4060/cd0683en",
 "Gahtan, J., Knapp, K. R., Schreck, C. J., III, Diamond, H. J., Kossin, J. P., &amp; Kruk, M. C. (2024). <i>International Best Track Archive for Climate Stewardship (IBTrACS) project, version 4r01</i> [Data set]. NOAA National Centers for Environmental Information. https://doi.org/10.25921/82ty-9e16",
 "Hewamalage, H., Ackermann, K., &amp; Bergmeir, C. (2023). Forecast evaluation for data scientists: Common pitfalls and best practices. <i>Data Mining and Knowledge Discovery, 37</i>(2), 788–832. https://doi.org/10.1007/s10618-022-00894-5",
@@ -290,6 +291,7 @@ APA=[
 "Huang, B., Liu, C., Banzon, V., Freeman, E., Graham, G., Hankins, B., Smith, T., &amp; Zhang, H.-M. (2021). Improvements of the Daily Optimum Interpolation Sea Surface Temperature (DOISST) version 2.1. <i>Journal of Climate, 34</i>(8), 2923–2939. https://doi.org/10.1175/JCLI-D-20-0166.1",
 "Huffman, G. J., Stocker, E. F., Bolvin, D. T., Nelkin, E. J., &amp; Tan, J. (2023). <i>GPM IMERG Final Precipitation L3 Half Hourly 0.1 degree x 0.1 degree V07</i> [Data set]. NASA Goddard Earth Sciences Data and Information Services Center. https://doi.org/10.5067/GPM/IMERG/3B-HH/07",
 "Hyndman, R. J., &amp; Athanasopoulos, G. (2021). <i>Forecasting: Principles and practice</i> (3rd ed.). OTexts. https://otexts.com/fpp3/",
+"Nababa, I. I., Kuta, A. A., Adekola, O., Nwachukwu, J. I., Symeonakis, E., &amp; Cavan, G. (2026). Artisanal fishery and their relationship with mangrove extent, rainfall, and sea surface temperature in the Niger Delta Region. <i>Regional Studies in Marine Science, 98</i>, Article 105071. https://doi.org/10.1016/j.rsma.2026.105071",
 "Nesslage, G., Lyubchich, V., Nitschke, P., Williams, E., Grimes, C., &amp; Wiedenmann, J. (2021). Environmental drivers of golden tilefish (<i>Lopholatilus chamaeleonticeps</i>) commercial landings and catch-per-unit-effort. <i>Fisheries Oceanography, 30</i>(5), 608–622. https://doi.org/10.1111/fog.12540",
 "Noy, I., Lacheheb, M., &amp; Pundit, M. (2023). <i>The impact of tropical cyclones on fishing activities in the Philippines</i> [Working paper]. Asian Development Bank. https://doi.org/10.22617/wps230291-2",
 "Oceana. (2026). <i>Net loss: How governance gaps are sinking Philippine fisheries</i> [Report]. Zenodo. https://doi.org/10.5281/zenodo.18320988",
@@ -300,7 +302,7 @@ FOUND=[
 "Hyndman, R. J., &amp; Koehler, A. B. (2006). Another look at measures of forecast accuracy. <i>International Journal of Forecasting, 22</i>(4), 679–688. https://doi.org/10.1016/j.ijforecast.2006.03.001",
 "Republic Act No. 10654. (2015). <i>An act to prevent, deter and eliminate illegal, unreported and unregulated fishing, amending Republic Act No. 8550, otherwise known as \u201cThe Philippine Fisheries Code of 1998,\u201d and for other purposes</i>. https://lawphil.net/statutes/repacts/ra2015/ra_10654_2015.html",
 "Wood, S. N. (2017). <i>Generalized additive models: An introduction with R</i> (2nd ed.). Chapman and Hall/CRC. https://doi.org/10.1201/9781315370279"]
-half=7
+half=8
 r1="".join(f'<p class="apa">{a}</p>' for a in APA[:half]);r2="".join(f'<p class="apa">{a}</p>' for a in APA[half:])
 rf="".join(f'<p class="apa">{a}</p>' for a in FOUND)
 S.append(f'''<section class="slide backup" id="b-refs" data-label="B5" data-title="Backup · References (1/2)" data-sec="6" data-steps="0">
