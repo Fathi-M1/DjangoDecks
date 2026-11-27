@@ -92,7 +92,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <path id="oc-line" d="M40,34 L520,90" stroke="var(--coral)" stroke-width="5" fill="none" stroke-dasharray="12 9"/>
  <circle cx="40" cy="34" r="9" fill="var(--sea)"/><circle cx="520" cy="90" r="9" fill="var(--coral)"/>
  <text x="30" y="20" font-size="22" font-weight="700" fill="#0b2a3c">2010 · 2.6M t</text><text x="530" y="118" font-size="22" font-weight="700" fill="#0b2a3c" text-anchor="end">2023 · 1.9M t</text></svg>
- <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> marine municipal production was <b>31,073.75 MT</b> in Q3 2025, down <b>40.2% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2025)</div>
+ <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> municipal fisheries production was <b>20,488.92 MT</b> in Q1 2026, down <b>38.1% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2026)</div>
 </div>
 <div class="abs rv bgc" data-s="3" style="left:1300px;top:470px;width:510px">
  <div class="lab" style="color:var(--sea)">3 · Forecasting so far</div>
@@ -103,7 +103,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <span class="lab" style="color:var(--aqua)">The question&nbsp;&nbsp;</span>Can we see these drops coming, province by province?</div>
 {notes("""When fish gets expensive at the palengke, it's usually because less fish came in. Fish isn't just food on our table; it supports jobs and income in coastal towns, and FAO points to fisheries as key to food security and livelihoods (FAO, 2024).
 [→] We've seen what happens when supply is disrupted. After the February 2023 oil spill off Naujan, Oriental Mindoro, fishing was banned; the fisherfolk interviewed lost their main income, some up to about US$1,300 a week, and relief did not cover basic needs (Agaton et al., 2023).
-[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 31,073.75 MT in marine municipal fisheries production in Q3 2025, down 40.2% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2025).
+[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 20,488.92 MT in municipal fisheries production in Q1 2026, down 38.1% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2026).
 [→] So can we see these drops coming? Bokingkito et al. (2026) built a regional forecasting model for Philippine fisheries using environmental data. That's our starting point.
 [→] So what's still missing?""")}
 </section>''')
@@ -128,7 +128,7 @@ S.append(f'''<section class="slide" id="s-gaps" data-label="02" data-title="III 
 </section>''')
 # ================= III · SOP <-> SO =================
 SOP=["What seasonal benchmarks will identify landing shortfalls for each MIMAROPA province and fish category, using PSA quarterly records from 2002 to 2025?",
-"How much will prior typhoon exposure, rainfall and sea surface temperature improve next-quarter landing forecasts from a Random Forest–GAMM workflow?",
+"How much will environmental predictors improve next-quarter landing forecasts from a Random Forest–GAMM workflow?",
 "What gross landing value at risk will the projected shortfalls carry when priced at historical first-sale prices?",
 f"How accurate will the forecasts be on held-out quarters ({TE[0]}–{TE[1]}), measured by MAE, RMSE and MASE against a seasonal-naive baseline?"]
 SO=[f"Build seasonal benchmarks for each province × fish category from PSA quarterly landings, {TR[0]}–{TE[1]}.",
@@ -176,19 +176,31 @@ S.append(f'''<section class="slide" id="s-scope" data-label="04" data-title="V �
 # ================= V · ALGORITHMS (2 slides) =================
 from flow import FLOW
 S.extend(FLOW)
-# ================= VI · CLIENTS =================
-CL=[("LGUs & fisheries offices","Primary potential users","see projected shortfalls early and prioritize monitoring"),
-("BFAR","","supplementary information for monitoring and planning"),
-("DTI","","exposure estimates for consultations with fisheries-related enterprises"),
-("Fisherfolk associations","","seasonal supply outlooks for marketing and deliveries"),
-("Traders, vendors & processors","","projected shortfalls for sourcing and inventory")]
-pos=[(110,270),(700,270),(1290,270),(400,560),(990,560)]
-clh="".join(f'<div class="abs glass cl rv" data-s="{i+1}" style="left:{x}px;top:{y}px">{f"<span class=tg>{t}</span>" if t else ""}<div class="ch">{h}</div><div class="cm">{m}</div></div>' for i,((h,t,m),(x,y)) in enumerate(zip(CL,pos)))
-S.append(f'''<section class="slide" id="s-clients" data-label="08" data-title="VII · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
-<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">09</div><div><div class="kick">VII · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
-{clh}
-<div class="abs" style="left:110px;right:110px;top:858px;padding:16px 26px;border-radius:14px;background:#fff7e0;border:2px solid var(--gold);font:600 23px/1.4 IN;color:#6b4a00">We will seek consultation with DTI or a relevant fisheries agency on data suitability and usefulness. Participation and adoption are not guaranteed.</div>
-{notes("""Our primary potential users are LGUs and fisheries offices, which could use provincial and fish-category forecasts to see projected shortfalls early and prioritize monitoring. [→] BFAR could use the findings as supplementary information for monitoring and planning. [→] DTI could use exposure estimates in consultations with fisheries-related enterprises. [→] Fisherfolk associations and cooperatives could use seasonal supply outlooks for marketing and delivery coordination. [→] Traders, vendors and processors could use projected shortfalls for sourcing and inventory planning. We will seek consultation with DTI or a relevant agency; participation and adoption are not guaranteed.""")}
+# ================= VI · CLIENTS AND BENEFICIARIES =================
+province_seals=[("palawan","Palawan"),("occidental-mindoro","Occidental Mindoro"),
+                ("oriental-mindoro","Oriental Mindoro"),("marinduque","Marinduque"),
+                ("romblon","Romblon")]
+seals="".join(f'<figure class="province-seal"><img src="{{{{IMG:{key}}}}}" alt="Seal of the Province of {name}"><figcaption>{name}</figcaption></figure>' for key,name in province_seals)
+S.append(f'''<section class="slide" id="s-clients" data-label="09" data-title="IX · Potential Clients and Beneficiaries" data-sec="4" data-steps="5" data-q="clients">
+<div class="abs client-title" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">09</div><div><div class="kick">IX · Potential Clients and Beneficiaries</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em> &amp; Beneficiaries</h2></div></div>
+<div class="abs client-group client-lgu rv" data-s="1">
+ <div class="client-card-head"><div><span class="client-role">Primary potential users</span><h3>LGUs &amp; fisheries offices</h3></div></div>
+ <div class="province-seals">{seals}</div>
+ <p>Provincial shortfall outlooks could help prioritize monitoring and assistance assessments.</p>
+</div>
+<div class="abs client-group client-agency client-bfar rv" data-s="2">
+ <div class="client-agency-head"><h3>BFAR</h3><img src="{{{{IMG:bfar}}}}" alt="Bureau of Fisheries and Aquatic Resources logo"></div>
+ <p>Supplementary information for fisheries monitoring and planning.</p>
+</div>
+<div class="abs client-group client-agency client-dti rv" data-s="3">
+ <div class="client-agency-head"><h3>DTI</h3><img src="{{{{IMG:dti}}}}" alt="Department of Trade and Industry logo"></div>
+ <p>Exposure estimates for consultations with fisheries-related enterprises.</p>
+</div>
+<h3 class="abs beneficiary-heading">People who may benefit if the outlook is used</h3>
+<div class="abs glass beneficiary-card beneficiary-direct rv" data-s="4"><h3>Municipal fisherfolk &amp; associations</h3><p>Earlier assistance assessments; seasonal supply outlooks for collective marketing and deliveries.</p></div>
+<div class="abs glass beneficiary-card beneficiary-indirect rv" data-s="5"><h3>Traders, vendors &amp; processors</h3><p>Projected shortfalls could inform sourcing, purchasing and inventory planning.</p></div>
+<p class="abs client-caveat">Seals and logos identify potential users only. Consultation, adoption and benefits are not guaranteed.</p>
+{notes("""Our primary potential users are LGUs and fisheries offices. The five seals identify MIMAROPA provinces in the current Area of Investigation; they do not represent agreements to participate. [→] BFAR may use findings as supplementary monitoring and planning information. [→] DTI may use exposure estimates in consultations with fisheries-related enterprises. [→] Municipal fisherfolk, their households, and associations are intended beneficiaries if planners use a reliable outlook. Associations may use it for collective marketing and delivery coordination. [→] Traders, vendors, and processors may use projected shortfalls for sourcing and inventory. We will seek consultation with DTI or a relevant fisheries agency. Participation, adoption, and livelihood benefits have not been demonstrated. Logos and seals are identifiers only, sourced from the supplied AquaTerra Client and Target Beneficiaries Handoff, pages 8–10 and 13–14.""")}
 </section>''')
 # ================= THANK YOU =================
 S.append(f'''<section class="slide" id="s-end" data-label="09" data-title="Thank you" data-sec="5" data-steps="0">
@@ -295,8 +307,8 @@ APA=[
 "Nesslage, G., Lyubchich, V., Nitschke, P., Williams, E., Grimes, C., &amp; Wiedenmann, J. (2021). Environmental drivers of golden tilefish (<i>Lopholatilus chamaeleonticeps</i>) commercial landings and catch-per-unit-effort. <i>Fisheries Oceanography, 30</i>(5), 608–622. https://doi.org/10.1111/fog.12540",
 "Noy, I., Lacheheb, M., &amp; Pundit, M. (2023). <i>The impact of tropical cyclones on fishing activities in the Philippines</i> [Working paper]. Asian Development Bank. https://doi.org/10.22617/wps230291-2",
 "Oceana. (2026). <i>Net loss: How governance gaps are sinking Philippine fisheries</i> [Report]. Zenodo. https://doi.org/10.5281/zenodo.18320988",
-"Philippine Statistics Authority. (2026). <i>Marine municipal fisheries: Volume and value of production by geolocation, species, year and quarter</i> [Data sets, Tables 0032E4GVMP0 and 0042E4GCMP0]. PSA OpenSTAT. https://openstat.psa.gov.ph/"]
-"Philippine Statistics Authority, Regional Statistical Services Office MIMAROPA. (2025). <i>Marine municipal fisheries situation in MIMAROPA Region: July to September 2025</i> [Infographic]. https://rssomimaropa.psa.gov.ph/infographics?page=3",
+"Philippine Statistics Authority. (2026). <i>Marine municipal fisheries: Volume and value of production by geolocation, species, year and quarter</i> [Data sets, Tables 0032E4GVMP0 and 0042E4GCMP0]. PSA OpenSTAT. https://openstat.psa.gov.ph/",
+"Philippine Statistics Authority, Regional Statistical Services Office MIMAROPA. (2026). <i>Fisheries situation in the MIMAROPA Region: January to March 2026</i> [Infographic]. https://rssomimaropa.psa.gov.ph/infographics/fisheries-situation-mimaropa-region-january-march-2026"]
 FOUND=[
 "Breiman, L. (2001). Random forests. <i>Machine Learning, 45</i>(1), 5–32. https://doi.org/10.1023/A:1010933404324",
 "Hyndman, R. J., &amp; Koehler, A. B. (2006). Another look at measures of forecast accuracy. <i>International Journal of Forecasting, 22</i>(4), 679–688. https://doi.org/10.1016/j.ijforecast.2006.03.001",
