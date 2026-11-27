@@ -176,19 +176,31 @@ S.append(f'''<section class="slide" id="s-scope" data-label="04" data-title="V �
 # ================= V · ALGORITHMS (2 slides) =================
 from flow import FLOW
 S.extend(FLOW)
-# ================= VI · CLIENTS =================
-CL=[("LGUs & fisheries offices","Primary potential users","see projected shortfalls early and prioritize monitoring"),
-("BFAR","","supplementary information for monitoring and planning"),
-("DTI","","exposure estimates for consultations with fisheries-related enterprises"),
-("Fisherfolk associations","","seasonal supply outlooks for marketing and deliveries"),
-("Traders, vendors & processors","","projected shortfalls for sourcing and inventory")]
-pos=[(110,270),(700,270),(1290,270),(400,560),(990,560)]
-clh="".join(f'<div class="abs glass cl rv" data-s="{i+1}" style="left:{x}px;top:{y}px">{f"<span class=tg>{t}</span>" if t else ""}<div class="ch">{h}</div><div class="cm">{m}</div></div>' for i,((h,t,m),(x,y)) in enumerate(zip(CL,pos)))
-S.append(f'''<section class="slide" id="s-clients" data-label="08" data-title="VII · Potential Clients" data-sec="4" data-steps="5" data-q="clients">
-<div class="abs" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">09</div><div><div class="kick">VII · Potential Clients</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em></h2></div></div>
-{clh}
-<div class="abs" style="left:110px;right:110px;top:858px;padding:16px 26px;border-radius:14px;background:#fff7e0;border:2px solid var(--gold);font:600 23px/1.4 IN;color:#6b4a00">We will seek consultation with DTI or a relevant fisheries agency on data suitability and usefulness. Participation and adoption are not guaranteed.</div>
-{notes("""Our primary potential users are LGUs and fisheries offices, which could use provincial and fish-category forecasts to see projected shortfalls early and prioritize monitoring. [→] BFAR could use the findings as supplementary information for monitoring and planning. [→] DTI could use exposure estimates in consultations with fisheries-related enterprises. [→] Fisherfolk associations and cooperatives could use seasonal supply outlooks for marketing and delivery coordination. [→] Traders, vendors and processors could use projected shortfalls for sourcing and inventory planning. We will seek consultation with DTI or a relevant agency; participation and adoption are not guaranteed.""")}
+# ================= VI · CLIENTS AND BENEFICIARIES =================
+province_seals=[("palawan","Palawan"),("occidental-mindoro","Occidental Mindoro"),
+                ("oriental-mindoro","Oriental Mindoro"),("marinduque","Marinduque"),
+                ("romblon","Romblon")]
+seals="".join(f'<figure class="province-seal"><img src="{{{{IMG:{key}}}}}" alt="Seal of the Province of {name}"><figcaption>{name}</figcaption></figure>' for key,name in province_seals)
+S.append(f'''<section class="slide" id="s-clients" data-label="09" data-title="IX · Potential Clients and Beneficiaries" data-sec="4" data-steps="5" data-q="clients">
+<div class="abs client-title" style="left:110px;top:56px;display:flex;gap:34px;align-items:flex-end"><div class="num">09</div><div><div class="kick">IX · Potential Clients and Beneficiaries</div><h2 style="margin-top:12px;font-size:58px">Potential <em>Clients</em> &amp; Beneficiaries</h2></div></div>
+<div class="abs client-group client-lgu rv" data-s="1">
+ <div class="client-card-head"><div><span class="client-role">Primary potential users</span><h3>LGUs &amp; fisheries offices</h3></div></div>
+ <div class="province-seals">{seals}</div>
+ <p>Provincial shortfall outlooks could help prioritize monitoring and assistance assessments.</p>
+</div>
+<div class="abs client-group client-agency client-bfar rv" data-s="2">
+ <div class="client-agency-head"><h3>BFAR</h3><img src="{{{{IMG:bfar}}}}" alt="Bureau of Fisheries and Aquatic Resources logo"></div>
+ <p>Supplementary information for fisheries monitoring and planning.</p>
+</div>
+<div class="abs client-group client-agency client-dti rv" data-s="3">
+ <div class="client-agency-head"><h3>DTI</h3><img src="{{{{IMG:dti}}}}" alt="Department of Trade and Industry logo"></div>
+ <p>Exposure estimates for consultations with fisheries-related enterprises.</p>
+</div>
+<h3 class="abs beneficiary-heading">People who may benefit if the outlook is used</h3>
+<div class="abs glass beneficiary-card beneficiary-direct rv" data-s="4"><h3>Municipal fisherfolk &amp; associations</h3><p>Earlier assistance assessments; seasonal supply outlooks for collective marketing and deliveries.</p></div>
+<div class="abs glass beneficiary-card beneficiary-indirect rv" data-s="5"><h3>Traders, vendors &amp; processors</h3><p>Projected shortfalls could inform sourcing, purchasing and inventory planning.</p></div>
+<p class="abs client-caveat">Seals and logos identify potential users only. Consultation, adoption and benefits are not guaranteed.</p>
+{notes("""Our primary potential users are LGUs and fisheries offices. The five seals identify MIMAROPA provinces in the current Area of Investigation; they do not represent agreements to participate. [→] BFAR may use findings as supplementary monitoring and planning information. [→] DTI may use exposure estimates in consultations with fisheries-related enterprises. [→] Municipal fisherfolk, their households, and associations are intended beneficiaries if planners use a reliable outlook. Associations may use it for collective marketing and delivery coordination. [→] Traders, vendors, and processors may use projected shortfalls for sourcing and inventory. We will seek consultation with DTI or a relevant fisheries agency. Participation, adoption, and livelihood benefits have not been demonstrated. Logos and seals are identifiers only, sourced from the supplied AquaTerra Client and Target Beneficiaries Handoff, pages 8–10 and 13–14.""")}
 </section>''')
 # ================= THANK YOU =================
 S.append(f'''<section class="slide" id="s-end" data-label="09" data-title="Thank you" data-sec="5" data-steps="0">
