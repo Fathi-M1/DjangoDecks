@@ -104,7 +104,7 @@ B=f'''<section class="slide uw flow f2" id="s-flowB" data-label="07" data-title=
 [→ Stage 4] Shortfall tonnes times 1,000 times the historical first-sale price gives the gross landing value at risk in pesos. We will rank province × fish-category combinations by that value. It is gross value at stake, not profit or income. Values are illustrative. Next: how we will evaluate all of this.""")}
 </section>'''
 EV=[("Held-out test quarters",f"<b>{te_[0]} – {te_[1]}</b> · {te_[2]} quarters, locked until the final check. Train and Tune quarters will be used only for fitting and selection.","Hewamalage et al. (2023)"),
-("Forecast accuracy","<b>MAE, RMSE and MASE</b> against a seasonal-naive baseline (the same quarter last year). MASE below 1 will mean the workflow beats the baseline.","Hyndman &amp; Athanasopoulos (2021)"),
+("Forecast accuracy","<b>MAE, RMSE and MASE</b> against a seasonal-naive baseline (the same quarter last year). MASE below 1 will mean the workflow beats the baseline.","Hewamalage et al. (2023)"),
 ("Do weather predictors help?","Forecasts <b>with vs without</b> typhoon, rainfall and SST predictors; contribution = the reduction in MAE on held-out quarters. Prediction, not cause.","Holmes et al. (2021); Nesslage et al. (2021)"),
 ("Are value rankings stable?","<b>Price sensitivity:</b> first-sale price vs a unit-value proxy. <b>Ranking stability:</b> whether the top province × category combinations keep their places.","")]
 pos=[(110,250),(980,250),(110,600),(980,600)]

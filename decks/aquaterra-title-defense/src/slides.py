@@ -92,7 +92,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <path id="oc-line" d="M40,34 L520,90" stroke="var(--coral)" stroke-width="5" fill="none" stroke-dasharray="12 9"/>
  <circle cx="40" cy="34" r="9" fill="var(--sea)"/><circle cx="520" cy="90" r="9" fill="var(--coral)"/>
  <text x="30" y="20" font-size="22" font-weight="700" fill="#0b2a3c">2010 · 2.6M t</text><text x="530" y="118" font-size="22" font-weight="700" fill="#0b2a3c" text-anchor="end">2023 · 1.9M t</text></svg>
- <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> marine municipal production was <b>31,073.75 MT</b> in Q3 2025, down <b>40.2% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2025)</div>
+ <p class="b22" style="margin-top:4px">National capture-fisheries trend: linked to overfishing and illegal fishing. Separately, <b>MIMAROPA</b> municipal fisheries production was <b>20,488.92 MT</b> in Q1 2026, down <b>38.1% YoY</b>.</p><div class="cite">Oceana (2026); PSA RSSO MIMAROPA (2026)</div>
 </div>
 <div class="abs rv bgc" data-s="3" style="left:1300px;top:470px;width:510px">
  <div class="lab" style="color:var(--sea)">3 · Forecasting so far</div>
@@ -103,7 +103,7 @@ S.append(f'''<section class="slide" id="s-bg" data-label="01" data-title="II · 
  <span class="lab" style="color:var(--aqua)">The question&nbsp;&nbsp;</span>Can we see these drops coming, province by province?</div>
 {notes("""When fish gets expensive at the palengke, it's usually because less fish came in. Fish isn't just food on our table; it supports jobs and income in coastal towns, and FAO points to fisheries as key to food security and livelihoods (FAO, 2024).
 [→] We've seen what happens when supply is disrupted. After the February 2023 oil spill off Naujan, Oriental Mindoro, fishing was banned; the fisherfolk interviewed lost their main income, some up to about US$1,300 a week, and relief did not cover basic needs (Agaton et al., 2023).
-[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 31,073.75 MT in marine municipal fisheries production in Q3 2025, down 40.2% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2025).
+[→] And the long-term trend is worrying: Oceana reports capture fisheries fell from about 2.6M mt in 2010 to 1.9M in 2023, roughly 45M kg lost every year, a national figure (Oceana, 2026). Oceana links the decline to governance gaps: overfishing, illegal fishing, commercial vessels entering municipal waters and weak enforcement. Separately, PSA RSSO MIMAROPA reported 20,488.92 MT in municipal fisheries production in Q1 2026, down 38.1% year over year; this is a MIMAROPA-specific statistic, not the national 45M kg/year figure (PSA RSSO MIMAROPA, 2026).
 [→] So can we see these drops coming? Bokingkito et al. (2026) built a regional forecasting model for Philippine fisheries using environmental data. That's our starting point.
 [→] So what's still missing?""")}
 </section>''')
@@ -128,7 +128,7 @@ S.append(f'''<section class="slide" id="s-gaps" data-label="02" data-title="III 
 </section>''')
 # ================= III · SOP <-> SO =================
 SOP=["What seasonal benchmarks will identify landing shortfalls for each MIMAROPA province and fish category, using PSA quarterly records from 2002 to 2025?",
-"How much will prior typhoon exposure, rainfall and sea surface temperature improve next-quarter landing forecasts from a Random Forest–GAMM workflow?",
+"How much will environmental predictors improve next-quarter landing forecasts from a Random Forest–GAMM workflow?",
 "What gross landing value at risk will the projected shortfalls carry when priced at historical first-sale prices?",
 f"How accurate will the forecasts be on held-out quarters ({TE[0]}–{TE[1]}), measured by MAE, RMSE and MASE against a seasonal-naive baseline?"]
 SO=[f"Build seasonal benchmarks for each province × fish category from PSA quarterly landings, {TR[0]}–{TE[1]}.",
@@ -307,8 +307,8 @@ APA=[
 "Nesslage, G., Lyubchich, V., Nitschke, P., Williams, E., Grimes, C., &amp; Wiedenmann, J. (2021). Environmental drivers of golden tilefish (<i>Lopholatilus chamaeleonticeps</i>) commercial landings and catch-per-unit-effort. <i>Fisheries Oceanography, 30</i>(5), 608–622. https://doi.org/10.1111/fog.12540",
 "Noy, I., Lacheheb, M., &amp; Pundit, M. (2023). <i>The impact of tropical cyclones on fishing activities in the Philippines</i> [Working paper]. Asian Development Bank. https://doi.org/10.22617/wps230291-2",
 "Oceana. (2026). <i>Net loss: How governance gaps are sinking Philippine fisheries</i> [Report]. Zenodo. https://doi.org/10.5281/zenodo.18320988",
-"Philippine Statistics Authority. (2026). <i>Marine municipal fisheries: Volume and value of production by geolocation, species, year and quarter</i> [Data sets, Tables 0032E4GVMP0 and 0042E4GCMP0]. PSA OpenSTAT. https://openstat.psa.gov.ph/"]
-"Philippine Statistics Authority, Regional Statistical Services Office MIMAROPA. (2025). <i>Marine municipal fisheries situation in MIMAROPA Region: July to September 2025</i> [Infographic]. https://rssomimaropa.psa.gov.ph/infographics?page=3",
+"Philippine Statistics Authority. (2026). <i>Marine municipal fisheries: Volume and value of production by geolocation, species, year and quarter</i> [Data sets, Tables 0032E4GVMP0 and 0042E4GCMP0]. PSA OpenSTAT. https://openstat.psa.gov.ph/",
+"Philippine Statistics Authority, Regional Statistical Services Office MIMAROPA. (2026). <i>Fisheries situation in the MIMAROPA Region: January to March 2026</i> [Infographic]. https://rssomimaropa.psa.gov.ph/infographics/fisheries-situation-mimaropa-region-january-march-2026"]
 FOUND=[
 "Breiman, L. (2001). Random forests. <i>Machine Learning, 45</i>(1), 5–32. https://doi.org/10.1023/A:1010933404324",
 "Hyndman, R. J., &amp; Koehler, A. B. (2006). Another look at measures of forecast accuracy. <i>International Journal of Forecasting, 22</i>(4), 679–688. https://doi.org/10.1016/j.ijforecast.2006.03.001",

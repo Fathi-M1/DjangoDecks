@@ -3,7 +3,7 @@ sys.path.insert(0,os.path.dirname(__file__))
 import slides,data
 D=os.path.dirname(os.path.abspath(__file__));IMG=os.path.join(D,'..','img')
 def b64(p,m):return f"data:{m};base64,"+base64.b64encode(open(os.path.join(IMG,p),'rb').read()).decode()
-css=open(os.path.join(D,'deck.css')).read()
+css=open(os.path.join(D,'deck.css'),encoding='utf-8').read()
 for k in['pf','pfi','in']:css=css.replace('{{FONT:%s}}'%k,b64(k+'.woff2','font/woff2'))
 html="\n".join(slides.S)
 _n=[-1]
@@ -32,11 +32,11 @@ chrome='''<div id="progress"></div>
 <button id="navtog" title="Show / hide navigation bar" aria-label="Toggle navigation bar" aria-expanded="false">︿</button>
 <div id="toast"></div>'''
 AMB='<div id="amb"><div class="par" data-d="14" style="inset:0"><div class="ray"></div><div class="ray"></div><div class="ray"></div></div><div class="caus par" data-d="8"></div><svg class="wave" viewBox="0 0 3840 150" preserveAspectRatio="none"><path d="'+''.join(f'{"M" if i==0 else "Q"}' for i in range(0))+'M0,70 '+' '.join(f'Q{i*480+240},{30 if i%2 else 110} {i*480+480},70' for i in range(8))+' V150 H0Z" fill="#bfeef2"/></svg><canvas id="fish" width="1920" height="1080"></canvas></div>'
-js=open(os.path.join(D,'deck.js')).read()
+js=open(os.path.join(D,'deck.js'),encoding='utf-8').read()
 dat="const QA=%s,RT=%s,QB=%s,PSA=%s,APA=%s;"%tuple(json.dumps(x,ensure_ascii=False) for x in(data.QA,data.RT,data.QB,data.PSA,slides.APA))
 out=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AquaTerra: Forecasting Municipal Fish Landing Shortfalls and Estimating Gross Landing Value at Risk in MIMAROPA</title><style>{css}</style></head><body>
 <div id="stage">{AMB}{html}{chrome}</div>
 <script>{dat}
 {js}</script></body></html>'''
-p=os.path.join(D,'..','index.html');open(p,'w').write(out);print(p,round(len(out)/1e6,2),'MB')
+p=os.path.join(D,'..','index.html');open(p,'w',encoding='utf-8',newline='\r\n').write(out);print(p,round(len(out)/1e6,2),'MB')
